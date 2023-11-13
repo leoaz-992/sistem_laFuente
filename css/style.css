@@ -1,0 +1,49 @@
+h1{
+  font-weight: 900;
+}
+.secctionCarrusel{
+  margin: 20px;
+}
+.carousel-item img{
+  height: 600px;
+}
+
+.fondoTextCarrusel{
+  background-color: rgba(0, 153, 255, 0.3);
+}
+
+.titleFooter, .lb-Footer{
+  color: aliceblue;
+  font-weight: 900;
+}
+li{
+  list-style: none;
+}
+.redes-icon{
+  margin:5px;
+  font-size: 2rem;
+  color: rgb(144, 226, 226);
+  
+}
+.footer-bootom{
+  margin-top: 20px;
+  padding-top: 15px;
+  text-align: center;
+  
+}
+.footer-bootom h6{
+  font-size: 12px;
+  color: rgb(150, 150, 178);
+}
+
+.link-footer{
+  color: aliceblue;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.info-footer{
+  font-size: 16px;
+  color: rgb(144, 226, 226);
+}

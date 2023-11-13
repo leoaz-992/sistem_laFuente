@@ -16,6 +16,12 @@ DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS pedidos;
 DROP TABLE IF EXISTS detallesPedidos;
 
+CREATE TABLE contactos (
+id_contactos INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nombre_contacto VARCHAR(80) NOT NULL ,
+telefono_contacto VARCHAR(20) NOT NULL ,
+correo_contacto VARCHAR(120) NOT NULL ,
+mensaje TEXT NOT NULL ); 
 
 CREATE TABLE metodos_Pago (
 id_metodo_pago INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
