@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="es-Ar">
 <head>
@@ -26,20 +27,20 @@
         <a class="nav-link" href="#productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pedidos.php">hace tu pedido</a>
+          <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="pedidos.php">Contactos</a>
+        <a class="nav-link" href="#">sobre nosotros</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="pedidos.php">sobre nosotros</a>
-        </li>
-        <?php if(true){ /* esto solo se tiene q ver si el empleado esta logueado */ ?>
+        <?php if(isset($_SESSION['nombre_usuario'])){ /* esto solo se tiene q ver si el empleado esta logueado */ ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Para Empleados
           </a>
           <ul class="dropdown-menu">
+            <?php if($_SESSION['id_rol']==1){?>
+              <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
+            <?php } ?>
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
             <li><a class="dropdown-item" href="#">Ver consultas</a></li>
@@ -48,7 +49,11 @@
         </li>
           <?php }?>
       </ul>
-      <a class="btn btn-primary d-flex" href="login.php">Login</a>
+      <?php if(isset($_SESSION['nombre_usuario'])){ ?>
+        <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
+        <?php }else{?>
+      <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>
+      <?php }?>
     </div>
   </div>
 </nav>

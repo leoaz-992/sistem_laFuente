@@ -1,4 +1,4 @@
-h1{
+h1,.titleForm{
   font-weight: 900;
 }
 .secctionCarrusel{
@@ -46,4 +46,15 @@ li{
 .info-footer{
   font-size: 16px;
   color: rgb(144, 226, 226);
+}
+
+.text-devs{
+  color: rgba(206, 215, 242, 0.5);
+  font-size: 12PX;
+}
+
+.main{
+  background-color: rgba(144, 226, 226, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgb(144, 226, 226);;
 }

@@ -5,7 +5,7 @@
    $servidor = 'localhost';
    $database = 'db_lafuente';
  
-   session_start();
+   
  
    // Mostrar el valor obtenido
  
