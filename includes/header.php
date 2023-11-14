@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="es-Ar">
 <head>
@@ -34,7 +35,7 @@
         <li class="nav-item">
         <a class="nav-link" href="pedidos.php">sobre nosotros</a>
         </li>
-        <?php if(true){ /* esto solo se tiene q ver si el empleado esta logueado */ ?>
+        <?php if(isset($_SESSION['nombre_usuario'])){ /* esto solo se tiene q ver si el empleado esta logueado */ ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Para Empleados
@@ -48,7 +49,11 @@
         </li>
           <?php }?>
       </ul>
-      <a class="btn btn-primary d-flex" href="login.php">Login</a>
+      <?php if(isset($_SESSION['nombre_usuario'])){ ?>
+        <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
+        <?php }else{?>
+      <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>
+      <?php }?>
     </div>
   </div>
 </nav>

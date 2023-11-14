@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "POST",
-        url: "login.php",
+        url: "gestionLogin.php",
       data: {
         email,
         contrasena,
@@ -14,8 +14,17 @@ $(document).ready(function () {
       success: function (response) {
         if (response === "success") {
         //redirigir y crear datos de sesion
+        $("#mensaje").html(`<div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Datos Correctos!</strong>
+      </div>`);
+          setTimeout(()=>{window.location.href= "index.php";},500);
         } else {
-            $("#message").html("Error en el registro. Por favor, intenta de nuevo.");
+            $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Error al iniciar Sesión.</strong>
+            <p>Los datos ingresados son incorrectos.</p>
+          </div>`);
         }
       },
     });

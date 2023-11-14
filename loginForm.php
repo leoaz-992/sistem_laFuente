@@ -1,15 +1,13 @@
 <?php
 include("includes/header.php");
-include("conn.php");
+
+  if (isset($_SESSION['nombre_usuario'])) {
+    
+  }
 ?>
 <div class="row justify-content-center p-5">
   <div class="col-md-4">
-    <div class="d-none" id="mensaje">
-      <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Error al iniciar Sesión.</strong>
-        <p>Los datos ingresados son incorrectos.</p>
-      </div>
+    <div class="" id="mensaje">
     </div>
     <main class="form-signin w-100 m-auto">
       <form id="loginForm">
@@ -27,7 +25,7 @@ include("conn.php");
           <input type="password" id="contrasena" class="form-control" id="floatingPassword" placeholder="Password">
           <label for="floatingPassword">Password</label>
         </div>
-        <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Inicia Sesión</button>
+        <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Iniciar Sesión</button>
       </form>
     </main>
   </div>
