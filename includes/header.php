@@ -41,6 +41,9 @@
             Para Empleados
           </a>
           <ul class="dropdown-menu">
+            <?php if($_SESSION['id_rol']==1){?>
+              <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
+            <?php } ?>
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
             <li><a class="dropdown-item" href="#">Ver consultas</a></li>

@@ -2,7 +2,7 @@
 include("includes/header.php");
 
   if (isset($_SESSION['nombre_usuario'])) {
-    
+    header('Location: index.php');
   }
 ?>
 <div class="row justify-content-center p-5">
