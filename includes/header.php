@@ -30,7 +30,7 @@
           <a class="nav-link" href="pedidos.php">hace tu pedido</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="pedidos.php">sobre nosotros</a>
+        <a class="nav-link" href="nosotros.php">sobre nosotros</a>
         </li>
         <?php if(isset($_SESSION['nombre_usuario'])){ /* esto solo se tiene q ver si el empleado esta logueado */ ?>
         <li class="nav-item dropdown">
