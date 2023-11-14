@@ -129,3 +129,9 @@ INSERT INTO `barrios` (`id_barrio`, `nombre_barrio`, `zona`) VALUES (NULL, 'SAN 
 -- CARGA EMPLEADOS 
 INSERT INTO `empleados` (`id_usuario`, `nombre`, `apellido`, `nombre_usuario`, `correo`, `password`, `id_rol`) VALUES (NULL, 'leo', 'lafuente', 'usuario1', 'usuario1@lafuente.com', 'user1234', '1'), (NULL, 'jorge', 'lafuente', 'jorge_lafuente', 'jorge@lafuente.com', 'jorge1234', '2'), (NULL, 'hector', 'lafuente', 'hector_lafuente', 'hector@lafuente.com', 'hector1234', '3'), (NULL, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', 'walter1234', '4');
 
+
+-- CIFRADO Y CAMBIO DE CONTRASEÑA EMPLEADOS
+UPDATE `empleados` SET `password` = '$2y$10$EDObej4yHOmG4MdUGIV6vuq01rkTZG4x0W2s4rvYKMWMzmALVOd2a' WHERE `empleados`.`id_usuario` = 1; 
+UPDATE `empleados` SET `password` = '$2y$10$rQ0Ad8SFlu2Ke04fB88nkeAGHPy61vGXb2HXgOdwIXJ8EZyBzfNvG' WHERE `empleados`.`id_usuario` = 2; 
+UPDATE `empleados` SET `password` = '$2y$10$JyP0LrxOW2UWRKS6PukvA.yeHpb4WyUKcxeIPckIGU2E/b1smvWXO' WHERE `empleados`.`id_usuario` = 3; 
+UPDATE `empleados` SET `password` = '$2y$10$GrN1XBh/H1//bA4KqqyPveS9xJg/e80fs7b5UPAVWhsZGcS.cSAR2' WHERE `empleados`.`id_usuario` = 4; 

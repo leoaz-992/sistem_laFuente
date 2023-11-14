@@ -6,7 +6,7 @@ include("includes/header.php");
   }
 ?>
 <div class="row justify-content-center p-5">
-  <div class="col-md-4">
+  <div class="col-md-4 main py-4">
     <div class="" id="mensaje">
     </div>
     <main class="form-signin w-100 m-auto">
@@ -18,12 +18,12 @@ include("includes/header.php");
         </div>
         <h1 class="h3 mb-3 fw-normal text-center">Inicia Sesión</h1>
         <div class="form-floating m-3">
-          <input type="email" id="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
+          <input type="text" id="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Correo o Nombre de usuario</label>
         </div>
         <div class="form-floating m-3">
           <input type="password" id="contrasena" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
+          <label for="floatingPassword">Contraseña</label>
         </div>
         <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Iniciar Sesión</button>
       </form>
