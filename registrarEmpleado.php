@@ -59,7 +59,9 @@ $resultRoles = mysqli_query($connection, $sql);
             <option value="" selected disabled>Elegir Rol para el Empleado</option>
             <?php while ($rol = mysqli_fetch_array($resultRoles)) {
               echo "<option value='" . $rol['id_rol'] . "'>" . $rol['nombre_rol'] . "</option>";
-            } ?>
+            }
+            mysqli_close($connection);
+            ?>
           </select>
         </div>
         <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Registrar Empleado</button>

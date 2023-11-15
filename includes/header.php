@@ -43,13 +43,14 @@
             <?php } ?>
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
-            <li><a class="dropdown-item" href="#">Ver consultas</a></li>
+            <li><a class="dropdown-item" href="contactos.php">Ver consultas</a></li>
             <li><a class="dropdown-item" href="#">Ver Distribucion</a></li>
           </ul>
         </li>
           <?php }?>
       </ul>
       <?php if(isset($_SESSION['nombre_usuario'])){ ?>
+      <h6 class="px-2 titleFooter"><?=$_SESSION['nombre_usuario']?></h6>
         <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
         <?php }else{?>
       <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>
