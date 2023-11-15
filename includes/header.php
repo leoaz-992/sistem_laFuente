@@ -44,7 +44,7 @@
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
             <li><a class="dropdown-item" href="#">Ver consultas</a></li>
-            <li><a class="dropdown-item" href="#">Ver Distribucion</a></li>
+            <li><a class="dropdown-item" href="distribucion.php">Ver Distribucion</a></li>
           </ul>
         </li>
           <?php }?>
