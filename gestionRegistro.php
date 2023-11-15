@@ -19,5 +19,5 @@ if(!empty($_POST['email']) && !empty($_POST['contrasena'])){
     echo "No se pudo crear el empleado.";
   }
 }
-
+mysqli_close($connection);
 ?>
