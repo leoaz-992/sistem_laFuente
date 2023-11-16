@@ -6,8 +6,8 @@ include("includes/header.php");
   }
 ?>
 <div class="row justify-content-center p-5">
-  <div class="col-md-4 main py-4">
-    <div class="" id="mensaje">
+  <div class="col-sm-10 col-md-9 col-lg-5 main py-4">
+    <div id="mensaje">
     </div>
     <main class="form-signin w-100 m-auto">
       <form id="loginForm">

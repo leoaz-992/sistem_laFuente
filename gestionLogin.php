@@ -22,5 +22,5 @@ if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {
 }
 
 
-
+mysqli_close($connection);
 ?>

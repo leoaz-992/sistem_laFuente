@@ -41,15 +41,22 @@
             <?php if($_SESSION['id_rol']==1){?>
               <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
             <?php } ?>
+            <!-- lista todos los pedidos -->
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
+            <!-- lista todos los productos -->
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
-            <li><a class="dropdown-item" href="#">Ver consultas</a></li>
+            <?php if($_SESSION['id_rol']==1||$_SESSION['id_rol']==3){?>
+              <!-- lista todos los mensajes de contacto -->
+            <li><a class="dropdown-item" href="contactos.php">Ver consultas</a></li>
+            <?php } ?>
+            <!-- lista todos los pedidos para distribucion -->
             <li><a class="dropdown-item" href="#">Ver Distribucion</a></li>
           </ul>
         </li>
           <?php }?>
       </ul>
       <?php if(isset($_SESSION['nombre_usuario'])){ ?>
+      <h6 class="px-2 titleFooter"><?=$_SESSION['nombre_usuario']?></h6>
         <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
         <?php }else{?>
       <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>

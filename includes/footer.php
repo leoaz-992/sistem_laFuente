@@ -1,5 +1,5 @@
 </section>
-<footer class="container-xxl bg-dark p-3 text-bg-light mt-5">
+<footer class="container-fluid bg-dark p-3 text-bg-light mt-5">
   <div class="row justify-content-between">
     <div class="col-lg-4 col-sm-6">
       <h5 class="titleFooter">redes sociales</h5>
@@ -33,10 +33,10 @@
         <li><a class="link-footer" href="loginForm.php" target="_blank" rel="noopener noreferrer">Login para Empleados</a></li>
       </ul>
     </div>
-    <div class="col-lg-4 offset-lg-0 col-sm-8 offset-sm-2">
+    <div class="col-lg-4 offset-lg-0 col-sm-8 offset-sm-2 position-relative">
       <!-- Formulario contacto footer -->
-      <form>
-        <h5 class="titleFooter">Contactanos:</h5>
+      <h5 class="titleFooter">Contactanos:</h5>
+      <form class="" id="contactoForm">
         <div class="mb-3 col-auto">
           <label for="nameContacto" class="form-label lb-Footer">Nombre</label>
           <input type="text" class="form-control form-control-sm" id="nameContacto" required />
@@ -55,6 +55,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
       </form>
+      <div class="" id="mensajeContact"></div>
       <!-- fin Formulario contacto footer -->
     </div>
   </div>
@@ -77,6 +78,7 @@
 <script src="js/pedido.js"></script>
 <script src="js/login.js"></script>
 <script src="js/registrar.js"></script>
+<script src="js/contacto.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
