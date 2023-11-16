@@ -6,7 +6,7 @@ $(document).ready(function () {
     let email    = $("#emailContacto").val();
     let mensaje  = $("#msjContacto").val();
 
-    console.log(nombre,telefono,email,mensaje);
+    console.log(mensaje.length);
 
 
     // Verificar que los campos no estén vacíos
@@ -15,6 +15,14 @@ $(document).ready(function () {
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong><i class="bi bi-exclamation-triangle text-danger"></i> Error al enviar su consulta.</strong>
             <p>Por favor Escriba su consulta en el campo mensaje.</p>
+          </div>`);
+      return;
+    }
+    if (mensaje.length>800) {
+      $("#mensajeContact").html(`<div class="position-absolute top-50 start-50 translate-middle alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong><i class="bi bi-exclamation-triangle text-danger"></i>Error.<i class="bi bi-exclamation-triangle text-danger"></i></strong>
+            <p>El mensaje es muy Largo.</p>
           </div>`);
       return;
     }
