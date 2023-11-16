@@ -1,5 +1,5 @@
 </section>
-<footer class="container-xxl bg-dark p-3 text-bg-light mt-5">
+<footer class="container-fluid bg-dark p-3 text-bg-light mt-5">
   <div class="row justify-content-between">
     <div class="col-lg-4 col-sm-6">
       <h5 class="titleFooter">redes sociales</h5>

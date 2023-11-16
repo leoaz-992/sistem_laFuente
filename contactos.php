@@ -1,6 +1,28 @@
 <?php include("includes/header.php");
   require "conn.php";
 
+  if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {
+    header('Location: index.php');
+}
+
+  if(isset($_GET['id_msj'])){
+    $id_mensaje = $_GET['id_msj'];
+    $select_sql = "SELECT `leido` FROM `contactos` WHERE `contactos`.`id_contactos` = $id_mensaje";
+    $resultSelect = mysqli_query($connection, $select_sql);
+    $row = mysqli_fetch_assoc($resultSelect);
+    $leido = $row['leido'];
+    
+    // Cambia el valor de 'leido' al opuesto
+    $nuevo_leido = $leido == '1' ? '0' : '1';
+    
+    $update_sql = "UPDATE `contactos` SET `leido` = '$nuevo_leido' WHERE `contactos`.`id_contactos` = $id_mensaje";
+    $resultContactoUpdate = mysqli_query($connection, $update_sql);
+    
+    if($resultContactoUpdate){
+        header("location:contactos.php");
+    }
+}
+
   $sql="SELECT * FROM `contactos`";
   $resultContacto=mysqli_query($connection,$sql);
 ?>
@@ -20,12 +42,20 @@
     <?php
     if (mysqli_num_rows($resultContacto) > 0) {
       while ($msj = mysqli_fetch_assoc($resultContacto)) {
+        if($msj["leido"]==1){
+          echo "<tr class='table-info'>";
+        }else{
           echo "<tr>";
-            echo"<th scope='row'></th>";
-            echo "<td>" . $msj["tabla01_nombre"] . "</td>";
-            echo "<td>" . $msj["tabla01_email"] . "</td>";
-            echo "<td>" . $msj["tabla01_mensaje"] . "</td>";
-            echo '<td class="actions"><a href="#">Editar</a> | <a href="#">Eliminar</a></td>';
+        }
+            echo "<td>" . $msj["nombre_contacto"] . "</td>";
+            echo "<td>" . $msj["telefono_contacto"] . "</td>";
+            echo "<td>" . $msj["correo_contacto"] . "</td>";
+            echo "<td>" . $msj["mensaje"] . "</td>";
+            if($msj["leido"]==1){
+              echo '<td class="actions"><a class="btn btn-outline-warning btn-sm" href="contactos.php?id_msj='.$msj["id_contactos"].'">Marcar como no leído</a> <a class="btn btn-outline-danger btn-sm" href="#">Eliminar</a></td>';
+            }else{
+            echo '<td class="actions"><a class="btn btn-outline-info btn-sm" href="contactos.php?id_msj='.$msj["id_contactos"].'">Marcar como leído</a> <a class="btn btn-outline-danger btn-sm" href="#">Eliminar</a></td>';
+            }
           echo "</tr>";
       }
   } else {
