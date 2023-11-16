@@ -3,13 +3,14 @@ require 'conn.php';
 session_start();
 
 function insertDireccion($connection, $calle, $numero, $nombre_barrio) {
-    $sql = "INSERT INTO `direcciones` (`id_direccion`, `calle`, `numeracion`,
+    $sql = "INSERT INTO `direcciones` ( `calle`, `numeracion`,
                                         `calle_1`, `calle_2`, `barrio_id`) 
-                                VALUES (NULL, '$calle', '$numero',
+                                VALUES ( '$calle', '$numero',
                                 NULL, NULL, '$nombre_barrio')";
     $resultDireccion = mysqli_query($connection, $sql);
     if ($resultDireccion === TRUE) {
-        return $connection->id_direccion;
+        $id_direccion= mysqli_insert_id($connection);
+        return $id_direccion;
     } else {
         throw new Exception("Error en la inserción Direccion: " . $connection->error);
     }
@@ -22,7 +23,8 @@ function insertCliente($connection, $nombre, $apellido, $telefono,$correo,$direc
 
     $resultCliente = mysqli_query($connection, $sql);
     if ($resultCliente === TRUE) {
-        return $connection->id_direccion;
+        $id_cliente= mysqli_insert_id($connection);
+        return $id_cliente;
     } else {
         throw new Exception("Error en la inserción Cliente: " . $connection->error);
     }
@@ -32,12 +34,13 @@ function insertPedido($connection,$clienteId,$tipo_pago){
     `estado_pedido_id`, `metPago_id`, `statusPago_id`,
     `cliente_id`, `total`) 
             VALUES (NULL, current_timestamp(), NULL,
-                    NULL, '$tipo_pago', NULL, 
-                    '$clienteId', NULL)";
+                    '2', '$tipo_pago', '1', 
+                    '$clienteId', '0')";
 
     $resultPedido = mysqli_query($connection, $sql);
     if ($resultPedido === TRUE) {
-        return $connection->id_pedido;
+        $id_pedido =mysqli_insert_id($connection);
+        return $id_pedido;
     } else {
         throw new Exception("Error en la inserción Pedido: " . $connection->error);
     }
@@ -47,8 +50,27 @@ function insertDetalle($connection,$pedidoId,$nombre_producto,$cantidad){
     $sql = "INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subTotal`) VALUES (NULL, '$pedidoId', '$nombre_producto', '$cantidad', '650', '5200')";
 
         $resultDetalle = mysqli_query($connection, $sql);
+  
+
         if ($resultDetalle === TRUE) {
-            return $connection->id_pedido;
+            $sqlactualizado = "UPDATE pedidos
+            SET total = (
+              SELECT SUM(productos.precio_producto * detallesPedidos.cantidad)
+              FROM detallesPedidos
+              INNER JOIN productos ON detallesPedidos.producto_id = productos.id_productos
+              WHERE detallesPedidos.pedido_id = pedidos.id_pedido
+            );";
+            $resultadoactualizado = mysqli_query($connection, $sqlactualizado);
+
+            $sqlAcPrecio = "UPDATE detallesPedidos dp
+            INNER JOIN productos p ON dp.producto_id = p.id_productos
+            SET dp.precio = p.precio_producto;";
+            $resulAcPrecio = mysqli_query($connection, $sqlactualizado);
+            if ($resultadoactualizado === true && $resulAcPrecio === true){
+                $id_detalle_prod= mysqli_insert_id($connection);
+                 return $id_detalle_prod;
+            } 
+           
     } else {
         throw new Exception("Error en la inserción Pedido: " . $connection->error);
     }

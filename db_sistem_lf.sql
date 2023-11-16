@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS pedidos_estados;
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS direcciones;
 DROP TABLE IF EXISTS pedidos;
+DROP TABLE IF EXISTS contactos;
 DROP TABLE IF EXISTS detallesPedidos;
 
 CREATE TABLE contactos (
