@@ -1,52 +1,85 @@
-$(document).ready(function () {
-    $("#altaPedido").submit(function (event) {
-      event.preventDefault();
-      let email = $("#email").val();
-      let contrasena = $("#contrasena").val();
-  
-      // Verificar que los campos no estén vacíos
-      if (email === "" || contrasena === "") {
-        $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+  $(document).ready(function () {
+  $("#altaPedido").submit(function (event) {
+    event.preventDefault();
+
+    let nombre = $("#nombre").val();
+    let apellido = $("#apellido").val();
+    let telefono = $("#telefono").val();
+    let correo = $("#correo").val();
+    let direccion = $("#direccion").val();
+    let nombre_barrio = $("#barrioslist").val();
+    let nombre_producto = $("#productoslist").val();
+    let cantidad = $("#cantidadpedido").val();
+    let tipo_pago = $("#metodoPago").val();
+
+    // Separa la calle del número 
+    // Dividir la dirección en palabras
+    direccionarray = direccion.split(" ");
+    
+    // Inicializar variables para la calle y el número
+    let calle = direccionarray[0];
+    let numero = direccionarray[1];
+
+    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
+
+    // Verificar que los campos no estén vacíos
+     if (nombre === "" || apellido === "" ||
+      telefono === "" || correo === ""|| nombre_barrio === null ||
+      calle === "" || numero === "" ||
+      cantidad === null || nombre_producto === null ||
+      tipo_pago === null) {
+
+      $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          <strong>Error al iniciar Sesión.</strong>
+          <strong>Uno de los campos estan vacios.</strong>
           <p>Por favor, rellena todos los campos.</p>
         </div>`);
-        // Vaciar los campos de entrada
-        $("#email").val("");
-        $("#contrasena").val("");
-        return;
-      }
-  
-      $.ajax({
-        type: "POST",
-        url: "gestionLogin.php",
-        data: {
-          email,
-          contrasena,
-        },
-        success: function (response) {
-          if (response === "success") {
-            //redirigir y crear datos de sesion
-            $("#mensaje")
-              .html(`<div class="alert alert-dismissible alert-success">
+      // Vaciar los campos de entrada
+      //$("#nombtr").val("");
+      //$("#contrasena").val("");
+      /* $("#nombre").val("");
+      $("#apellido").val("");
+      $("#telefono").val("");
+      $("#telefono").val("");
+      $("#direccion").val("");
+      $("#barrioslist").val("");
+      $("#productoslist").val("");
+      $("#cantidad").val("");
+      $("#metodoPago").val(""); 
+      return;*/
+     }
+
+     $.ajax({
+      type: "POST",
+      url: "gestion_pedido.php",
+      data: {
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        calle,
+        numero,
+        nombre_barrio,
+        nombre_producto,
+        cantidad,
+        tipo_pago,
+      },
+      success: function (response) {
+        if (response === "success") {
+          //redirigir y crear datos de sesion
+          $("#mensaje")
+            .html(`<div class="alert alert-dismissible alert-success">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          <strong>Datos Correctos!</strong>
+          <strong>Pedido Realizado Correctamente!</strong>
         </div>`);
-            setTimeout(() => {
-              window.location.href = "index.php";
-            }, 500);
-          } else {
-            $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+        } else {
+          $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-              <strong>Error al iniciar Sesión.</strong>
-              <p>Los datos ingresados son incorrectos.</p>
+              <strong>Error al hacer el pedido</strong>
+              <p>intente nuevamente.</p>
             </div>`);
-            // Vaciar los campos de entrada
-            $("#email").val("");
-            $("#contrasena").val("");
-          }
-        },
-      });
-    });
+        }
+      },
+    }); 
   });
-  
+});
