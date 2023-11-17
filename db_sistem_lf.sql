@@ -74,8 +74,8 @@ CREATE TABLE direcciones (
 id_direccion INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 calle VARCHAR(80) NOT NULL,
 numeracion INT(6) NOT NULL,
-calle_1 VARCHAR(80) NOT NULL,
-calle_2 VARCHAR(80) NOT NULL,
+calle_1 VARCHAR(80) NULL,
+calle_2 VARCHAR(80) NULL,
 barrio_id INT(11) NOT NULL);
 
 CREATE TABLE pedidos (
