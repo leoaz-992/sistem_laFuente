@@ -13,13 +13,12 @@ $resultado=mysqli_query($connection ,$sql);
     <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">id_pedido</th>
+      
       <th scope="col">nombre_cliente</th>
       <th scope="col">telefono</th>
       <th scope="col">direccion</th>
       <th scope="col">numero</th>
       <th scope="col">barrio</th>
-      <th scope="col">distrito</th>
       <th scope="col">metodo_pago</th>
       <th scope="col">estado_pago</th>
       <th scope="col">dia_entrega</th>
@@ -31,22 +30,18 @@ if(mysqli_num_rows($resultado)>0){
   while($pedido=mysqli_fetch_array($resultado)){
     echo"<tr>";
       
-      echo"<td>". $pedido["idPedido"] ."</td>";
       echo"<td>". $pedido["Nombre_cliente"] ."</td>";
       echo"<td>". $pedido["telefono"] ."</td>";
       echo"<td>". $pedido["Direccion"] ."</td>";
       echo"<td>". $pedido["altura"] ."</td>";
       echo"<td>". $pedido["barrio"] ."</td>";
-      echo"<td>". $pedido["distrito"] ."</td>";
       echo"<td>". $pedido["metodo_de_pago"] ."</td>";
       echo"<td>". $pedido["estado_de_pago"] ."</td>";
+      if($pedido["dia_entrega"]== null){
+        echo"<td>pendiente</td>";
+      }else{
       echo"<td>". $pedido["dia_entrega"] ."</td>";
-      
-      
-      
-      
-      
-      
+      }
     echo"</tr>";
   }
 }
