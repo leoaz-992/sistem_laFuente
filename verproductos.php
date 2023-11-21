@@ -19,8 +19,8 @@ while ($producto = mysqli_fetch_assoc($result)){
   <img src="public/<?=$producto['imagen_producto']?>" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><?=$producto['nombre_producto']?></h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <p class="card-text"><?=$producto['descripcion_producto']?></p>
+    <a href="pedidoForm.php" class="btn btn-primary">hace tu pedido</a>
   </div>
 </div>
 </div>

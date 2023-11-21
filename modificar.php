@@ -23,7 +23,7 @@ if ($deleteDetallesResult) {
 } else {
     echo "Error al eliminar los detalles de pedidos: " . mysqli_error($connection);
 }
-}else{
+}
 
 $id_producto = $_POST['id'];
 $nombre = $_POST['product-name'];
@@ -41,7 +41,7 @@ if ($result) {
 } else {
     echo "Error al actualizar el producto: " . mysqli_error($connection);
 }
-}
+
 
 
 mysqli_close($connection);
