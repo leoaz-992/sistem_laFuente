@@ -60,7 +60,7 @@ include("includes/header.php");
   </div>
   <!-- fin Carrusel -->
 </section>
-<section>
+<!-- <section>
   <h2 id="productos" class="text-center">Productos</h2>
   <div class="row">
     <div class="col-md-3">
@@ -73,7 +73,7 @@ include("includes/header.php");
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <?php
 include("includes/footer.php");
 ?>
