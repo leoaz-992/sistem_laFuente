@@ -2,6 +2,27 @@
 require 'conn.php';
 session_start();
 
+function buscarCliente($conn, $correo, $telefono) {
+
+    $sql = "SELECT id_cliente FROM `clientes` WHERE `telefono` = ? AND `coreo` = ? ;";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    
+    mysqli_stmt_bind_param($stmt, "ss", $correo, $telefono);
+
+    mysqli_stmt_execute($stmt);
+
+    $resultBusqueda = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($resultBusqueda)==1) {
+        $cliente = mysqli_fetch_array($resultBusqueda);
+        $id_cliente = $cliente["id_cliente"];
+        return $id_cliente;
+    } else {
+        return false;
+    }
+} 
+
 function insertDireccion($connection, $calle, $numero, $nombre_barrio) {
     $sql = "INSERT INTO `direcciones` ( `calle`, `numeracion`,
                                         `calle_1`, `calle_2`, `barrio_id`) 
@@ -30,6 +51,7 @@ function insertCliente($connection, $nombre, $apellido, $telefono,$correo,$direc
     }
 }
 function insertPedido($connection,$clienteId,$tipo_pago){
+    
     $sql = "INSERT INTO `pedidos` (`id_pedido`, `fecha_pedido`, `fecha_entrega`,
     `estado_pedido_id`, `metPago_id`, `statusPago_id`,
     `cliente_id`, `total`) 
@@ -80,10 +102,18 @@ function insertDetalle($connection,$pedidoId,$nombre_producto,$cantidad){
 // Similar functions for insertCliente, insertPedido, insertDetalle
 
 try {
-    $direccionId = insertDireccion($connection, $_POST['calle'], $_POST['numero'], $_POST['nombre_barrio']);
-    $clienteId = insertCliente($connection, $_POST['nombre'], $_POST['apellido'], $_POST['telefono'], $_POST['correo'], $direccionId);
+    
+    $clienteId = buscarCliente($connection, $_POST['correo'], $_POST['telefono']);
+    
+    if (!$clienteId) {
+        $direccionId = insertDireccion($connection, $_POST['calle'], $_POST['numero'], $_POST['nombre_barrio']);
+
+        $clienteId = insertCliente($connection, $_POST['nombre'], $_POST['apellido'], $_POST['telefono'], $_POST['correo'], $direccionId); 
+    }
+    
     $pedidoId = insertPedido($connection, $clienteId, $_POST['tipo_pago']);
     $detalleId = insertDetalle($connection, $pedidoId, $_POST['nombre_producto'], $_POST['cantidad']);
+    
     //echo "Inserción exitosa. Detalle ID: " . $detalleId;
     echo "success";
 } catch (Exception $e) {

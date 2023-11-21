@@ -34,7 +34,7 @@ nombre_producto VARCHAR(120) NOT NULL UNIQUE,
 descripcion_producto TEXT,
 imagen_producto VARCHAR(255)NULL,
 precio_producto DECIMAL(10,4) NOT NULL,
-stock_poducto INT(11) NOT NULL);
+stock_producto INT(11) NOT NULL);
 
 CREATE TABLE empleados (
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -66,8 +66,8 @@ CREATE TABLE clientes (
 id_cliente INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre VARCHAR(60) NOT NULL,
 apellido VARCHAR(60) NOT NULL,
-telefono INT(11) NOT NULL UNIQUE,
-coreo VARCHAR(80) NOT NULL UNIQUE,
+telefono INT(11) NOT NULL,
+coreo VARCHAR(80) NOT NULL,
 dirreccion_id INT(11) NOT NULL);
 
 CREATE TABLE direcciones (
