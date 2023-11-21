@@ -67,8 +67,8 @@ include("includes/header.php");
       <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
         <img src="public/bidon-agua-20L.png" class="card-img-top" alt="bidon 20 l">
         <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h4 class="card-title">Nuevo bidón</h4>
+          <p class="card-text">Más simple de servir.</p>
         </div>
       </div>
     </div>

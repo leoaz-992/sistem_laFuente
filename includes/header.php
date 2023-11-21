@@ -24,7 +24,7 @@
           <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
         </li>
         <li class="nav-item dropdown">
-        <a class="nav-link" href="agregoproducto.php">Productos</a>
+        <a class="nav-link" href="verproductos.php">Productos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
