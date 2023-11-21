@@ -19,7 +19,7 @@ $resultProductos = mysqli_query($connection, $sql);
 ?>
 
 <div class="container mt-5">
-    <h2>Alta de Pedido</h2>
+<h2 class="text-center">Alta de Pedido</h2>
     <form id="altaPedido">
         <div class="row">
             <!-- Columna 1: Nombre y Apellido -->
