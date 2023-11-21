@@ -24,7 +24,7 @@
           <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
         </li>
         <li class="nav-item dropdown">
-        <a class="nav-link" href="#productos">Productos</a>
+        <a class="nav-link" href="agregoproducto.php">Productos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
@@ -44,7 +44,7 @@
             <!-- lista todos los pedidos -->
             <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
             <!-- lista todos los productos -->
-            <li><a class="dropdown-item" href="#">Ver Productos</a></li>
+            <li><a class="dropdown-item" href="listaProductos.php">Ver Productos</a></li>
             <?php if($_SESSION['id_rol']==1||$_SESSION['id_rol']==3){?>
               <!-- lista todos los mensajes de contacto -->
             <li><a class="dropdown-item" href="contactos.php">Ver consultas</a></li>

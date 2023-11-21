@@ -31,10 +31,10 @@ tipo_pago VARCHAR(60) NOT NULL UNIQUE);
 CREATE TABLE productos (
 id_productos INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre_producto VARCHAR(120) NOT NULL UNIQUE,
-descripcion_producto TEXT,
-imagen_producto VARCHAR(255)NULL,
 precio_producto DECIMAL(10,4) NOT NULL,
-stock_poducto INT(11) NOT NULL);
+stock_poducto INT(11) NOT NULL),
+descripcion TEXT,
+imagen_producto VARCHAR(255)NULL;
 
 CREATE TABLE empleados (
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,

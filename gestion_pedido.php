@@ -88,6 +88,7 @@ function insertDetalle($connection,$pedidoId,$id_producto,$cantidad){
 
 try {
     $direccionId = insertDireccion($connection, $_POST['calle'], $_POST['numero'], $_POST['nombre_barrio']);
+    
     $clienteId = insertCliente($connection, $_POST['nombre'], $_POST['apellido'], $_POST['telefono'], $_POST['correo'], $direccionId);
     $pedidoId = insertPedido($connection, $clienteId, $_POST['tipo_pago']);
     $detalleId = insertDetalle($connection, $pedidoId, $_POST['nombre_producto'], $_POST['cantidad']);
