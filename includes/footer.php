@@ -1,5 +1,5 @@
 </section>
-<footer class="container-xxl bg-dark p-3 text-bg-light mt-5">
+<footer class="container-fluid bg-dark p-3 text-bg-light mt-5">
   <div class="row justify-content-between">
     <div class="col-lg-4 col-sm-6">
       <h5 class="titleFooter">redes sociales</h5>
@@ -28,7 +28,7 @@
       <h5 class="titleFooter">Menu</h5>
       <ul>
         <li><a class="link-footer" href="index.php" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-        <li><a class="link-footer" href="#" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
+        <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
         <li><a class="link-footer" href="#" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
         <li><a class="link-footer" href="loginForm.php" target="_blank" rel="noopener noreferrer">Login para Empleados</a></li>
       </ul>
@@ -74,6 +74,8 @@
       year.innerHTML= año;
     </script>
 <script src="js/jquery-3.6.0.min.js"></script>
+
+<script src="js/pedido.js"></script>
 <script src="js/login.js"></script>
 <script src="js/registrar.js"></script>
 <script src="js/contacto.js"></script>

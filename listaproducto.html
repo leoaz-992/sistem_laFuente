@@ -1,0 +1,75 @@
+`<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+</head>
+<body>
+
+<h1>Lista de Productos</h1>
+
+<!-- Formulario para Agregar Producto -->
+<form action="#" method="post" id="product-form">
+    <label for="product-name">Nombre del Producto:</label>
+    <input type="text" id="product-name" name="product-name" required><br>
+
+    <label for="product-price">Precio del Producto:</label>
+    <input type="number" id="product-price" name="product-price" step="0.01" required><br>
+
+    <label for="product-quantity">Cantidad:</label>
+    <input type="number" id="product-quantity" name="product-quantity" required><br>
+
+    <label for="product-description">Descripción:</label>
+    <textarea id="product-description" name="product-description" rows="4" cols="50"></textarea><br>
+
+    <input type="submit" value="Agregar Producto">
+</form>
+
+<!-- Lista de Productos -->
+<ul id="product-list"></ul>
+
+<script>
+    // Función para agregar un producto a la lista
+    function addProduct() {
+        // Obtenemos los valores del formulario
+        const productName = document.getElementById('product-name').value;
+        const productPrice = document.getElementById('product-price').value;
+        const productQuantity = document.getElementById('product-quantity').value;
+        const productDescription = document.getElementById('product-description').value;
+
+        // Creamos un nuevo elemento de lista
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<strong>${productName}</strong> - Precio: $${productPrice} - Cantidad: ${productQuantity} - ${productDescription} <button onclick="editProduct(this)">Editar</button> <button onclick="deleteProduct(this)">Eliminar</button>`;
+
+        // Agregamos el elemento de lista a la lista de productos
+        document.getElementById('product-list').appendChild(listItem);
+
+        // Limpiamos el formulario
+        document.getElementById('product-form').reset();
+    }
+
+    // Función para editar un producto
+    function editProduct(button) {
+        const listItem = button.parentNode;
+        const productInfo = listItem.innerText.split(' - ');
+
+        // Rellenamos el formulario con la información del producto
+        document.getElementById('product-name').value = productInfo[0];
+        document.getElementById('product-price').value = parseFloat(productInfo[1].replace('Precio: $', ''));
+        document.getElementById('product-quantity').value = parseInt(productInfo[2].replace('Cantidad: ', ''));
+        document.getElementById('product-description').value = productInfo[3];
+
+        // Eliminamos el producto de la lista
+        listItem.remove();
+    }
+
+    // Función para eliminar un producto
+    function deleteProduct(button) {
+        const listItem = button.parentNode;
+        listItem.remove();
+    }
+</script>
+
+</body>
+</html>

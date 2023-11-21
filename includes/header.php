@@ -27,7 +27,7 @@
         <a class="nav-link" href="#productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pedidos.php">hace tu pedido</a>
+          <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="nosotros.php">sobre nosotros</a>
@@ -41,13 +41,17 @@
             <?php if($_SESSION['id_rol']==1){?>
               <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
             <?php } ?>
-            <li><a class="dropdown-item" href="#">Ver pedidos</a></li>
+            <!-- lista todos los pedidos -->
+            <li><a class="dropdown-item" href="listapedidos.php">Ver pedidos</a></li>
+            <!-- lista todos los productos -->
             <li><a class="dropdown-item" href="#">Ver Productos</a></li>
+            <?php if($_SESSION['id_rol']==1||$_SESSION['id_rol']==3){?>
+              <!-- lista todos los mensajes de contacto -->
             <li><a class="dropdown-item" href="contactos.php">Ver consultas</a></li>
             <li><a class="dropdown-item" href="distribucion.php">Ver Distribucion</a></li>
           </ul>
         </li>
-          <?php }?>
+          <?php }}?>
       </ul>
       <?php if(isset($_SESSION['nombre_usuario'])){ ?>
       <h6 class="px-2 titleFooter"><?=$_SESSION['nombre_usuario']?></h6>

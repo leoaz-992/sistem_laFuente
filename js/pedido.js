@@ -1,0 +1,93 @@
+  $(document).ready(function () {
+  $("#altaPedido").submit(function (event) {
+    event.preventDefault();
+
+    let nombre = $("#nombre").val();
+    let apellido = $("#apellido").val();
+    let telefono = $("#telefono").val();
+    let correo = $("#correo").val();
+    let direccion = $("#direccion").val();
+    let nombre_barrio = $("#barrioslist").val();
+    let nombre_producto = $("#productoslist").val();
+    let cantidad = $("#cantidadpedido").val();
+    let tipo_pago = $("#metodoPago").val();
+
+    // Separa la calle del número 
+    // Dividir la dirección en palabras
+    direccionarray = direccion.split(/(\d+)/);
+    
+    // Inicializar variables para la calle y el número
+    let calle = direccionarray[0].trim();
+    let numero = direccionarray[1];
+
+    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
+
+    // Verificar que los campos no estén vacíos
+     if (nombre === "" || apellido === "" ||
+      telefono === "" || correo === ""|| nombre_barrio === null ||
+      calle === "" || numero === "" ||
+      cantidad === null || nombre_producto === null ||
+      tipo_pago === null) {
+
+      $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Uno de los campos estan vacios.</strong>
+          <p>Por favor, rellena todos los campos.</p>
+        </div>`);
+      // Vaciar los campos de entrada
+      /* $("#nombre").val("");
+      $("#apellido").val("");
+      $("#telefono").val("");
+      $("#telefono").val("");
+      $("#direccion").val("");
+      $("#barrioslist").val("");
+      $("#productoslist").val("");
+      $("#cantidad").val("");
+      $("#metodoPago").val(""); 
+      return;*/
+     }
+
+     $.ajax({
+      type: "POST",
+      url: "gestion_pedido.php",
+      data: {
+        nombre,
+        apellido,
+        telefono,
+        correo,
+        calle,
+        numero,
+        nombre_barrio,
+        nombre_producto,
+        cantidad,
+        tipo_pago,
+      },
+      success: function (response) {
+        if (response === "success") {
+          //redirigir y crear datos de sesion
+          $("#mensaje")
+            .html(`<div class="alert alert-dismissible alert-success">
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Pedido Realizado Correctamente!</strong>
+        </div>`);
+        // Vaciar los campos de entrada
+        $("#nombre").val("");
+        $("#apellido").val("");
+        $("#telefono").val("");
+        $("#telefono").val("");
+        $("#direccion").val("");
+        $("#barrioslist").val("");
+        $("#productoslist").val("");
+        $("#cantidad").val("");
+        $("#metodoPago").val("");
+        } else {
+          $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              <strong>Error al hacer el pedido</strong>
+              <p>intente nuevamente.</p>
+            </div>`);
+        }
+      },
+    }); 
+  });
+});
