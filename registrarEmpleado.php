@@ -11,8 +11,6 @@ $resultRoles = mysqli_query($connection, $sql);
 ?>
 <div class="row justify-content-center p-5">
   <div class="col-md-6">
-    <div class="" id="mensaje">
-    </div>
     <main class="form-signin w-100 m-auto main p-4">
       <form id="newEmployeeForm">
         <div class="row justify-content-center">
@@ -26,14 +24,12 @@ $resultRoles = mysqli_query($connection, $sql);
           <div class="col-lg-6 col-sm-12">
             <label for="nombreEmp" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombreEmp" autofocus placeholder="ingrese su nombre" require />
-            <div class="valid-feedback">Success! You've done it.</div>
-            <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+            <div class="invalid-feedback">Por favor ingrese un nombre</div>
           </div>
           <div class="col-lg-6 col-sm-12">
             <label for="apellidoEmp" class="form-label">Apellido</label>
             <input type="text" class="form-control " id="apellidoEmp" placeholder="ingrese su Apellido" require />
-            <div class="valid-feedback">Success! You've done it.</div>
-            <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+            <div id="invalidApellido" class="invalid-feedback">Por favor, ingresa un apellido.</div>
           </div>
         </div>
         <div class="form-group">
@@ -48,15 +44,19 @@ $resultRoles = mysqli_query($connection, $sql);
         <div class="form-group">
           <label for="contrasena" class="form-label mt-4">Contraseña</label>
           <input type="password" class="form-control" id="contrasena" placeholder="contraseña" autocomplete="off" require>
+          <div class="valid-feedback">Las contraseña es valida.</div>
+            <div id="invalid_contrasena" class="invalid-feedback"></div>
         </div>
         <div class="form-group">
           <label for="repetirContrasena" class="form-label mt-4">Repita contraseña</label>
           <input type="password" class="form-control" id="repetirContrasena" placeholder="Repetir contraseña" autocomplete="off" require>
+          <div class="valid-feedback">Las contraseñas coinciden</div>
+            <div id="invalid_repetirContrasena" class="invalid-feedback"></div>
         </div>
         <div class="form-group">
           <label for="rolUser" class="form-label mt-4">Rol</label>
           <select class="form-select" id="rolUser">
-            <option value="" selected disabled>Elegir Rol para el Empleado</option>
+            <option value="null" selected disabled>Elegir Rol para el Empleado</option>
             <?php while ($rol = mysqli_fetch_array($resultRoles)) {
               echo "<option value='" . $rol['id_rol'] . "'>" . $rol['nombre_rol'] . "</option>";
             }
@@ -67,6 +67,8 @@ $resultRoles = mysqli_query($connection, $sql);
         <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Registrar Empleado</button>
       </form>
     </main>
+    <div class="mt-2" id="mensaje">
+    </div>
   </div>
 </div>
 <!-- envia los datos del formulario -->

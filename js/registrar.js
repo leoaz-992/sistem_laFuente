@@ -1,34 +1,99 @@
+const MENSAJES_ERROR = {
+    CAMPO_VACIO: 'Por favor, rellena todos los campos.',
+    CONTRASEÑA_NO_VALIDA:'La contraseña no es valida, Debe tener al menos 8 caracteres de longitud y contener letras mayúsculas, letras minúsculas y al menos un número.',
+    CONTRASEÑAS_NO_COINCIDEN: 'Las contraseñas no coinciden',
+    CORREO_INVALIDO: 'El correo electrónico no es válido',
+    CORREO_EXISTE:'El correo ingresado ya corresponde a un empleado.',
+    NOMBRE_USUARIO_EXISTE:'El nombre de usuario no se encuentra disponible.'
+  };
+
+const MENSAJE_EXITO = '¡Usuario Creado Correctamente!';
+
+const validarFormulario = (nombre, apellido, nombre_usuario, email, contrasena, copycontrasena, rol) => {
+    if (!nombre || !apellido || !nombre_usuario || !email || !contrasena || !copycontrasena || !rol) {
+      return MENSAJES_ERROR.CAMPO_VACIO;
+    }
+  
+    if (contrasena !== copycontrasena) {
+      return MENSAJES_ERROR.CONTRASEÑAS_NO_COINCIDEN;
+    }
+  
+    const regexCorreo = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    if (!regexCorreo.test(email)) {
+      return MENSAJES_ERROR.CORREO_INVALIDO;
+    }
+
+    const regexPass=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/
+    if (!regexPass.test(contrasena)) {
+      return MENSAJES_ERROR.CONTRASEÑA_NO_VALIDA;
+    }
+  
+    return null;
+  }
+
 $(document).ready(function () {
   $("#newEmployeeForm").submit(function (event) {
     event.preventDefault();
-    let nombre          = $("#nombreEmp").val();
-    let apellido        = $("#apellidoEmp").val();
-    let nombre_usuario   = $("#nombreUsuario").val();
-    let email           = $("#emailEmployee").val();
-    let contrasena      = $("#contrasena").val();
-    let copycontrasena  = $("#repetirContrasena").val();
+
+    let nombre          = $("#nombreEmp").val().trim();
+    let apellido        = $("#apellidoEmp").val().trim();
+    let nombre_usuario  = $("#nombreUsuario").val().trim();
+    let email           = $("#emailEmployee").val().trim();
+    let contrasena      = $("#contrasena").val().trim();
+    let copycontrasena  = $("#repetirContrasena").val().trim();
     let rol             = $("#rolUser").val();
 
     //console.log(nombre,apellido,nombre_usuario,email,contrasena,copycontrasena,rol);
+    
+    const mensajeError = validarFormulario(nombre, apellido, nombre_usuario, email, contrasena, copycontrasena, rol);
 
-
-    // Verificar que los campos no estén vacíos
-    if (email === "" || contrasena === ""||nombre===""||apellido === "" || copycontrasena === ""||nombre_usuario===""|| rol==null) {
+    if (mensajeError) {
+      if(mensajeError == MENSAJES_ERROR.CAMPO_VACIO){
+        $("#nombreEmp").addClass("is-invalid").val("");
+        $("#apellidoEmp").addClass("is-invalid").val("");
+        $("#nombreUsuario").addClass("is-invalid").val("");
+        $("#emailEmployee").addClass("is-invalid").val("");
+        $("#contrasena").addClass("is-invalid").val("");
+        $("#repetirContrasena").addClass("is-invalid").val("");
+        $("#rolUser").addClass("is-invalid");
+      }
+      if(mensajeError == MENSAJES_ERROR.CONTRASEÑAS_NO_COINCIDEN){
+        $("#contrasena").removeClass("is-valid");
+        $("#invalid_contrasena").text(mensajeError);       
+        $("#repetirContrasena").removeClass("is-valid");
+        $("#invalid_repetirContrasena").text(mensajeError); 
+        $("#contrasena").addClass("is-invalid");
+        $("#repetirContrasena").addClass("is-invalid");
+      }
+      if(mensajeError == MENSAJES_ERROR.CONTRASEÑA_NO_VALIDA){
+        $("#contrasena").removeClass("is-valid");
+        $("#invalid_contrasena").text(mensajeError);       
+        $("#repetirContrasena").removeClass("is-valid");
+        $("#invalid_repetirContrasena").text(mensajeError); 
+        $("#contrasena").addClass("is-invalid");
+        $("#repetirContrasena").addClass("is-invalid");
+      }
       $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>Error al cargar los datos.</strong>
-        <p>Por favor, rellena todos los campos.</p>
+        <p>${mensajeError}</p>
       </div>`);
-      // Vaciar los campos de entrada
-      $("#email").val("");
-      $("#contrasena").val("");
+      
       return;
+    }else{
+      $("#nombreEmp").removeClass("is-invalid");
+      $("#apellidoEmp").removeClass("is-invalid");
+      $("#nombreUsuario").removeClass("is-invalid");
+      $("#emailEmployee").removeClass("is-invalid");
+      $("#contrasena").removeClass("is-invalid");
+      $("#repetirContrasena").removeClass("is-invalid");
+      $("#rolUser").removeClass("is-invalid");
+      $("#newEmployeeForm").removeClass('was-validated')
     }
-
 
     $.ajax({
       type: "POST",
-      url: "gestionRegistro.php",
+      url: "gestionRegistroEmpleado.php",
       data: {
         nombre,
         apellido,
@@ -42,18 +107,23 @@ $(document).ready(function () {
         //console.log(response);
         if (response === "success") {
           //redirigir y crear datos de sesion
-          $("#mensaje")
-            .html(`<div class="alert alert-dismissible alert-success">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Datos Correctos!</strong>
-      </div>`);
+          $("#mensaje").html(`<div class="alert alert-dismissible alert-success">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              <strong>${MENSAJE_EXITO}</strong>
+              </div>`);
           setTimeout(() => {
             window.location.href = "index.php";
           }, 500);
-        } else {
+        }if(response === "El correo o el usuario ya existe"){
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Error al iniciar Sesión.</strong>
+            <strong>Error al Crear un Registro.</strong>
+            <p>El usuario o el correo ya existen.</p>
+          </div>`);
+        }else {
+          $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Error al Crear un Registro.</strong>
             <p>Los datos ingresados son incorrectos.</p>
           </div>`);
           // Vaciar los campos de entrada
@@ -63,17 +133,4 @@ $(document).ready(function () {
       },
     });
   })
-  //valida que los campos no se envien vacios
-  $("#newEmployeeForm").submit(function (event) {
-    $('input').each(function() {
-      if($(this).val()==""){
-        $(this).addClass("is-invalid");
-        $(this).removeClass("is-valid");
-        return;
-      }else{
-        $(this).addClass("is-valid");
-        $(this).removeClass("is-invalid");
-      }
-  });
-  });
 });

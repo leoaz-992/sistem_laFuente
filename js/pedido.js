@@ -14,10 +14,10 @@
 
     // Separa la calle del número 
     // Dividir la dirección en palabras
-    direccionarray = direccion.split(" ");
+    direccionarray = direccion.split(/(\d+)/);
     
     // Inicializar variables para la calle y el número
-    let calle = direccionarray[0];
+    let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
     console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
@@ -35,8 +35,6 @@
           <p>Por favor, rellena todos los campos.</p>
         </div>`);
       // Vaciar los campos de entrada
-      //$("#nombtr").val("");
-      //$("#contrasena").val("");
       /* $("#nombre").val("");
       $("#apellido").val("");
       $("#telefono").val("");
@@ -72,6 +70,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           <strong>Pedido Realizado Correctamente!</strong>
         </div>`);
+        // Vaciar los campos de entrada
+        $("#nombre").val("");
+        $("#apellido").val("");
+        $("#telefono").val("");
+        $("#telefono").val("");
+        $("#direccion").val("");
+        $("#barrioslist").val("");
+        $("#productoslist").val("");
+        $("#cantidad").val("");
+        $("#metodoPago").val("");
         } else {
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

@@ -1,31 +1,3 @@
-`<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
-</head>
-<body>
-
-<h1>Lista de Productos</h1>
-
-<!-- Formulario para Agregar Producto -->
-<form action="#" method="post" id="product-form">
-    <label for="product-name">Nombre del Producto:</label>
-    <input type="text" id="product-name" name="product-name" required><br>
-
-    <label for="product-price">Precio del Producto:</label>
-    <input type="number" id="product-price" name="product-price" step="0.01" required><br>
-
-    <label for="product-quantity">Cantidad:</label>
-    <input type="number" id="product-quantity" name="product-quantity" required><br>
-
-    <label for="product-description">Descripción:</label>
-    <textarea id="product-description" name="product-description" rows="4" cols="50"></textarea><br>
-
-    <input type="submit" value="Agregar Producto">
-</form>
-
 <!-- Lista de Productos -->
 <ul id="product-list"></ul>
 
@@ -70,6 +42,34 @@
         listItem.remove();
     }
 </script>
+   <!-- ... tu código HTML anterior ... -->
 
-</body>
-</html>
+   <script>
+       function addProduct() {
+           // ... código para obtener valores del formulario ...
+
+           // Enviar datos al servidor (PHP) para guardar en la base de datos
+           fetch('guardar_producto.php', {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({
+                   name: productName,
+                   price: productPrice,
+                   quantity: productQuantity,
+                   description: productDescription
+               }),
+           })
+           .then(response => response.json())
+           .then(data => {
+               // Manejar la respuesta del servidor si es necesario
+               console.log('Producto guardado:', data);
+           });
+
+           // ... resto de tu código ...
+       }
+
+       // ... funciones editProduct y deleteProduct ...
+
+   </script>

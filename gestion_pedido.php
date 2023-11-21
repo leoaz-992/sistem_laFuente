@@ -68,13 +68,27 @@ function insertPedido($connection,$clienteId,$tipo_pago){
     }
 }
 
-function insertDetalle($connection,$pedidoId,$nombre_producto,$cantidad){
-    $sql = "INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subTotal`) VALUES (NULL, '$pedidoId', '$nombre_producto', '$cantidad', '650', '5200')";
+function insertDetalle($connection,$pedidoId,$id_producto,$cantidad){
+    //busca el precio del producto por id_producto.
+    $sqlPriceProduct="SELECT p.precio_producto AS precio FROM `productos` AS p WHERE p.id_productos = $id_producto";
+    $resultPrecio = mysqli_query($connection, $sqlPriceProduct);
+    if (mysqli_num_rows($resultPrecio) > 0) {
+        while($row = mysqli_fetch_assoc($resultPrecio)) {
+            $precio=$row["precio"];
+        }
+    } else {
+        //si no encuentra envia un error
+        throw new Exception("Error en la inserción Pedido. no se encontro el producto.: " . $connection->error);
+    }
+
+    //insert el pedido en la base de datos
+    $sql = "INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subTotal`) VALUES (NULL, '$pedidoId', '$id_producto', '$cantidad', '$precio', ($precio*$cantidad))";
 
         $resultDetalle = mysqli_query($connection, $sql);
   
-
+    
         if ($resultDetalle === TRUE) {
+    //actualiza el total  de la tabla pedidos en base a todos los detalles pedidos relacionados a ese pedido.
             $sqlactualizado = "UPDATE pedidos
             SET total = (
               SELECT SUM(productos.precio_producto * detallesPedidos.cantidad)
@@ -84,22 +98,15 @@ function insertDetalle($connection,$pedidoId,$nombre_producto,$cantidad){
             );";
             $resultadoactualizado = mysqli_query($connection, $sqlactualizado);
 
-            $sqlAcPrecio = "UPDATE detallesPedidos dp
-            INNER JOIN productos p ON dp.producto_id = p.id_productos
-            SET dp.precio = p.precio_producto;";
-            $resulAcPrecio = mysqli_query($connection, $sqlactualizado);
-            if ($resultadoactualizado === true && $resulAcPrecio === true){
+            if ($resultadoactualizado === true){
                 $id_detalle_prod= mysqli_insert_id($connection);
                  return $id_detalle_prod;
-            } 
+            }
            
     } else {
         throw new Exception("Error en la inserción Pedido: " . $connection->error);
     }
-
-
 }
-// Similar functions for insertCliente, insertPedido, insertDetalle
 
 try {
     
