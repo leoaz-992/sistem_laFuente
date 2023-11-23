@@ -3,15 +3,15 @@ include("includes/header.php");
 require("conn.php");
 
 $id_detallePedido = $_GET['id_pedido'];
-$sql="SELECT
-p.nombre_producto AS producto, cantidad FROM `detallespedidos` INNER JOIN productos p ON detallespedidos.producto_id = p.id_productos WHERE pedido_id = $id_detallePedido";
- $result=mysqli_query($connection,$sql);
+$sql = "SELECT p.nombre_producto AS producto, cantidad , subTotal FROM `detallespedidos` INNER JOIN productos p ON detallespedidos.producto_id = p.id_productos WHERE pedido_id = $id_detallePedido";
+$result = mysqli_query($connection, $sql);
 ?>
-<?php if($result){
-    while($product= mysqli_fetch_array($result)){
+<?php if ($result) {
+    while ($product = mysqli_fetch_array($result)) {
 ?>
-<p>producto:  <?=$product['producto']?></p>
-<p>cantidad: <?=$product['cantidad']?></p>
+        <p>producto: <?= $product['producto'] ?></p>
+        <p>cantidad: <?= $product['cantidad'] ?></p>
+        <p>total a pagar: <strong><?= $product['subTotal'] ?></strong></p>
 
 <?php
     }

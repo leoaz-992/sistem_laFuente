@@ -36,10 +36,12 @@ $resultRoles = mysqli_query($connection, $sql);
           <label for="nombreUsuario" class="form-label mt-4">Nombre de usuario</label>
           <input type="text" class="form-control" id="nombreUsuario" aria-describedby="nombreUser" placeholder="Ingrese un nombre de usuario" require>
           <small id="nombreUser" class="form-text text-muted">El nombre de usuario debe tener minimo 8 caracteres.</small>
+          <div class="invalid-feedback">por favor, ingrese un nombre de usuario.</div>
         </div>
         <div class="form-group">
           <label for="emailEmployee" class="form-label mt-4">Correo</label>
           <input type="email" class="form-control" id="emailEmployee" aria-describedby="emailHelp" placeholder="Enter email" require>
+          <div class="invalid-feedback">por favor, ingrese un correo.</div>
         </div>
         <div class="form-group">
           <label for="contrasena" class="form-label mt-4">Contraseña</label>

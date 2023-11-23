@@ -29,7 +29,7 @@
       <ul>
         <li><a class="link-footer" href="index.php" target="_blank" rel="noopener noreferrer">Inicio</a></li>
         <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
-        <li><a class="link-footer" href="#" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
+        <li><a class="link-footer" href="verproductos.php" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
         <li><a class="link-footer" href="loginForm.php" target="_blank" rel="noopener noreferrer">Login para Empleados</a></li>
       </ul>
     </div>
@@ -68,11 +68,11 @@
   </div>
 </footer>
 <script>
-      const fecha = new Date();
-      const año = fecha.getFullYear();
-      const year= document.getElementById("dateYear");
-      year.innerHTML= año;
-    </script>
+  const fecha = new Date();
+  const año = fecha.getFullYear();
+  const year = document.getElementById("dateYear");
+  year.innerHTML = año;
+</script>
 <script src="js/jquery-3.6.0.min.js"></script>
 
 <script src="js/pedido.js"></script>
