@@ -7,10 +7,11 @@
     let telefono = $("#telefono").val();
     let correo = $("#correo").val();
     let direccion = $("#direccion").val();
-    let nombre_barrio = $("#barrioslist").val();
-    let nombre_producto = $("#productoslist").val();
-    let cantidad = $("#cantidadpedido").val();
-    let tipo_pago = $("#metodoPago").val();
+    let nombre_barrio = $("#nombre_barrio").val();
+    let productosConCantidad = $("#altaPedido input[name^='cantidad_']").filter(function() {
+      return $(this).val() > 0
+    }).length > 0;
+    let tipo_pago = $("#tipo_pago").val();
 
     // Separa la calle del número 
     // Dividir la dirección en palabras
@@ -20,13 +21,13 @@
     let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
-    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
+    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago);
 
     // Verificar que los campos no estén vacíos
      if (nombre === "" || apellido === "" ||
       telefono === "" || correo === ""|| nombre_barrio === null ||
       calle === "" || numero === "" ||
-      cantidad === null || nombre_producto === null ||
+      !productosConCantidad ||
       tipo_pago === null) {
 
       $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
@@ -40,28 +41,17 @@
       $("#telefono").val("");
       $("#telefono").val("");
       $("#direccion").val("");
-      $("#barrioslist").val("");
+      $("#nombre_barrio").val("");
       $("#productoslist").val("");
       $("#cantidad").val("");
-      $("#metodoPago").val(""); 
-      return;*/
+      $("#tipo_pago").val("");*/ 
+      return;
      }
 
      $.ajax({
       type: "POST",
       url: "gestion_pedido.php",
-      data: {
-        nombre,
-        apellido,
-        telefono,
-        correo,
-        calle,
-        numero,
-        nombre_barrio,
-        nombre_producto,
-        cantidad,
-        tipo_pago,
-      },
+      data: $(this).serialize() + "&calle="+calle+"&numero="+numero,
       success: function (response) {
         if (response === "success") {
           //redirigir y crear datos de sesion
@@ -76,10 +66,10 @@
         $("#telefono").val("");
         $("#telefono").val("");
         $("#direccion").val("");
-        $("#barrioslist").val("");
+        $("#nombre_barrio").val("");
         $("#productoslist").val("");
-        $("#cantidad").val("");
-        $("#metodoPago").val("");
+        $("#altaPedido input[name^='cantidad_']").val("0");
+        $("#tipo_pago").val("");
         } else {
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

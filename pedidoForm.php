@@ -10,7 +10,7 @@ require("conn.php");
 $sql = "SELECT id_barrio, nombre_barrio FROM `barrios`";
 $resultBarrios = mysqli_query($connection, $sql);
 
-$sql = "SELECT id_metodo_pago, tipo_pago FROM `metodos_pago`";
+$sql = "SELECT id_metodo_pago, tipo_pago FROM `metodos_pago` ORDER BY id_metodo_pago ASC";
 $resultMetodos = mysqli_query($connection, $sql);
 
 $sql = "SELECT id_productos, nombre_producto FROM `productos`";
@@ -19,7 +19,7 @@ $resultProductos = mysqli_query($connection, $sql);
 ?>
 
 <div class="container mt-5">
-<h2 class="text-center">Alta de Pedido</h2>
+    <h2 class="text-center">Alta de Pedido</h2>
     <form id="altaPedido">
         <div class="row">
             <!-- Columna 1: Nombre y Apellido -->
@@ -64,8 +64,8 @@ $resultProductos = mysqli_query($connection, $sql);
             <!-- <div class="row py-2"> -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="barrioslist">Barrios:</label>
-                    <select class="form-select" id="barrioslist" aria-label="Default select example">
+                    <label for="nombre_barrio">Barrios:</label>
+                    <select class="form-select" name="nombre_barrio" id="nombre_barrio" aria-label="Default select example">
                         <option selected disabled>seleccione un barrio</option>
                         <?php
                         while ($barrio = mysqli_fetch_array($resultBarrios)) {
@@ -78,31 +78,12 @@ $resultProductos = mysqli_query($connection, $sql);
         </div>
 
         <!-- Columna 2: Producto -->
-        <div class=row>
+        <div class="row">
+            <!-- Columna 3: Método de Pago -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="producto">Producto:</label>
-                    <select class="form-select" id="productoslist" aria-label="Default select example">
-                        <option selected disabled>seleccione un producto</option>
-                        <?php
-                        while ($producto = mysqli_fetch_array($resultProductos)) {
-                            echo '<option value="' . $producto['id_productos'] . '">' . $producto["nombre_producto"] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <!-- Columna 3: Cantidad y Método de Pago -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="number" class="form-control" id="cantidadpedido" name="cantidad" required>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="metodoPago">Método de Pago:</label>
-                    <select class="form-select" id="metodoPago" name="metodoPago">
+                    <label for="tipo_pago">Método de Pago:</label>
+                    <select class="form-select" id="tipo_pago" name="tipo_pago">
                         <option selected disabled>seleccione un producto</option>
                         <?php
                         while ($metpago = mysqli_fetch_array($resultMetodos)) {
@@ -113,13 +94,28 @@ $resultProductos = mysqli_query($connection, $sql);
                 </div>
             </div>
         </div>
-</div>
+    
+        <h2 class="text-center mt-5">Productos</h2>
 
-<!-- Botón de Enviar -->
-<button type="submit" class="btn btn-primary">Enviar</button>
+        <div class="row">
+            <?php
+            while ($producto = mysqli_fetch_array($resultProductos)) {
+                echo '<div class="col-md-4">';
+                echo '<div class="form-group">';
+                echo '<label for="cantidad_'.$producto['id_productos'].'">'.$producto["nombre_producto"].'</label>';
+                echo '<input type="number" min="0" class="form-control" id="cantidad_'.$producto['id_productos'].'" name="cantidad_'.$producto['id_productos'].'" value="'.($producto['id_productos'] == 7 ? 1 : 0).'" required>';
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
 
-</form>
-<div id="mensaje"></div>
+        <!-- Botón de Enviar -->
+        <div class="d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+    <div id="mensaje"></div>
 </div>
 
 <?php

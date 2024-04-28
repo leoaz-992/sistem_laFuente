@@ -119,9 +119,16 @@ try {
     }
     
     $pedidoId = insertPedido($connection, $clienteId, $_POST['tipo_pago']);
-    $detalleId = insertDetalle($connection, $pedidoId, $_POST['nombre_producto'], $_POST['cantidad']);
     
-    //echo "Inserción exitosa. Detalle ID: " . $detalleId;
+    foreach($_POST as $field => $value) {
+        if (substr( $field, 0, 9 ) === "cantidad_" && $value > 0) {
+            $productoId = explode("_", $field)[1];
+            $detalleId = insertDetalle($connection, $pedidoId, $productoId, $value);
+    
+            //echo "Inserción exitosa. Detalle ID: " . $detalleId;
+        }
+    }
+
     echo "success";
 } catch (Exception $e) {
     echo $e->getMessage();
