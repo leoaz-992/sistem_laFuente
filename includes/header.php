@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- iconos de bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- para los graficos -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
   <link rel="shortcut icon" href="public/cascada.png" type="image/x-icon">
   <title>La fuente</title>
 </head>
@@ -28,9 +30,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link" href="verproductos.php">Productos</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="nosotros.php">sobre nosotros</a>
           </li>
@@ -62,7 +64,7 @@
           <?php } ?>
         </ul>
         <?php if (isset($_SESSION['nombre_usuario'])) { ?>
-          <h6 class="px-2 titleFooter"><a class="link-footer" href="miperfil.php?username=<?= $_SESSION['nombre_usuario'] ?>" target="_blank"><?= $_SESSION['nombre_usuario'] ?></a></h6>
+          <h6 class="px-2 titleFooter"><a class="link-footer" href="miperfil.php" target="_blank"><?= $_SESSION['nombre_usuario'] ?></a></h6>
           <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
         <?php } else { ?>
           <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>
