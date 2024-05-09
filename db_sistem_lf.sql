@@ -32,9 +32,9 @@ CREATE TABLE productos (
 id_productos INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre_producto VARCHAR(120) NOT NULL UNIQUE,
 precio_producto DECIMAL(10,2) NOT NULL,
-stock_poducto INT(11) NOT NULL),
+stock_poducto INT(11) NOT NULL,
 descripcion TEXT,
-imagen_producto VARCHAR(255)NULL;
+imagen_producto VARCHAR(255)NULL);
 
 CREATE TABLE empleados (
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
