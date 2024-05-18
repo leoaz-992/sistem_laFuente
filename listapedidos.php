@@ -2,15 +2,17 @@
 include("includes/header.php");
 require("conn.php");
 
+//cambia el estado del pedido a distribucion.
 if (isset($_GET['id_pedido'])) {
   $id_recibido = $_GET['id_pedido'];
-  //cambia el estado del pedido a distribucion.
   $sqlUpdate = "UPDATE `pedidos` SET `estado_pedido_id` = '3' WHERE `pedidos`.`id_pedido` = $id_recibido";
   $resultUpdate = mysqli_query($connection, $sqlUpdate);
   if ($resultUpdate) {
     header("location:listapedidos.php");
   }
 }
+
+/* quitar un pedido */
 if (isset($_GET['id_pedido_quitar'])) {
   $id_recibido = $_GET['id_pedido_quitar'];
   $sqlDeleteDetalle = "DELETE FROM `detallespedidos` WHERE `pedido_id` = $id_recibido;";
