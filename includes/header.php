@@ -44,27 +44,30 @@
               <ul class="dropdown-menu">
                 <?php if ($_SESSION['id_rol'] == 1) { ?>
                   <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
+                  <li><a class="dropdown-item" href="estadisticas.php">Estadisticas</a></li>
+                  <li><a class="dropdown-item" href="informes.php">Informes</a></li>
                 <?php } ?>
                 <!-- lista todos los productos -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
-                  <li><a class="dropdown-item" href="listaProductos.php">Ver Productos</a></li>
+                  <li><a class="dropdown-item" href="listaProductos.php">Productos</a></li>
                 <?php } ?>
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
                   <!-- lista todos los mensajes de contacto -->
-                  <li><a class="dropdown-item" href="contactos.php">Ver consultas</a></li>
+                  <li><a class="dropdown-item" href="contactos.php">Consultas</a></li>
                   <!-- lista todos los pedidos -->
-                  <li><a class="dropdown-item" href="listapedidos.php">Ver pedidos</a></li>
+                  <li><a class="dropdown-item" href="listapedidos.php">Pedidos Recibidos</a></li>
                 <?php } ?>
                 <!-- lista todos los pedidos q estan en distribucion -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3 || $_SESSION['id_rol'] == 2) { ?>
-                  <li><a class="dropdown-item" href="distribucion.php">Ver Distribucion</a></li>
+                  <li><a class="dropdown-item" href="distribucion.php">Pedidos en Distribucion</a></li>
                 <?php } ?>
+                <li><a class="dropdown-item" href="miperfil.php">Cambiar contraseña</a></li>
               </ul>
             </li>
           <?php } ?>
         </ul>
         <?php if (isset($_SESSION['nombre_usuario'])) { ?>
-          <h6 class="px-2 titleFooter"><a class="link-footer" href="miperfil.php" target="_blank"><?= $_SESSION['nombre_usuario'] ?></a></h6>
+          <h6 class="px-2 pt-1 m-0 text-info"><?= $_SESSION['nombre_usuario'] ?></h6>
           <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
         <?php } else { ?>
           <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>
