@@ -53,7 +53,7 @@
                 <?php } ?>
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
                   <!-- lista todos los mensajes de contacto -->
-                  <li><a class="dropdown-item" href="contactos.php">Consultas</a></li>
+                  <li><a class="dropdown-item" href="contactos.php">Consultas<span class=" ms-4 badge bg-primary rounded-pill"><?= $_SESSION['consultasSinLeer'] ? "sin leer: " . $_SESSION['consultasSinLeer'] : "" ?></span></a></li>
                   <!-- lista todos los pedidos -->
                   <li><a class="dropdown-item" href="listapedidos.php">Pedidos Recibidos</a></li>
                 <?php } ?>

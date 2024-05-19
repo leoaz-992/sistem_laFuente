@@ -1,5 +1,6 @@
 <?php include("includes/header.php");
 require "conn.php";
+require("config/consultas.php");
 /* si no esta logeado o no tiene un rol admin o recepcion te envia al index */
 if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {
   header('Location: index.php');
@@ -29,7 +30,7 @@ if (isset($_GET['id_msj_delete'])) {
 
   $deleteResult = mysqli_query($connection, $sql);
   if ($deleteResult) {
-      header("location:contactos.php");
+    header("location:contactos.php");
   }
 }
 
@@ -71,7 +72,7 @@ $resultContacto = mysqli_query($connection, $sql);
       } else {
         echo "<tr class='text-center'><th colspan='5'>No hay mensajes disponibles.</th></tr>";
       }
-
+      obtenerConsultasSinLeer();
       mysqli_close($connection);
       ?>
     </tbody>
