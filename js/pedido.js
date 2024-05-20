@@ -8,6 +8,7 @@
     let correo = $("#correo").val();
     let direccion = $("#direccion").val();
     let nombre_barrio = $("#nombre_barrio").val();
+
     let productosConCantidad = $("#altaPedido input[name^='cantidad_']").filter(function() {
       return $(this).val() > 0
     }).length > 0;
@@ -21,7 +22,7 @@
     let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
-    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago);
+   /*  console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago); */
 
     // Verificar que los campos no estén vacíos
      if (nombre === "" || apellido === "" ||
@@ -53,6 +54,8 @@
       url: "gestion_pedido.php",
       data: $(this).serialize() + "&calle="+calle+"&numero="+numero,
       success: function (response) {
+
+        console.log(response)
         if (response === "success") {
           //redirigir y crear datos de sesion
           $("#mensaje")

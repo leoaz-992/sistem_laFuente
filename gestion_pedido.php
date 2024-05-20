@@ -107,7 +107,7 @@ function insertDetalle($connection,$pedidoId,$id_producto,$cantidad){
         throw new Exception("Error en la inserción Pedido: " . $connection->error);
     }
 }
-
+/* fg */
 try {
     
     $clienteId = buscarCliente($connection, $_POST['correo'], $_POST['telefono']);

@@ -3,9 +3,9 @@ include("includes/header.php");
 require("conn.php");
 
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
-/*if (!isset($_SESSION['id_rol']) && $_SESSION['id_rol'] != 1) {
+if (!isset($_SESSION['id_rol']) && $_SESSION['id_rol'] != 1 ||$_SESSION['id_rol'] != 3 ) {
   header('Location: index.php');
-}*/
+}
 
 $sql = "SELECT id_barrio, nombre_barrio FROM `barrios`";
 $resultBarrios = mysqli_query($connection, $sql);
