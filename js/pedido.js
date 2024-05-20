@@ -7,10 +7,12 @@
     let telefono = $("#telefono").val();
     let correo = $("#correo").val();
     let direccion = $("#direccion").val();
-    let nombre_barrio = $("#barrioslist").val();
-    let nombre_producto = $("#productoslist").val();
-    let cantidad = $("#cantidadpedido").val();
-    let tipo_pago = $("#metodoPago").val();
+    let nombre_barrio = $("#nombre_barrio").val();
+
+    let productosConCantidad = $("#altaPedido input[name^='cantidad_']").filter(function() {
+      return $(this).val() > 0
+    }).length > 0;
+    let tipo_pago = $("#tipo_pago").val();
 
     // Separa la calle del número 
     // Dividir la dirección en palabras
@@ -20,7 +22,7 @@
     let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
-    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
+   /*  console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago); */
 
     // Verificar que los campos no estén vacíos
      if (nombre === "" || apellido === "" ||
@@ -63,6 +65,8 @@
         tipo_pago,
       },
       success: function (response) {
+
+        console.log(response)
         if (response === "success") {
           //redirigir y crear datos de sesion
           $("#mensaje")
