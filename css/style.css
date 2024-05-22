@@ -65,3 +65,8 @@ li{
 .table td, .table th {
   padding: 10px;
 }
+.cardproducto{
+  border: solid 1px blue;
+  height: 420px;
+  max-width: 20rem;
+}
