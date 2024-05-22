@@ -26,7 +26,7 @@ include("includes/header.php");
         <div class="carousel-caption d-none d-md-block fondoTextCarrusel">
           <h5 class="titulo-carrusel">La Fuente</h5>
           <p class="text-carrusel">
-            lo mejor para su mesa.
+            Lo mejor para su mesa.
           </p>
         </div>
       </div>
@@ -60,9 +60,10 @@ include("includes/header.php");
   </div>
   <!-- fin Carrusel -->
 </section>
+<!-- añadir seccion productos -->
 <!-- <section>
   <h2 id="productos" class="text-center">Productos</h2>
-  <div class="row">
+  <div class="row ">
     <div class="col-md-3">
       <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
         <img src="public/bidon-agua-20L.png" class="card-img-top" alt="bidon 20 l">

@@ -11,9 +11,15 @@ $(document).ready(function () {
         <strong>Error al iniciar Sesión.</strong>
         <p>Por favor, rellena todos los campos.</p>
       </div>`);
+
       // Vaciar los campos de entrada
       $("#email").val("");
       $("#contrasena").val("");
+
+      // Ocultar el mensaje después de 5 segundos
+      setTimeout(function () {
+        $("#mensaje").html("");
+      }, 5000);
       return;
     }
 
@@ -44,6 +50,11 @@ $(document).ready(function () {
           // Vaciar los campos de entrada
           $("#email").val("");
           $("#contrasena").val("");
+
+          // Ocultar el mensaje después de 5 segundos.
+          setTimeout(function () {
+            $("#mensaje").html("");
+          }, 5000);
         }
       },
     });

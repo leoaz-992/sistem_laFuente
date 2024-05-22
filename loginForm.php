@@ -1,9 +1,9 @@
 <?php
 include("includes/header.php");
 
-  if (isset($_SESSION['nombre_usuario'])) {
-    header('Location: index.php');
-  }
+if (isset($_SESSION['nombre_usuario'])) {
+  header('Location: index.php');
+}
 ?>
 <div class="row justify-content-center p-5">
   <div class="col-sm-10 col-md-9 col-lg-5 main py-4">

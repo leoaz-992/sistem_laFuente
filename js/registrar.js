@@ -120,15 +120,26 @@ $(document).ready(function () {
             <strong>Error al Crear un Registro.</strong>
             <p>El usuario o el correo ya existen.</p>
           </div>`);
-        }else {
+          $("#nombreUsuario").addClass("is-invalid");
+          $("#emailEmployee").addClass("is-invalid");
+          $("#nombreUsuario").val("");
+          $("#emailEmployee").val("");
+
+        }
+        if(response=== "No se pudo crear el empleado."){
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Error al Crear un Registro.</strong>
             <p>Los datos ingresados son incorrectos.</p>
           </div>`);
           // Vaciar los campos de entrada
-          $("#email").val("");
+          $("#nombreEmp").val("");
+          $("#apellidoEmp").val("");
+          $("#nombreUsuario").val("");
+          $("#emailEmployee").val("");
           $("#contrasena").val("");
+          $("#repetirContrasena").val("");
+          $("#rolUser").val("");
         }
       },
     });

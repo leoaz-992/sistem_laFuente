@@ -3,8 +3,8 @@ include("includes/header.php");
 require("conn.php");
 
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
-if (!isset($_SESSION['id_rol']) && $_SESSION['id_rol'] != 1 ||$_SESSION['id_rol'] != 3 ) {
-  header('Location: index.php');
+if (!isset($_SESSION['id_rol']) && ($_SESSION['id_rol'] != 1 || $_SESSION['id_rol'] != 3)) {
+    header('Location: index.php');
 }
 
 $sql = "SELECT id_barrio, nombre_barrio FROM `barrios`";
@@ -94,7 +94,6 @@ $resultProductos = mysqli_query($connection, $sql);
                 </div>
             </div>
         </div>
-    
         <h2 class="text-center mt-5">Productos</h2>
 
         <div class="row">
@@ -102,14 +101,13 @@ $resultProductos = mysqli_query($connection, $sql);
             while ($producto = mysqli_fetch_array($resultProductos)) {
                 echo '<div class="col-md-4">';
                 echo '<div class="form-group">';
-                echo '<label for="cantidad_'.$producto['id_productos'].'">'.$producto["nombre_producto"].'</label>';
-                echo '<input type="number" min="0" class="form-control" id="cantidad_'.$producto['id_productos'].'" name="cantidad_'.$producto['id_productos'].'" value="'.($producto['id_productos'] == 7 ? 1 : 0).'" required>';
+                echo '<label for="cantidad_' . $producto['id_productos'] . '">' . $producto["nombre_producto"] . '</label>';
+                echo '<input type="number" min="0" class="form-control" id="cantidad_' . $producto['id_productos'] . '" name="cantidad_' . $producto['id_productos'] . '" value="' . ($producto['id_productos'] == 7 ? 1 : 0) . '" required>';
                 echo '</div>';
                 echo '</div>';
             }
             ?>
         </div>
-
         <!-- Botón de Enviar -->
         <div class="d-flex justify-content-center mt-5">
             <button type="submit" class="btn btn-primary">Enviar</button>

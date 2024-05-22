@@ -28,8 +28,8 @@
       <h5 class="titleFooter">Menu</h5>
       <ul>
         <li><a class="link-footer" href="index.php" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-        <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
-        <li><a class="link-footer" href="#" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
+        <!-- <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li> -->
+        <li><a class="link-footer" href="verproductos.php" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
         <li><a class="link-footer" href="loginForm.php" target="_blank" rel="noopener noreferrer">Login para Empleados</a></li>
       </ul>
     </div>
@@ -64,15 +64,15 @@
       <b>La Fuente</b>©. Proveedores de agua embotellada.
       <span id="dateYear"></span>
     </h6>
-    <p class="text-devs">Creado por: Alvarez, Benitez, Mendoza y Ojeda.</p>
+    <p class="text-devs">Creado por: Alvarez, Mendoza, Ojeda y Recalde.</p>
   </div>
 </footer>
 <script>
-      const fecha = new Date();
-      const año = fecha.getFullYear();
-      const year= document.getElementById("dateYear");
-      year.innerHTML= año;
-    </script>
+  const fecha = new Date();
+  const año = fecha.getFullYear();
+  const year = document.getElementById("dateYear");
+  year.innerHTML = año;
+</script>
 <script src="js/jquery-3.6.0.min.js"></script>
 
 <script src="js/pedido.js"></script>

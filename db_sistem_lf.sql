@@ -31,10 +31,10 @@ tipo_pago VARCHAR(60) NOT NULL UNIQUE);
 CREATE TABLE productos (
 id_productos INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre_producto VARCHAR(120) NOT NULL UNIQUE,
-precio_producto DECIMAL(10,4) NOT NULL,
-stock_poducto INT(11) NOT NULL),
+precio_producto DECIMAL(10,2) NOT NULL,
+stock_poducto INT(11) NOT NULL,
 descripcion TEXT,
-imagen_producto VARCHAR(255)NULL;
+imagen_producto VARCHAR(255)NULL);
 
 CREATE TABLE empleados (
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -86,15 +86,15 @@ estado_pedido_id INT(11) NOT NULL,
 metPago_id INT(11) NOT NULL,
 statusPago_id INT(11) NOT NULL,
 cliente_id INT(11) NOT NULL,
-total DECIMAL(10,4) NOT NULL);
+total DECIMAL(10,2) NOT NULL);
 
 CREATE TABLE detallesPedidos (
 id_detalle_prod INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 pedido_id INT(11) NOT NULL,
 producto_id INT(11) NOT NULL,
 cantidad INT(11) NOT NULL,
-precio DECIMAL(10,4) NOT NULL,
-subTotal DECIMAL(10,4) NOT NULL);
+precio DECIMAL(10,2) NOT NULL,
+subTotal DECIMAL(10,2) NOT NULL);
 
 ALTER TABLE empleados ADD CONSTRAINT empleados_id_rol_roles_empleados_id_rol FOREIGN KEY (id_rol) REFERENCES roles_empleados(id_rol);
 ALTER TABLE clientes ADD CONSTRAINT clientes_dirreccion_id_direcciones_id_direccion FOREIGN KEY (dirreccion_id) REFERENCES direcciones(id_direccion);
@@ -108,7 +108,11 @@ ALTER TABLE detallesPedidos ADD CONSTRAINT detallesPedidos_producto_id_productos
 
 -- DATOS DE PRUEBA --
 -- Carga 4 productos
-INSERT INTO `productos` (`nombre_producto`, `descripcion_producto`, `imagen_producto`, `precio_producto`, `stock_poducto`) VALUES ( 'bidon20l', 'bidon de agua 20 litros', NULL, '1500', '300'), ( 'soda', 'sifón soda 2,25 litro', NULL, '600', '600'), ('dispencer', 'dispenser común para bidones de agua', NULL, '500', '3000'), ('dispencerFrio-Calor', 'dispenser eléctrico con agua fría y caliente.', NULL, '8000', '400');
+INSERT INTO `productos` (`nombre_producto`, `descripcion_producto`, `imagen_producto`, `precio_producto`, `stock_poducto`) VALUES 
+( 'bidon20l', 'bidon de agua 20 litros', NULL, '1500', '300'),
+( 'soda', 'sifón soda 2,25 litro', NULL, '600', '600'),
+('dispencer', 'dispenser común para bidones de agua', NULL, '500', '3000'),
+('dispencerFrio-Calor', 'dispenser eléctrico con agua fría y caliente.', NULL, '8000', '400');
 
 -- CARGA DE ROLES EMPLEADOS
 INSERT INTO `roles_empleados` (`id_rol`, `nombre_rol`) VALUES (NULL, 'ADMIN'), (NULL, 'REPARTIDOR'), (NULL, 'RECEPCION'),(NULL, 'ENCARGADO');
@@ -128,7 +132,11 @@ INSERT INTO `barrios` (`id_barrio`, `nombre_barrio`, `zona`) VALUES (NULL, 'SAN 
 
 
 -- CARGA EMPLEADOS 
-INSERT INTO `empleados` (`id_usuario`, `nombre`, `apellido`, `nombre_usuario`, `correo`, `password`, `id_rol`) VALUES (NULL, 'leo', 'lafuente', 'usuario1', 'usuario1@lafuente.com', 'user1234', '1'), (NULL, 'jorge', 'lafuente', 'jorge_lafuente', 'jorge@lafuente.com', 'jorge1234', '2'), (NULL, 'hector', 'lafuente', 'hector_lafuente', 'hector@lafuente.com', 'hector1234', '3'), (NULL, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', 'walter1234', '4');
+INSERT INTO `empleados` (`id_usuario`, `nombre`, `apellido`, `nombre_usuario`, `correo`, `password`, `id_rol`) VALUES 
+(NULL, 'Administrador', 'lafuente', 'usuario1', 'usuario1@lafuente.com', 'user1234', '1'),
+(NULL, 'jorge', 'lafuente', 'jorge_lafuente', 'jorge@lafuente.com', 'jorge1234', '2'),
+(NULL, 'hector', 'lafuente', 'hector_lafuente', 'hector@lafuente.com', 'hector1234', '3'),
+(NULL, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', 'walter1234', '4');
 
 
 -- CIFRADO Y CAMBIO DE CONTRASEÑA EMPLEADOS

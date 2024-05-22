@@ -61,3 +61,7 @@ li{
 .nosotros{
   height: 50vh;
 }
+
+.table td, .table th {
+  padding: 10px;
+}
