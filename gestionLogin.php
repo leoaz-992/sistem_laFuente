@@ -20,13 +20,4 @@ if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {
     echo "Inicio de sesión fallido. Verifica tus credenciales.";
   }
 }
-
-/* function obtenerConsultasSinLeer()
-{
-  global $connection;
-  $sql = "SELECT COUNT(`leido`) AS consultasSinLeer FROM `contactos` WHERE `leido`=0;";
-  $result = mysqli_query($connection, $sql);
-  $data = mysqli_fetch_array($result);
-  $_SESSION['consultasSinLeer'] = $data['consultasSinLeer'];
-} */
 mysqli_close($connection);

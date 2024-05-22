@@ -67,7 +67,7 @@
           <?php } ?>
         </ul>
         <?php if (isset($_SESSION['nombre_usuario'])) { ?>
-          <h6 class="px-2 pt-1 m-0 text-info"><?= $_SESSION['nombre_usuario'] ?></h6>
+          <h6 class="px-2 pt-1 text-info"><?= $_SESSION['nombre_usuario'] ?></h6>
           <a class="btn btn-danger d-flex" href="loginout.php">cerrar Sesión</a>
         <?php } else { ?>
           <a class="btn btn-primary d-flex" href="loginForm.php">Login</a>

@@ -11,23 +11,114 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
 <h2> Hola <?= $_SESSION["nombreCompleto"] ?></h2>
 <!-- //? menu lateral -->
 <div class="row">
-  <div class="col-2 pt-2 bg-dark text-light">
-    <button id="info" class="btn btn-link text-light btn-sm p-1 m-1" type="button">ver informes</button>
-    <button id="esta" class="btn btn-link text-light btn-sm p-1 m-1" type="button">ver estadisticas</button>
-    <button id="pass" class="btn btn-link text-light btn-sm p-1 m-1" type="button">Cambiar contraseña</button>
-  </div>
   <!-- // todo: donde se muestra la info -->
-  <div class="col-10 ps-3 pt-3 border border-bottom-0">
+  <div class="col-12 ps-3 pt-3 border border-bottom-0">
     <div id="estadisticas">
       <h3 class="text-center">estadisticas</h3>
       <div class="row">
         <div class="col-9">
-          <span class="badge rounded-pill bg-secondary">semana</span>
-          <span class="badge rounded-pill bg-secondary">mes</span>
-          <span class="badge rounded-pill bg-primary">año</span>
-          <div id="garficoBidonesVendidosPorAño">
-            <table class="charts-css column show-labels">
-              <caption> Column Example #6 </caption>
+          <!-- botones -->
+          <button id="semana" class="border border-0 badge rounded-pill bg-primary">semana</button>
+          <button id="mes" class="border border-0 badge rounded-pill bg-secondary">mes</button>
+          <button id="anio" class="border border-0 badge rounded-pill bg-secondary">año</button>
+          <!-- gafico por semana -->
+          <div id="garficoBidonesVendidosPorSemana">
+            <table class="charts-css column show-labels datasets-spacing-2 show-10-secondary-axes">
+              <caption> grafico por dia </caption>
+              <thead>
+                <tr>
+                  <th scope="col"> Dias </th>
+                  <th scope="col"> Progress </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Lunes</th>
+                  <td style="--size: 0.7;">70</td>
+                </tr>
+                <tr>
+                  <th scope="row">Martes</th>
+                  <td style="--size: 0.5;">50</td>
+                </tr>
+                <tr>
+                  <th scope="row">Miercoles</th>
+                  <td style="--size: 0.4;">40</td>
+                </tr>
+                <tr>
+                  <th scope="row">Jueves</th>
+                  <td style="--size: 0.8;">80</td>
+                </tr>
+                <tr>
+                  <th scope="row">Viernes</th>
+                  <td style="--size: 0.9;">90</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="garficoBidonesVendidosPorMes">
+            <table class="charts-css column show-labels datasets-spacing-2 show-10-secondary-axes">
+              <caption>grafico por meses</caption>
+              <thead>
+                <tr>
+                  <th scope="col"> Meses </th>
+                  <th scope="col"> Progress </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row fs-6">Ene</th>
+                  <td style="--size: 0.2;">20</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Feb</th>
+                  <td style="--size: 0.4;">40</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Mar</th>
+                  <td style="--size: 0.6;">60</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Abr</th>
+                  <td style="--size: 0.8;">80</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">May</th>
+                  <td style="--size: 1;">100</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Jun</th>
+                  <td style="--size: 0.5;">50</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Jul</th>
+                  <td style="--size: 0.3;">30</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Ago</th>
+                  <td style="--size: 0.2;">20</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Sept</th>
+                  <td style="--size: 0.5;">50</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">oct</th>
+                  <td style="--size: 0.75;">75</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">Nov</th>
+                  <td style="--size: 0.45;">45</td>
+                </tr>
+                <tr>
+                  <th scope="row fs-6">dic</th>
+                  <td style="--size: 0.6;">60</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="garficoBidonesVendidosPorAnio">
+            <table class="charts-css column show-labels datasets-spacing-10 show-10-secondary-axes">
+              <caption> grafico por año </caption>
               <thead>
                 <tr>
                   <th scope="col"> Year </th>
@@ -36,24 +127,24 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row"> 2016 </th>
-                  <td style="--size: 0.2;"></td>
+                  <th scope="row"> 2024 </th>
+                  <td style="--size: 0.2;">20</td>
                 </tr>
                 <tr>
-                  <th scope="row"> 2017 </th>
-                  <td style="--size: 0.4;"></td>
+                  <th scope="row"> 2025 </th>
+                  <td style="--size: 0.4;">40</td>
                 </tr>
                 <tr>
-                  <th scope="row"> 2018 </th>
-                  <td style="--size: 0.6;"></td>
+                  <th scope="row"> 2026 </th>
+                  <td style="--size: 0.6;">60</td>
                 </tr>
                 <tr>
-                  <th scope="row"> 2019 </th>
-                  <td style="--size: 0.8;"></td>
+                  <th scope="row"> 2027 </th>
+                  <td style="--size: 0.8;">80</td>
                 </tr>
                 <tr>
-                  <th scope="row"> 2020 </th>
-                  <td style="--size: 1;"></td>
+                  <th scope="row"> 2028 </th>
+                  <td style="--size: 1;">100</td>
                 </tr>
               </tbody>
             </table>
@@ -61,13 +152,13 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
         </div>
         <div class="col-2">
           <div class="row text-white bg-info p-3 ">
-            vendidos
+            Dispenser prendados
           </div>
           <div class="row text-white bg-success p-3 my-2">
-            cantidad bidones
+            Bidones entregados
           </div>
           <div class="row text-white bg-dark p-3">
-            pedidos
+            pedidos recibidos
           </div>
         </div>
       </div>
@@ -79,32 +170,75 @@ include("includes/footer.php");
 ?>
 
 <script>
-  let div1 = document.getElementById('informes');
-  let div2 = document.getElementById('estadisticas');
-  let div3 = document.getElementById('cambiarContra');
+  let div1 = document.getElementById('garficoBidonesVendidosPorSemana');
+  let div2 = document.getElementById('garficoBidonesVendidosPorMes');
+  let div3 = document.getElementById('garficoBidonesVendidosPorAnio');
 
-  div1.style.display = 'none';
+  /* div1.style.display = 'none'; */
   div2.style.display = 'none';
   div3.style.display = 'none';
 
-  let boton1 = document.getElementById('info');
-  let boton2 = document.getElementById('esta');
-  let boton3 = document.getElementById('pass');
+  let boton1 = document.getElementById('semana');
+  let boton2 = document.getElementById('mes');
+  let boton3 = document.getElementById('anio');
 
   // Luego, agrega un evento 'click' a cada botón
   boton1.addEventListener('click', function() {
-    div1.style.display = 'block'; // Muestra div1
-    div2.style.display = 'none'; // Oculta div2
-    div3.style.display = 'none'; // Oculta div3
+    // Verifica si boton1 tiene la clase .bg-secondary y, si es así, quítala
+    if (boton1.classList.contains('bg-secondary')) {
+      boton1.classList.remove('bg-secondary');
+    }
+    boton1.classList.add('bg-primary'); // Agrega la clase .bg-primary a boton1
+    if (boton2.classList.contains('bg-primary')) {
+      boton2.classList.remove('bg-primary');
+    }
+    boton2.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton2
+    if (boton3.classList.contains('bg-primary')) {
+      boton3.classList.remove('bg-primary');
+    }
+    boton3.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton3
+
+    // Oculta div2 y div3
+    div1.style.display = 'block';
+    div2.style.display = 'none';
+    div3.style.display = 'none';
   });
 
   boton2.addEventListener('click', function() {
+    // Verifica si boton2 tiene la clase .bg-secondary y, si es así, quítala
+    if (boton2.classList.contains('bg-secondary')) {
+      boton2.classList.remove('bg-secondary');
+    }
+    boton2.classList.add('bg-primary'); // Agrega la clase .bg-primary a boton2
+    if (boton1.classList.contains('bg-primary')) {
+      boton1.classList.remove('bg-primary');
+    }
+    boton1.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton1
+    if (boton3.classList.contains('bg-primary')) {
+      boton3.classList.remove('bg-primary');
+    }
+    boton3.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton3
+
     div1.style.display = 'none'; // Oculta div1
     div2.style.display = 'block'; // Muestra div2
     div3.style.display = 'none'; // Oculta div3
   });
 
   boton3.addEventListener('click', function() {
+    // Verifica si boton3 tiene la clase .bg-secondary y, si es así, quítala
+    if (boton3.classList.contains('bg-secondary')) {
+      boton3.classList.remove('bg-secondary');
+    }
+    boton3.classList.add('bg-primary'); // Agrega la clase .bg-primary a boton3
+    if (boton2.classList.contains('bg-primary')) {
+      boton2.classList.remove('bg-primary');
+    }
+    boton2.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton2
+    if (boton1.classList.contains('bg-primary')) {
+      boton1.classList.remove('bg-primary');
+    }
+    boton1.classList.add('bg-secondary'); // Agrega la clase .bg-secondary a boton1
+
     div1.style.display = 'none'; // Oculta div1
     div2.style.display = 'none'; // Oculta div2
     div3.style.display = 'block'; // Muestra div3

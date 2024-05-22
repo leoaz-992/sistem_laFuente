@@ -63,25 +63,25 @@ include("includes/header.php");
 <!-- añadir seccion productos -->
 
 
- <section>
+<section>
 
   <h2 id="productos" class="text-center">Productos</h2>
   <div class="row ">
-  <?php
-  include "conn.php";
-  $sql = "SELECT * FROM productos";
+    <?php
+    include "conn.php";
+    $sql = "SELECT * FROM productos";
     $result = mysqli_query($connection, $sql);
- while ($row = mysqli_fetch_assoc($result)) {
-      ?>
-    <div class="col-md-3">
-      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-        <img src="public/<?=$row['imagen_producto']?>" class="card-img-top" alt="bidon 20 l">
-        <div class="card-body">
-          <h4 class="card-title"><?= $row['nombre_producto']?></h4>
-          <p class="card-text">Más simple de servir.</p>
+    while ($row = mysqli_fetch_assoc($result)) {
+    ?>
+      <div class="col-md-3 ">
+        <div class="card text-white bg-primary mb-3">
+          <img src="public/<?= $row['imagen_producto'] ?>" class="card-img-top" alt="bidon 20 l">
+          <div class="card-body">
+            <h4 class="card-title"><?= $row['nombre_producto'] ?></h4>
+            <p class="card-text">Más simple de servir.</p>
+          </div>
         </div>
       </div>
-    </div>
     <?php } ?>
   </div>
 </section>
