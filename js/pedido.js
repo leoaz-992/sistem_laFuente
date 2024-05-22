@@ -9,12 +9,6 @@ $(document).ready(function () {
     let direccion = $("#direccion").val();
     let nombre_barrio = $("#nombre_barrio").val();
 
-    let productosConCantidad = $("#altaPedido input[name^='cantidad_']").filter(function() {
-      return $(this).val() > 0
-    }).length > 0;
-    let tipo_pago = $("#tipo_pago").val();
-
-
     let productosConCantidad =
       $("#altaPedido input[name^='cantidad_']").filter(function () {
         return $(this).val() > 0;
@@ -43,7 +37,6 @@ $(document).ready(function () {
       !productosConCantidad ||
       tipo_pago === null
     ) {
-      
       $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           <strong>Uno de los campos estan vacios.</strong>
@@ -59,9 +52,9 @@ $(document).ready(function () {
       $("#productoslist").val("");
       $("#cantidad").val("");
 
-      $("#tipo_pago").val("");*/ 
+      $("#tipo_pago").val("");*/
       return;
-     }
+    }
 
     $.ajax({
       type: "POST",
@@ -87,8 +80,6 @@ $(document).ready(function () {
           $("#productoslist").val("");
           $("#altaPedido input[name^='cantidad_']").val("0");
           $("#tipo_pago").val("");
-
-
         } else {
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
