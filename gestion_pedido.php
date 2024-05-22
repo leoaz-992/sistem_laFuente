@@ -4,17 +4,21 @@ session_start();
 
 function buscarCliente($conn, $correo, $telefono)
 {
-    $sql = "SELECT id_cliente FROM `clientes` WHERE `telefono` = '$telefono' AND `correo` = '$correo';";
-    $resultBusqueda = mysqli_query($conn, $sql);
 
-    if ($resultBusqueda) {
+    $sql = "SELECT id_cliente FROM `clientes` WHERE `telefono` = ? AND `correo` = ? ;";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param($stmt, "ss", $correo, $telefono);
+
+    mysqli_stmt_execute($stmt);
+
+    $resultBusqueda = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($resultBusqueda) == 1) {
         $cliente = mysqli_fetch_array($resultBusqueda);
-        if ($cliente) {
-            $id_cliente = $cliente["id_cliente"];
-            return $id_cliente;
-        } else {
-            return false;
-        }
+        $id_cliente = $cliente["id_cliente"];
+        return $id_cliente;
     } else {
         return false;
     }
@@ -37,7 +41,7 @@ function insertDireccion($connection, $calle, $numero, $nombre_barrio)
 function insertCliente($connection, $nombre, $apellido, $telefono, $correo, $direccionId)
 {
     $sql = "INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`,
-    `telefono`, `coreo`, `dirreccion_id`) 
+    `telefono`, `correo`, `dirreccion_id`) 
     VALUES (NULL, '$nombre', '$apellido', '$telefono', 
     '$correo', '$direccionId')";
 
@@ -107,7 +111,7 @@ function insertDetalle($connection, $pedidoId, $id_producto, $cantidad)
         throw new Exception("Error en la inserción Pedido: " . $connection->error);
     }
 }
-
+/* fg */
 try {
 
     $clienteId = buscarCliente($connection, $_POST['correo'], $_POST['telefono']);
@@ -119,9 +123,16 @@ try {
     }
 
     $pedidoId = insertPedido($connection, $clienteId, $_POST['tipo_pago']);
-    $detalleId = insertDetalle($connection, $pedidoId, $_POST['nombre_producto'], $_POST['cantidad']);
 
-    //echo "Inserción exitosa. Detalle ID: " . $detalleId;
+    foreach ($_POST as $field => $value) {
+        if (substr($field, 0, 9) === "cantidad_" && $value > 0) {
+            $productoId = explode("_", $field)[1];
+            $detalleId = insertDetalle($connection, $pedidoId, $productoId, $value);
+
+            //echo "Inserción exitosa. Detalle ID: " . $detalleId;
+        }
+    }
+
     echo "success";
 } catch (Exception $e) {
     echo $e->getMessage();

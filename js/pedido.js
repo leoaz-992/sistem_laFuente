@@ -1,4 +1,4 @@
-  $(document).ready(function () {
+$(document).ready(function () {
   $("#altaPedido").submit(function (event) {
     event.preventDefault();
 
@@ -7,28 +7,43 @@
     let telefono = $("#telefono").val();
     let correo = $("#correo").val();
     let direccion = $("#direccion").val();
-    let nombre_barrio = $("#barrioslist").val();
-    let nombre_producto = $("#productoslist").val();
-    let cantidad = $("#cantidadpedido").val();
-    let tipo_pago = $("#metodoPago").val();
+    let nombre_barrio = $("#nombre_barrio").val();
 
-    // Separa la calle del número 
+    let productosConCantidad = $("#altaPedido input[name^='cantidad_']").filter(function() {
+      return $(this).val() > 0
+    }).length > 0;
+    let tipo_pago = $("#tipo_pago").val();
+
+
+    let productosConCantidad =
+      $("#altaPedido input[name^='cantidad_']").filter(function () {
+        return $(this).val() > 0;
+      }).length > 0;
+    let tipo_pago = $("#tipo_pago").val();
+
+    // Separa la calle del número
     // Dividir la dirección en palabras
     direccionarray = direccion.split(/(\d+)/);
-    
+
     // Inicializar variables para la calle y el número
     let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
-    console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, nombre_producto, cantidad, tipo_pago);
+    /*  console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago); */
 
     // Verificar que los campos no estén vacíos
-     if (nombre === "" || apellido === "" ||
-      telefono === "" || correo === ""|| nombre_barrio === null ||
-      calle === "" || numero === "" ||
-      cantidad === null || nombre_producto === null ||
-      tipo_pago === null) {
-
+    if (
+      nombre === "" ||
+      apellido === "" ||
+      telefono === "" ||
+      correo === "" ||
+      nombre_barrio === null ||
+      calle === "" ||
+      numero === "" ||
+      !productosConCantidad ||
+      tipo_pago === null
+    ) {
+      
       $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           <strong>Uno de los campos estan vacios.</strong>
@@ -40,29 +55,21 @@
       $("#telefono").val("");
       $("#telefono").val("");
       $("#direccion").val("");
-      $("#barrioslist").val("");
+      $("#nombre_barrio").val("");
       $("#productoslist").val("");
       $("#cantidad").val("");
-      $("#metodoPago").val(""); 
-      return;*/
+
+      $("#tipo_pago").val("");*/ 
+      return;
      }
 
-     $.ajax({
+    $.ajax({
       type: "POST",
       url: "gestion_pedido.php",
-      data: {
-        nombre,
-        apellido,
-        telefono,
-        correo,
-        calle,
-        numero,
-        nombre_barrio,
-        nombre_producto,
-        cantidad,
-        tipo_pago,
-      },
+
+      data: $(this).serialize() + "&calle=" + calle + "&numero=" + numero,
       success: function (response) {
+        console.log(response);
         if (response === "success") {
           //redirigir y crear datos de sesion
           $("#mensaje")
@@ -70,16 +77,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           <strong>Pedido Realizado Correctamente!</strong>
         </div>`);
-        // Vaciar los campos de entrada
-        $("#nombre").val("");
-        $("#apellido").val("");
-        $("#telefono").val("");
-        $("#telefono").val("");
-        $("#direccion").val("");
-        $("#barrioslist").val("");
-        $("#productoslist").val("");
-        $("#cantidad").val("");
-        $("#metodoPago").val("");
+          // Vaciar los campos de entrada
+          $("#nombre").val("");
+          $("#apellido").val("");
+          $("#telefono").val("");
+          $("#telefono").val("");
+          $("#direccion").val("");
+          $("#nombre_barrio").val("");
+          $("#productoslist").val("");
+          $("#altaPedido input[name^='cantidad_']").val("0");
+          $("#tipo_pago").val("");
+
+
         } else {
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -88,6 +97,6 @@
             </div>`);
         }
       },
-    }); 
+    });
   });
 });
