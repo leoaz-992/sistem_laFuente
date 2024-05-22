@@ -81,7 +81,13 @@ $resultado = mysqli_query($connection, $sql);
   </tbody>
 </table>
 
+function redirigirADistribucion() {
+  header("location:distribucion.php");
+  exit;
+}
+
+</div>
+
 <?php
 include("includes/footer.php");
-
 ?>

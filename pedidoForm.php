@@ -94,7 +94,6 @@ $resultProductos = mysqli_query($connection, $sql);
                 </div>
             </div>
         </div>
-
         <h2 class="text-center mt-5">Productos</h2>
 
         <div class="row">
@@ -109,7 +108,6 @@ $resultProductos = mysqli_query($connection, $sql);
             }
             ?>
         </div>
-
         <!-- Botón de Enviar -->
         <div class="d-flex justify-content-center mt-5">
             <button type="submit" class="btn btn-primary">Enviar</button>
