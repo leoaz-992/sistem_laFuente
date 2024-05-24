@@ -9,8 +9,26 @@ $(document).ready(function () {
 
     let numeroTelefono = Number(telefono);
 
-    // Verificar que los campos no estén vacíos
+    var expemail = new RegExp(
+      "[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}"
+    );
+
+    if (!expemail.test(email)) {
+      $("#mensajeContact")
+        .html(`<div class="position-absolute top-50 start-50 translate-middle alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong><i class="bi bi-exclamation-triangle text-danger"></i> Error al enviar su consulta.</strong>
+            <p>Por favor ingrese un email valido.</p>
+          </div>`);
+      // Ocultar el mensaje después de 5 segundos
+      setTimeout(function () {
+        $("#mensajeContact").html("");
+      }, 5000);
+
+      return;
+    }
     if (mensaje === "") {
+      // Verificar que los campos no estén vacíos
       $("#mensajeContact")
         .html(`<div class="position-absolute top-50 start-50 translate-middle alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
