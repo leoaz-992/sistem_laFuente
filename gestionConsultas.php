@@ -1,5 +1,5 @@
 <?php
-require "conn.php";
+require_once "conn.php";
 
 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
@@ -27,8 +27,8 @@ function crearMjsContacto($nameContact, $telContact, $emailContact, $mensajeCont
 
   $mensajeLength = strlen($mensajeContact);
   if ($mensajeLength > 6 && $mensajeLength < 700) {
-    $sql = "INSERT INTO `contactos` (`nombre_contacto`, `telefono_contacto`, `correo_contacto`, `mensaje`, `leido`)
-                VALUES ('$nameContact', '$telContact', '$emailContact', '$mensajeContact', '0')";
+    $sql = "INSERT INTO `contactos` (`nombre_contacto`, `telefono_contacto`, `correo_contacto`, `mensaje`, `leido`, `fecha_mensaje`)
+                VALUES ('$nameContact', '$telContact', '$emailContact', '$mensajeContact', '0', current_timestamp())";
 
     $result = mysqli_query($connection, $sql);
 
