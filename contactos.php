@@ -1,6 +1,6 @@
 <?php include("includes/header.php");
-require "conn.php";
-require("config/consultas.php");
+require_once "conn.php";
+require_once("config/consultas.php");
 /* si no esta logeado o no tiene un rol admin o recepcion te envia al index */
 if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {
   header('Location: index.php');
@@ -44,6 +44,7 @@ $resultContacto = mysqli_query($connection, $sql);
       <tr class="">
         <th scope="col-2">Nombre</th>
         <th scope="col-2">Telefono</th>
+        <th scope="col-2">Enviado el</th>
         <th scope="col-2">correo</th>
         <th scope="col-4">mensaje</th>
         <th scope="col-2">accion</th>
@@ -53,6 +54,10 @@ $resultContacto = mysqli_query($connection, $sql);
       <?php
       if (mysqli_num_rows($resultContacto) > 0) {
         while ($msj = mysqli_fetch_assoc($resultContacto)) {
+          //cambia el formato de fecha
+          $fecha = DateTime::createFromFormat("Y-m-d", $msj["fecha_mensaje"]);
+          $fechaFormateada = $fecha->format("d-m-Y");
+
           if ($msj["leido"] == 1) {
             echo "<tr class='table-info'>";
           } else {
@@ -60,6 +65,7 @@ $resultContacto = mysqli_query($connection, $sql);
           }
           echo "<td>" . $msj["nombre_contacto"] . "</td>";
           echo "<td>" . $msj["telefono_contacto"] . "</td>";
+          echo "<td>" . $fechaFormateada . "</td>";
           echo "<td>" . $msj["correo_contacto"] . "</td>";
           echo "<td>" . $msj["mensaje"] . "</td>";
           if ($msj["leido"] == 1) {
