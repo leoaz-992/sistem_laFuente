@@ -1,5 +1,5 @@
 <?php
-require_once "conn.php";
+require_once "config/conn.php";
 
 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;

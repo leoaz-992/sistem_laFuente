@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-require("conn.php");
+include_once("includes/header.php");
+require_once("config/conn.php");
 
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
 if (!isset($_SESSION['id_rol']) && ($_SESSION['id_rol'] != 1 || $_SESSION['id_rol'] != 3)) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conn.php';
+require("config/conn.php");
 require("config/consultas.php");
 
 if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {

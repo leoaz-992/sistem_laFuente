@@ -1,5 +1,5 @@
 <?php
-require 'conn.php';
+require_once("config/conn.php");
 session_start();
 
 function buscarCliente($conn, $correo, $telefono)

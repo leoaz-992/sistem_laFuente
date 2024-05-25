@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-require("conn.php");
+include_once("includes/header.php");
+require_once("config/conn.php");
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
 if (!isset($_SESSION['id_rol']) && $_SESSION['id_rol'] != 1) {
   header('Location: index.php');
@@ -47,13 +47,13 @@ $resultRoles = mysqli_query($connection, $sql);
           <label for="contrasena" class="form-label mt-4">Contraseña</label>
           <input type="password" class="form-control" id="contrasena" placeholder="contraseña" autocomplete="off" require>
           <div class="valid-feedback">Las contraseña es valida.</div>
-            <div id="invalid_contrasena" class="invalid-feedback"></div>
+          <div id="invalid_contrasena" class="invalid-feedback"></div>
         </div>
         <div class="form-group">
           <label for="repetirContrasena" class="form-label mt-4">Repita contraseña</label>
           <input type="password" class="form-control" id="repetirContrasena" placeholder="Repetir contraseña" autocomplete="off" require>
           <div class="valid-feedback">Las contraseñas coinciden</div>
-            <div id="invalid_repetirContrasena" class="invalid-feedback"></div>
+          <div id="invalid_repetirContrasena" class="invalid-feedback"></div>
         </div>
         <div class="form-group">
           <label for="rolUser" class="form-label mt-4">Rol</label>

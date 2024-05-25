@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-include "conn.php";
+require_once("includes/header.php");
+require_once "config/conn.php";
 
 // Recibir datos del formulario
 $nombre_producto = $_POST['product-name'];
@@ -16,7 +16,6 @@ if (isset($_FILES["imagen_producto"])) {
     // Mueve el archivo al destino deseado
     if (move_uploaded_file($archivoTemp, $carpetaDestino . $nombreArchivo)) {
         echo "Imagen subida exitosamente.<br>";
-
     } else {
         echo "Error al subir la imagen.";
     }
@@ -44,4 +43,3 @@ if ($result) {
 // Cierra la conexión a la base de datos
 mysqli_close($connection);
 include("includes/footer.php");
-?>

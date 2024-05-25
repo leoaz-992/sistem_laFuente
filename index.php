@@ -1,5 +1,5 @@
 <?php
-include("includes/header.php");
+include_once("includes/header.php");
 ?>
 <h1 class="text-center">Bienvenidos a la Fuente</h1>
 <section class="secctionCarrusel">
@@ -68,7 +68,7 @@ include("includes/header.php");
   <h2 id="productos" class="text-center">Productos</h2>
   <div class="row ">
     <?php
-    include "conn.php";
+    require_once "config/conn.php";
     $sql = "SELECT * FROM productos";
     $result = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($result)) {

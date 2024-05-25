@@ -1,5 +1,5 @@
 <?php include("includes/header.php");
-require_once "conn.php";
+require_once "config/conn.php";
 require_once("config/consultas.php");
 /* si no esta logeado o no tiene un rol admin o recepcion te envia al index */
 if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {

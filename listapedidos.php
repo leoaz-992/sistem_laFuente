@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-require("conn.php");
+include_once("includes/header.php");
+require_once("config/conn.php");
 
 //cambia el estado del pedido a distribucion.
 if (isset($_GET['id_pedido'])) {
