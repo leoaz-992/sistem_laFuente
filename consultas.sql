@@ -14,3 +14,21 @@ SET total = (
 UPDATE detallesPedidos dp
 INNER JOIN productos p ON dp.producto_id = p.id_productos
 SET dp.precio = p.precio_producto;
+
+
+
+--trae el número de pedidos entregados cadda dia en el rango de una semana
+SELECT 
+    CASE
+        WHEN DAYOFWEEK(`fecha_entrega`) = 1 THEN 'Domingo'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 2 THEN 'Lunes'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 3 THEN 'Martes'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 4 THEN 'Miércoles'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 5 THEN 'Jueves'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 6 THEN 'Viernes'
+        WHEN DAYOFWEEK(`fecha_entrega`) = 7 THEN 'Sábado'
+    END as `dia_semana`,
+    COUNT(`fecha_entrega`) as `cantidad_pedidos`
+FROM `pedidos`
+WHERE `fecha_entrega` BETWEEN '2024-05-23' AND '2024-05-29'
+GROUP BY `dia_semana`;
