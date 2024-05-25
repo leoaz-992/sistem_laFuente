@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-include "conn.php";
+include ("config/conn.php");
 
 if(isset($_POST['id'])){ 
     $id=$_POST['id'];

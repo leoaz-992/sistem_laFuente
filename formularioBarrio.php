@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-require "conn.php"
+require ("config/conn.php");
 ?>
 
 <?php 
