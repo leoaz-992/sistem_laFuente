@@ -1,10 +1,10 @@
 <?php
-include("includes/header.php");
-include "conn.php";
+include_once("includes/header.php");
+require_once("config/conn.php");
 ?>
 
 <div class="container mt-4">
-<h2 class="text-center" style="text-decoration: underline;">Lista de Productos</h2>
+    <h2 class="text-center" style="text-decoration: underline;">Lista de Productos</h2>
 
     <?php
     // Obtener la lista de productos

@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-require("conn.php");
+require("config/conn.php");
 
 $id_detallePedido = $_GET['id_pedido'];
 $sql = "SELECT p.nombre_producto AS producto, cantidad , subTotal FROM `detallespedidos` INNER JOIN productos p ON detallespedidos.producto_id = p.id_productos WHERE pedido_id = $id_detallePedido";

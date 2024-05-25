@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-require "conn.php";
+include_once("includes/header.php");
+require_once("config/conn.php");
 
 if (!isset($_SESSION['id_rol'])) {
   header('Location: index.php');
@@ -34,5 +34,5 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
   </div>
 </div>
 <?php
-include("includes/footer.php");
+include_once("includes/footer.php");
 ?>

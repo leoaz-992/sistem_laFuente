@@ -1,28 +1,28 @@
 <?php
 include("includes/header.php");
-include "conn.php";
+require_once("config/conn.php");
 
 if (isset($_GET['id_delete'])) {
     $id = $_GET['id_delete'];
     // Obtener los registros relacionados en detallespedidos
-$sqlDetalles = "DELETE FROM detallespedidos WHERE producto_id = $id";
+    $sqlDetalles = "DELETE FROM detallespedidos WHERE producto_id = $id";
 
-$deleteDetallesResult = mysqli_query($connection, $sqlDetalles);
+    $deleteDetallesResult = mysqli_query($connection, $sqlDetalles);
 
-if ($deleteDetallesResult) {
-    // Ahora puedes eliminar el producto
-    $sqlEliminarProducto = "DELETE FROM productos WHERE id_productos = $id";
+    if ($deleteDetallesResult) {
+        // Ahora puedes eliminar el producto
+        $sqlEliminarProducto = "DELETE FROM productos WHERE id_productos = $id";
 
-    $deleteResult = mysqli_query($connection, $sqlEliminarProducto);
+        $deleteResult = mysqli_query($connection, $sqlEliminarProducto);
 
-    if ($deleteResult) {
-        header("location:listaProductos.php");
+        if ($deleteResult) {
+            header("location:listaProductos.php");
+        } else {
+            echo "Error al eliminar el producto: " . mysqli_error($connection);
+        }
     } else {
-        echo "Error al eliminar el producto: " . mysqli_error($connection);
+        echo "Error al eliminar los detalles de pedidos: " . mysqli_error($connection);
     }
-} else {
-    echo "Error al eliminar los detalles de pedidos: " . mysqli_error($connection);
-}
 }
 
 $id_producto = $_POST['id'];
@@ -46,5 +46,3 @@ if ($result) {
 
 mysqli_close($connection);
 include("includes/footer.php");
-?>
-

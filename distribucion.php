@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
-require("conn.php");
+include_once("includes/header.php");
+require_once("config/conn.php");
 
 
 /* UPDATE `pedidos` SET `fecha_entrega` = CURRENT_TIMESTAMP(), `estado_pedido_id` = '1' WHERE `pedidos`.`id_pedido` = 1; */
@@ -82,8 +82,8 @@ $resultado = mysqli_query($connection, $sql);
 </table>
 
 function redirigirADistribucion() {
-  header("location:distribucion.php");
-  exit;
+header("location:distribucion.php");
+exit;
 }
 
 </div>
