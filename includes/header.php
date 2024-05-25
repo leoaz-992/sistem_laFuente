@@ -51,6 +51,14 @@
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
                   <li><a class="dropdown-item" href="listaProductos.php">Productos</a></li>
                 <?php } ?>
+                 <!-- lista todos los barrios -->
+                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                  <li><a class="dropdown-item" href="ListadoBarrios.php">Barrios</a></li>
+                <?php } ?>
+                 <!-- lista todos los Clientes -->
+                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                  <li><a class="dropdown-item" href="ListaClientes.php">Clientes</a></li>
+                <?php } ?>
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
                   <!-- lista todos los mensajes de contacto -->
                   <li><a class="dropdown-item" href="contactos.php">Consultas<span class=" ms-4 badge bg-primary rounded-pill"><?= $_SESSION['consultasSinLeer'] ? "sin leer: " . $_SESSION['consultasSinLeer'] : "" ?></span></a></li>

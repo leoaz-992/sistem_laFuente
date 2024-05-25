@@ -1,6 +1,7 @@
 <?php
-require 'conn.php';
+require_once 'conn.php';
 session_start();
+
 
 function buscarCliente($conn, $correo, $telefono)
 {

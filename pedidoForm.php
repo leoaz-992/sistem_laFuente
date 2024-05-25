@@ -41,6 +41,7 @@ $resultProductos = mysqli_query($connection, $sql);
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
                     <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                    <div id="telefonoError" class="text-danger" style="display: none;">Por favor, ingrese un número de teléfono válido.</div>
                 </div>
             </div>
         </div>
@@ -52,7 +53,11 @@ $resultProductos = mysqli_query($connection, $sql);
                     <label for="correo">Correo:</label>
                     <input type="email" class="form-control" id="correo" name="correo" required>
                 </div>
+                <div id="correoError" class="invalid-feedback">
+                    Por favor, introduce una dirección de correo electrónico válida.
+                </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="direccion">Dirección:</label>
@@ -115,6 +120,52 @@ $resultProductos = mysqli_query($connection, $sql);
     </form>
     <div id="mensaje"></div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const telefonoInput = document.getElementById("telefono");
+    const telefonoError = document.getElementById("telefonoError");
+
+
+    const correoInput = document.getElementById("correo");
+    const correoError = document.getElementById("correoError");
+
+    telefonoInput.addEventListener("change", function() {
+        const telefonoValue = telefonoInput.value;
+        const telefonoPattern = /^[0-9]{10}$/; // Ajusta la expresión regular según el formato deseado
+
+        if (telefonoPattern.test(telefonoValue)) {
+            telefonoError.style.display = "none";
+            telefonoInput.classList.remove("is-invalid");
+            telefonoInput.classList.add("is-valid");
+        } else {
+            telefonoError.style.display = "block";
+            telefonoInput.classList.remove("is-valid");
+            telefonoInput.classList.add("is-invalid");
+        }
+    });
+
+    correoInput.addEventListener("change", function() {
+        const correoValue = correoInput.value;
+        const correoPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Ajusta la expresión regular según el formato deseado
+
+        if (correoPattern.test(correoValue)) {
+            correoError.style.display = "none";
+            correoInput.classList.remove("is-invalid");
+            correoInput.classList.add("is-valid");
+        } else {
+            correoError.style.display = "block";
+            correoInput.classList.remove("is-valid");
+            correoInput.classList.add("is-invalid");
+        }
+    });
+
+    
+});
+
+
+</script>
 
 <?php
 include("includes/footer.php");
