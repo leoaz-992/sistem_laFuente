@@ -28,7 +28,12 @@
       <h5 class="titleFooter">Menu</h5>
       <ul>
         <li><a class="link-footer" href="index.php" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-        <!-- <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li> -->
+        <?php
+        if (isset($_SESSION['id_rol'])) {
+          if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
+            <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
+        <?php }
+        } ?>
         <li><a class="link-footer" href="verproductos.php" target="_blank" rel="noopener noreferrer">Nuestros Productos</a></li>
         <li><a class="link-footer" href="loginForm.php" target="_blank" rel="noopener noreferrer">Login para Empleados</a></li>
       </ul>

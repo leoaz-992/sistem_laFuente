@@ -30,13 +30,15 @@
           <li class="nav-item dropdown">
             <a class="nav-link" href="verproductos.php">Productos</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
-          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="nosotros.php">sobre nosotros</a>
           </li>
           <?php if (isset($_SESSION['nombre_usuario'])) { /* esto solo se tiene q ver si el empleado esta logueado */ ?>
+            <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
+              <li class="nav-item">
+                <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
+              </li>
+            <?php } ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Para Empleados
@@ -51,12 +53,12 @@
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
                   <li><a class="dropdown-item" href="listaProductos.php">Productos</a></li>
                 <?php } ?>
-                 <!-- lista todos los barrios -->
-                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                <!-- lista todos los barrios -->
+                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
                   <li><a class="dropdown-item" href="ListadoBarrios.php">Barrios</a></li>
                 <?php } ?>
-                 <!-- lista todos los Clientes -->
-                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                <!-- lista todos los Clientes -->
+                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
                   <li><a class="dropdown-item" href="ListaClientes.php">Clientes</a></li>
                 <?php } ?>
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
