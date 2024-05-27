@@ -1,9 +1,9 @@
 <?php
-  session_start();
+require_once("config/redireccion.php");
+session_start();
 
-  session_unset();
+session_unset();
 
-  session_destroy();
+session_destroy();
 
-  header('Location: loginForm.php');
-?>
+redirigirA('loginForm');

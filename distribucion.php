@@ -1,17 +1,21 @@
 <?php
 include_once("includes/header.php");
 require_once("config/conn.php");
+require_once('config/redireccion.php');
 
 
-/* UPDATE `pedidos` SET `fecha_entrega` = CURRENT_TIMESTAMP(), `estado_pedido_id` = '1' WHERE `pedidos`.`id_pedido` = 1; */
+// si recibe un id_pedido significa que el pedido fue entregado.
 if (isset($_GET['id_pedido'])) {
   $id_recibido = $_GET['id_pedido'];
+
   $sqlUpdate = "UPDATE `pedidos` SET `fecha_entrega` = CURRENT_TIMESTAMP(), `estado_pedido_id` = '1', `statusPago_id` = '2' WHERE `pedidos`.`id_pedido` = $id_recibido";
   $resultUpdate = mysqli_query($connection, $sqlUpdate);
   if ($resultUpdate) {
-    header("location:distribucion.php");
+    redirigirA('distribucion');
   }
 }
+
+//elimina el pedido
 if (isset($_GET['id_pedido_quitar'])) {
   $id_recibido = $_GET['id_pedido_quitar'];
   $sqlDeleteDetalle = "DELETE FROM `detallespedidos` WHERE `pedido_id` = $id_recibido;";
@@ -21,10 +25,11 @@ if (isset($_GET['id_pedido_quitar'])) {
   if ($resultDeleteDetalle) {
     $resultDelete = mysqli_query($connection, $sqlDelete);
     if ($resultDelete) {
-      header("location:distribucion.php");
+      redirigirA('distribucion');
     }
   }
 }
+//trae la lista de pedidos
 $sql = "SELECT p.id_pedido AS idPedido, c.nombre AS Nombre_cliente, c.telefono AS telefono, d.calle AS Direccion, d.numeracion AS altura, b.nombre_barrio AS barrio, b.zona AS distrito, m.tipo_pago AS metodo_de_pago, w.nombre_estado AS estado_de_pago, p.fecha_entrega AS dia_entrega, p.total AS total FROM pedidos p INNER JOIN clientes c ON p.cliente_id = c.id_cliente INNER JOIN direcciones d ON c.dirreccion_id = d.id_direccion INNER JOIN barrios b ON b.id_barrio = d.barrio_id INNER JOIN metodos_Pago m ON p.metPago_id = m.id_metodo_pago INNER JOIN pagos_stados w ON p.statusPago_id = w.id_estado WHERE p.fecha_entrega IS NULL AND p.estado_pedido_id =3 ORDER BY `distrito` ASC";
 
 $resultado = mysqli_query($connection, $sql);
@@ -77,15 +82,8 @@ $resultado = mysqli_query($connection, $sql);
       echo "<tr class='text-center'><th colspan='10'>No hay pedidos disponibles.</th></tr>";
     }
     ?>
-
   </tbody>
 </table>
-
-function redirigirADistribucion() {
-header("location:distribucion.php");
-exit;
-}
-
 </div>
 
 <?php
