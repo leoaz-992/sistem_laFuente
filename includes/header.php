@@ -46,8 +46,8 @@
               <ul class="dropdown-menu">
                 <?php if ($_SESSION['id_rol'] == 1) { ?>
                   <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
-                  <li><a class="dropdown-item" href="estadisticas.php">Estadisticas</a></li>
-                  <li><a class="dropdown-item" href="informes.php">Informes</a></li>
+                  <li><a class="dropdown-item" href="estadisticasVentas.php">Estadisticas</a></li>
+                  <li><a class="dropdown-item" href="informesClientes.php">Informes</a></li>
                 <?php } ?>
                 <!-- lista todos los productos -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
