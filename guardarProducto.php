@@ -1,6 +1,7 @@
 <?php
 require_once("includes/header.php");
 require_once "config/conn.php";
+require_once "config/redireccion.php";
 
 // Recibir datos del formulario
 $nombre_producto = $_POST['product-name'];
@@ -32,7 +33,7 @@ if ($result) {
     // Verifica si la inserción fue exitosa
     if (mysqli_affected_rows($connection) > 0) { // Corregir a mysqli_affected_rows
         echo "producto agregado satisfactoriamente";
-        header("location:verproductos.php");
+        redirigirA("verproductos");
     } else {
         echo "Error en el registro. Por favor, intenta de nuevo.";
     }
