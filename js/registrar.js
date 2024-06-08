@@ -43,7 +43,6 @@ $(document).ready(function () {
     let copycontrasena  = $("#repetirContrasena").val().trim();
     let rol             = $("#rolUser").val();
 
-    //console.log(nombre,apellido,nombre_usuario,email,contrasena,copycontrasena,rol);
     
     const mensajeError = validarFormulario(nombre, apellido, nombre_usuario, email, contrasena, copycontrasena, rol);
 

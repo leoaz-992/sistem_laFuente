@@ -23,8 +23,6 @@ $(document).ready(function () {
     let calle = direccionarray[0].trim();
     let numero = direccionarray[1];
 
-    /*  console.log(nombre, apellido, telefono, correo, direccion, calle, numero, nombre_barrio, tipo_pago); */
-
     // Verificar que los campos no estén vacíos
     if (
       nombre === "" ||
@@ -73,7 +71,6 @@ $(document).ready(function () {
           // Vaciar los campos de entrada
           $("#nombre").val("");
           $("#apellido").val("");
-          $("#telefono").val("");
           $("#telefono").val("");
           $("#direccion").val("");
           $("#nombre_barrio").val("");
