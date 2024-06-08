@@ -1,6 +1,6 @@
 <?php
 include("includes/header.php");
-include "conn.php";
+include "config/conn.php";
 ?>
 
 <div class="container mt-4">
@@ -53,7 +53,7 @@ include "conn.php";
 
     <!-- Botón para agregar más productos -->
     <div class="d-flex justify-content-center">
-        <a href='agregoproducto.php' class='btn btn-primary mt-3'>Agregar mas metodo de pagos</a>
+        <a href='formulariometodo_pago.php' class='btn btn-primary mt-3'>Agregar mas metodo de pagos</a>
     </div>
 </div>
 

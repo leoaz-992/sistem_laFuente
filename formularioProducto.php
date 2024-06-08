@@ -21,7 +21,7 @@ require_once "config/conn.php"
 
 ?>
 
-    <form action="modificar.php" method="post">
+    <form action="modificarProducto.php" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
 
         <div class="mb-8">
@@ -46,7 +46,7 @@ require_once "config/conn.php"
         <button type="submit" class="btn btn-primary">Modificar Producto</button>
     </form>
 <?php } else { ?>
-    <form action="enviar.php" enctype="multipart/form-data" method="post">
+    <form action="guardarProducto.php" enctype="multipart/form-data" method="post">
         <div class="mb-8">
             <label for="product-name" class="form-label">Nombre del Producto:</label>
             <input type="text" class="form-control" id="product-name" name="product-name" required>

@@ -1,6 +1,7 @@
 <?php
 include_once("includes/header.php");
 require_once("config/conn.php");
+require_once("config/redireccion.php");
 
 //cambia el estado del pedido a distribucion.
 if (isset($_GET['id_pedido'])) {
@@ -8,7 +9,7 @@ if (isset($_GET['id_pedido'])) {
   $sqlUpdate = "UPDATE `pedidos` SET `estado_pedido_id` = '3' WHERE `pedidos`.`id_pedido` = $id_recibido";
   $resultUpdate = mysqli_query($connection, $sqlUpdate);
   if ($resultUpdate) {
-    header("location:listapedidos.php");
+    redirigirA("listapedidos");
   }
 }
 
@@ -21,7 +22,7 @@ if (isset($_GET['id_pedido_quitar'])) {
   if ($resultDeleteDetalle) {
     $resultDelete = mysqli_query($connection, $sqlDelete);
     if ($resultDelete) {
-      header("location:listapedidos.php");
+      redirigirA("listapedidos");
     }
   }
 }

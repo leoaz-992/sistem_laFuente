@@ -43,7 +43,6 @@ $(document).ready(function () {
     let copycontrasena  = $("#repetirContrasena").val().trim();
     let rol             = $("#rolUser").val();
 
-    //console.log(nombre,apellido,nombre_usuario,email,contrasena,copycontrasena,rol);
     
     const mensajeError = validarFormulario(nombre, apellido, nombre_usuario, email, contrasena, copycontrasena, rol);
 
@@ -126,7 +125,7 @@ $(document).ready(function () {
           $("#emailEmployee").val("");
 
         }
-        if(response=== "No se pudo crear el empleado."){
+        if(response === "No se pudo crear el empleado."){
           $("#mensaje").html(`<div class="alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Error al Crear un Registro.</strong>

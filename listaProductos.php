@@ -34,8 +34,8 @@ require_once("config/conn.php");
 
             // Botones en la última columna
             echo "<td>";
-            echo "<a href='agregoproducto.php?id=" . $row['id_productos'] . "' class='btn btn-warning btn-sm me-2'>Modificar</a>";
-            echo "<a href='modificar.php?id_delete=" . $row['id_productos'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
+            echo "<a href='formularioProducto.php?id=" . $row['id_productos'] . "' class='btn btn-warning btn-sm me-2'>Modificar</a>";
+            echo "<a href='modificarProducto.php?id_delete=" . $row['id_productos'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
         }
 
         echo "</tbody>";
@@ -50,7 +50,7 @@ require_once("config/conn.php");
 
     <!-- Botón para agregar más productos -->
     <div class="d-flex justify-content-center">
-        <a href='agregoproducto.php' class='btn btn-primary mt-3'>Agregar más productos</a>
+        <a href='formularioProducto.php' class='btn btn-primary mt-3'>Agregar más productos</a>
     </div>
 </div>
 

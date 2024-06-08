@@ -1,6 +1,7 @@
 <?php
 include("includes/header.php");
 require_once("config/conn.php");
+require_once('config/redireccion.php');
 
 if (isset($_GET['id_delete'])) {
     $id = $_GET['id_delete'];
@@ -16,7 +17,7 @@ if (isset($_GET['id_delete'])) {
         $deleteResult = mysqli_query($connection, $sqlEliminarProducto);
 
         if ($deleteResult) {
-            header("location:listaProductos.php");
+            redirigirA("listaProductos");
         } else {
             echo "Error al eliminar el producto: " . mysqli_error($connection);
         }
@@ -37,12 +38,10 @@ $sql = "UPDATE `productos` SET `nombre_producto` = '$nombre', `descripcion_produ
 $result = mysqli_query($connection, $sql);
 
 if ($result) {
-    header("location:listaProductos.php");
+    redirigirA("listaProductos");
 } else {
     echo "Error al actualizar el producto: " . mysqli_error($connection);
 }
-
-
 
 mysqli_close($connection);
 include("includes/footer.php");

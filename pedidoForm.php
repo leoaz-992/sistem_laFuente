@@ -1,10 +1,11 @@
 <?php
 include_once("includes/header.php");
 require_once("config/conn.php");
+require_once("config/redireccion.php");
 
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
 if (!isset($_SESSION['id_rol']) && ($_SESSION['id_rol'] != 1 || $_SESSION['id_rol'] != 3)) {
-    header('Location: index.php');
+    redirigirA('index');
 }
 
 $sql = "SELECT id_barrio, nombre_barrio FROM `barrios`";
@@ -122,49 +123,47 @@ $resultProductos = mysqli_query($connection, $sql);
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    
-    const telefonoInput = document.getElementById("telefono");
-    const telefonoError = document.getElementById("telefonoError");
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const telefonoInput = document.getElementById("telefono");
+        const telefonoError = document.getElementById("telefonoError");
 
 
-    const correoInput = document.getElementById("correo");
-    const correoError = document.getElementById("correoError");
+        const correoInput = document.getElementById("correo");
+        const correoError = document.getElementById("correoError");
 
-    telefonoInput.addEventListener("change", function() {
-        const telefonoValue = telefonoInput.value;
-        const telefonoPattern = /^[0-9]{10}$/; // Ajusta la expresión regular según el formato deseado
+        telefonoInput.addEventListener("change", function() {
+            const telefonoValue = telefonoInput.value;
+            const telefonoPattern = /^[0-9]{10}$/; // Ajusta la expresión regular según el formato deseado
 
-        if (telefonoPattern.test(telefonoValue)) {
-            telefonoError.style.display = "none";
-            telefonoInput.classList.remove("is-invalid");
-            telefonoInput.classList.add("is-valid");
-        } else {
-            telefonoError.style.display = "block";
-            telefonoInput.classList.remove("is-valid");
-            telefonoInput.classList.add("is-invalid");
-        }
+            if (telefonoPattern.test(telefonoValue)) {
+                telefonoError.style.display = "none";
+                telefonoInput.classList.remove("is-invalid");
+                telefonoInput.classList.add("is-valid");
+            } else {
+                telefonoError.style.display = "block";
+                telefonoInput.classList.remove("is-valid");
+                telefonoInput.classList.add("is-invalid");
+            }
+        });
+
+        correoInput.addEventListener("change", function() {
+            const correoValue = correoInput.value;
+            const correoPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Ajusta la expresión regular según el formato deseado
+
+            if (correoPattern.test(correoValue)) {
+                correoError.style.display = "none";
+                correoInput.classList.remove("is-invalid");
+                correoInput.classList.add("is-valid");
+            } else {
+                correoError.style.display = "block";
+                correoInput.classList.remove("is-valid");
+                correoInput.classList.add("is-invalid");
+            }
+        });
+
+
     });
-
-    correoInput.addEventListener("change", function() {
-        const correoValue = correoInput.value;
-        const correoPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Ajusta la expresión regular según el formato deseado
-
-        if (correoPattern.test(correoValue)) {
-            correoError.style.display = "none";
-            correoInput.classList.remove("is-invalid");
-            correoInput.classList.add("is-valid");
-        } else {
-            correoError.style.display = "block";
-            correoInput.classList.remove("is-valid");
-            correoInput.classList.add("is-invalid");
-        }
-    });
-
-    
-});
-
-
 </script>
 
 <?php

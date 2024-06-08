@@ -1,9 +1,10 @@
 <?php include("includes/header.php");
 require_once "config/conn.php";
 require_once("config/consultas.php");
+require_once('config/redireccion.php');
 /* si no esta logeado o no tiene un rol admin o recepcion te envia al index */
 if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {
-  header('Location: index.php');
+  redirigirA('index');
 }
 /* si recibe por get un id cambia el estado de mensaje con ese id */
 if (isset($_GET['id_msj'])) {
@@ -20,7 +21,7 @@ if (isset($_GET['id_msj'])) {
   $resultContactoUpdate = mysqli_query($connection, $update_sql);
 
   if ($resultContactoUpdate) {
-    header("location:contactos.php");
+    redirigirA("contactos");
   }
 }
 if (isset($_GET['id_msj_delete'])) {
@@ -30,7 +31,7 @@ if (isset($_GET['id_msj_delete'])) {
 
   $deleteResult = mysqli_query($connection, $sql);
   if ($deleteResult) {
-    header("location:contactos.php");
+    redirigirA('contactos');
   }
 }
 

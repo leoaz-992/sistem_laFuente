@@ -1,8 +1,9 @@
 <?php
 include("includes/header.php");
+require_once("config/redireccion.php");
 
-if (isset($_SESSION['nombre_usuario'])) {
-  header('Location: index.php');
+if (isset($_SESSION['id_rol'])) {
+  redirigirA('index');
 }
 ?>
 <div class="row justify-content-center p-5">

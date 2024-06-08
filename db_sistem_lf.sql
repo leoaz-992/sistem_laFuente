@@ -136,7 +136,8 @@ INSERT INTO `empleados` (`id_usuario`, `nombre`, `apellido`, `nombre_usuario`, `
 (NULL, 'Administrador', 'lafuente', 'usuario1', 'usuario1@lafuente.com', 'user1234', '1'),
 (NULL, 'jorge', 'lafuente', 'jorge_lafuente', 'jorge@lafuente.com', 'jorge1234', '2'),
 (NULL, 'hector', 'lafuente', 'hector_lafuente', 'hector@lafuente.com', 'hector1234', '3'),
-(NULL, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', 'walter1234', '4');
+(NULL, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', 'walter1234', '4'),
+(NULL, 'cesar', 'Recalde', 'cesar_recalde', 'crlafuente@gmail.com', 'holaQ1234', '3'),;
 
 
 -- CIFRADO Y CAMBIO DE CONTRASEÑA EMPLEADOS

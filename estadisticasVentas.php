@@ -3,7 +3,7 @@ include_once("includes/header.php");
 require_once "config/conn.php";
 
 if (!isset($_SESSION['id_rol'])) {
-  header('Location: index.php');
+  redirigirA('index');
 }
 
 $nombre_usuario = $_SESSION['nombre_usuario'];
