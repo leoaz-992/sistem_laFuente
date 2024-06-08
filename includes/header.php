@@ -86,4 +86,4 @@
     </div>
   </nav>
 
-  <section class="container py-3">
+  <section class="container-md py-3">
