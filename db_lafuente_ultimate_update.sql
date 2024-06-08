@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2024 a las 02:59:52
+-- Tiempo de generación: 08-06-2024 a las 04:03:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -65,7 +65,7 @@ CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `apellido` varchar(60) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
   `correo` varchar(80) NOT NULL,
   `dirreccion_id` int(11) NOT NULL,
   `visible` tinyint(1) DEFAULT 1
@@ -76,12 +76,13 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `telefono`, `correo`, `dirreccion_id`, `visible`) VALUES
-(4, 'ana', 'karenina', 111112321, 'mi_correo@correo.com', 4, 1),
-(5, 'pepe', 'argento', 121231989, 'pepe@argento.com', 5, 1),
-(6, 'cecilio', 'coki', 123212111, 'micorreo@gm.com', 7, 1),
-(7, 'cosme', 'fulanitp', 1134255332, 'mi.correo@full.com', 8, 1),
-(8, 'cecilio', 'coki', 1289982210, 'ceci@gm.com', 9, 1),
-(9, 'lety', 'embla', 2147483647, 'gool@gol.com', 10, 1);
+(4, 'ana', 'karenina', '111112321', 'mi_correo@correo.com', 4, 1),
+(5, 'pepe', 'argento', '121231989', 'pepe@argento.com', 5, 1),
+(6, 'cecilio', 'coki', '123212111', 'micorreo@gm.com', 7, 1),
+(7, 'cosme', 'fulanitp', '1134255332', 'mi.correo@full.com', 8, 1),
+(8, 'cecilio', 'coki', '1289982210', 'ceci@gm.com', 9, 1),
+(9, 'lety', 'embla', '3704444444', 'gool@gol.com', 10, 1),
+(18, 'keops', 'faraon', '2344900191', 'lamdaa@gmil.com', 19, 1);
 
 -- --------------------------------------------------------
 
@@ -138,7 +139,9 @@ INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `c
 (16, 8, 1, 6, 1500.00, 9000.00, 1),
 (17, 8, 3, 1, 500.00, 500.00, 1),
 (18, 14, 1, 2, 1500.00, 3000.00, 1),
-(19, 15, 1, 3, 1500.00, 4500.00, 1);
+(19, 15, 1, 3, 1500.00, 4500.00, 1),
+(20, 16, 1, 1, 1500.00, 1500.00, 1),
+(21, 17, 1, 3, 1500.00, 4500.00, 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +169,16 @@ INSERT INTO `direcciones` (`id_direccion`, `calle`, `numeracion`, `calle_1`, `ca
 (7, 'luz azul', 12, NULL, NULL, 15),
 (8, 'calle falsa', 123, NULL, NULL, 11),
 (9, 'calle falsa', 123, NULL, NULL, 5),
-(10, 'stress', 345, NULL, NULL, 4);
+(10, 'stress', 345, NULL, NULL, 4),
+(11, 'roma', 1234, NULL, NULL, 14),
+(12, 'roma', 1234, NULL, NULL, 14),
+(13, 'roma', 1234, NULL, NULL, 14),
+(14, 'roma', 1234, NULL, NULL, 14),
+(15, 'roma', 300, NULL, NULL, 7),
+(16, 'roma', 300, NULL, NULL, 2),
+(17, 'roma', 3990, NULL, NULL, 10),
+(18, 'roma', 3990, NULL, NULL, 10),
+(19, 'roma', 3990, NULL, NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -194,7 +206,8 @@ INSERT INTO `empleados` (`id_usuario`, `nombre`, `apellido`, `nombre_usuario`, `
 (3, 'hector', 'lafuente', 'hector_lafuente', 'hector@lafuente.com', '$2y$10$JyP0LrxOW2UWRKS6PukvA.yeHpb4WyUKcxeIPckIGU2E/b1smvWXO', 3),
 (4, 'walter', 'lafuente', 'walter_lafuente', 'walter@lafuente.com', '$2y$10$GrN1XBh/H1//bA4KqqyPveS9xJg/e80fs7b5UPAVWhsZGcS.cSAR2', 4),
 (11, 'cosme', 'fulanito', 'cosme_fulanito', 'cosme@gm.com', '$2y$10$nLRoIb0QUu7kOJ/7MWWI0ewwXOZI39JqJPm0n2et1C7db9HhYwuVG', 4),
-(12, 'joe', 'king', 'bigjoe', 'joe@gmail.com', '$2y$10$Ydb.oORmzkWa6CVaCybPSOOgvA8w.iKVglYtQy.y1v.ZlX4POGJ7m', 2);
+(12, 'joe', 'king', 'bigjoe', 'joe@gmail.com', '$2y$10$Ydb.oORmzkWa6CVaCybPSOOgvA8w.iKVglYtQy.y1v.ZlX4POGJ7m', 2),
+(13, 'cesar', 'Recalde', 'cesar_recalde', 'crlafuente@gmail.com', '$2y$10$ufmGvf5oWGVvrfKH8qgs5u0LOd05PxBZsCqQhruSrxpjVJD8wSh3i', 3);
 
 -- --------------------------------------------------------
 
@@ -216,6 +229,29 @@ INSERT INTO `metodos_pago` (`id_metodo_pago`, `tipo_pago`) VALUES
 (1, 'EFECTIVO'),
 (2, 'MERCADO PAGO'),
 (4, 'TRANSFERENCIA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `observaciones_distribucion`
+--
+
+CREATE TABLE `observaciones_distribucion` (
+  `id_observacion` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
+  `observacion` text NOT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT 1,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `observaciones_distribucion`
+--
+
+INSERT INTO `observaciones_distribucion` (`id_observacion`, `id_empleado`, `id_pedido`, `observacion`, `visible`, `create_at`, `update_at`) VALUES
+(1, 3, 17, ' no se encontro la direccion de la casa.', 1, '2024-06-07 22:58:07', '2024-06-07 22:58:07');
 
 -- --------------------------------------------------------
 
@@ -267,7 +303,9 @@ INSERT INTO `pedidos` (`id_pedido`, `fecha_pedido`, `fecha_entrega`, `estado_ped
 (10, '2024-05-26 23:15:25', '2024-05-21 00:22:38', 1, 1, 2, 6, 0.00),
 (11, '2024-05-26 23:15:25', '2024-05-24 19:26:03', 1, 1, 2, 5, 0.00),
 (14, '2024-05-21 23:19:01', '2024-05-22 19:19:01', 1, 1, 2, 8, 3000.00),
-(15, '2024-05-27 03:33:03', '2024-05-27 18:32:33', 1, 1, 2, 9, 4500.00);
+(15, '2024-05-27 03:33:03', '2024-05-27 18:32:33', 1, 1, 2, 9, 4500.00),
+(16, '2024-06-06 21:36:19', NULL, 3, 1, 1, 18, 1500.00),
+(17, '2024-06-08 01:51:44', NULL, 3, 1, 1, 9, 4500.00);
 
 -- --------------------------------------------------------
 
@@ -310,10 +348,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_productos`, `nombre_producto`, `descripcion_producto`, `imagen_producto`, `precio_producto`, `stock_poducto`, `visible`) VALUES
-(1, 'bidon20l', 'bidon de agua 20 litros', 'bidon-agua-20L.png', 1500.00, 300, 0),
-(2, 'soda', 'sifón soda 2,25 litro', 'sifon_soda_descartable.png', 600.00, 600, 0),
-(3, 'dispencer', 'dispenser común para bidones de agua', 'dispenser-comun.jpg', 500.00, 3000, 0),
-(4, 'dispencerFrio-Calor', 'dispenser eléctrico con agua fría y caliente.', 'dispencer.png', 8000.00, 400, 0);
+(1, 'bidon20l', 'bidon de agua 20 litros', 'bidon-agua-20L.png', 1500.00, 300, 1),
+(2, 'soda', 'sifón soda 2,25 litro', 'sifon_soda_descartable.png', 600.00, 600, 1),
+(3, 'dispencer', 'dispenser común para bidones de agua', 'dispenser-comun.jpg', 500.00, 3000, 1),
+(4, 'dispencerFrio-Calor', 'dispenser eléctrico con agua fría y caliente.', 'dispencer.png', 8000.00, 400, 1);
 
 -- --------------------------------------------------------
 
@@ -394,6 +432,14 @@ ALTER TABLE `metodos_pago`
   ADD UNIQUE KEY `tipo_pago` (`tipo_pago`);
 
 --
+-- Indices de la tabla `observaciones_distribucion`
+--
+ALTER TABLE `observaciones_distribucion`
+  ADD PRIMARY KEY (`id_observacion`),
+  ADD KEY `id_empleado` (`id_empleado`,`id_pedido`),
+  ADD KEY `id_pedido` (`id_pedido`);
+
+--
 -- Indices de la tabla `pagos_stados`
 --
 ALTER TABLE `pagos_stados`
@@ -444,7 +490,7 @@ ALTER TABLE `barrios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `contactos`
@@ -456,25 +502,31 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `detallespedidos`
 --
 ALTER TABLE `detallespedidos`
-  MODIFY `id_detalle_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_detalle_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `metodos_pago`
 --
 ALTER TABLE `metodos_pago`
   MODIFY `id_metodo_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `observaciones_distribucion`
+--
+ALTER TABLE `observaciones_distribucion`
+  MODIFY `id_observacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_stados`
@@ -486,7 +538,7 @@ ALTER TABLE `pagos_stados`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos_estados`
@@ -534,6 +586,13 @@ ALTER TABLE `direcciones`
 --
 ALTER TABLE `empleados`
   ADD CONSTRAINT `empleados_id_rol_roles_empleados_id_rol` FOREIGN KEY (`id_rol`) REFERENCES `roles_empleados` (`id_rol`);
+
+--
+-- Filtros para la tabla `observaciones_distribucion`
+--
+ALTER TABLE `observaciones_distribucion`
+  ADD CONSTRAINT `observaciones_distribucion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_usuario`),
+  ADD CONSTRAINT `observaciones_distribucion_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`);
 
 --
 -- Filtros para la tabla `pedidos`
