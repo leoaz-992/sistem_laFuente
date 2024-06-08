@@ -27,13 +27,14 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="verproductos.php">Productos</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="nosotros.php">sobre nosotros</a>
           </li>
           <?php if (isset($_SESSION['nombre_usuario'])) { /* esto solo se tiene q ver si el empleado esta logueado */ ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="verproductos.php">Productos</a>
+            </li>
             <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
               <li class="nav-item">
                 <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
@@ -48,17 +49,18 @@
                   <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
                   <li><a class="dropdown-item" href="estadisticasVentas.php">Estadisticas</a></li>
                   <li><a class="dropdown-item" href="informesClientes.php">Informes</a></li>
+                  <li><a class="dropdown-item" href="metodopago.php">Metodos de pago</a></li>
                 <?php } ?>
-                <!-- lista todos los productos -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                  <!-- lista todos los productos -->
                   <li><a class="dropdown-item" href="listaProductos.php">Productos</a></li>
                 <?php } ?>
-                <!-- lista todos los barrios -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                  <!-- lista todos los barrios -->
                   <li><a class="dropdown-item" href="ListadoBarrios.php">Barrios</a></li>
                 <?php } ?>
-                <!-- lista todos los Clientes -->
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                  <!-- lista todos los Clientes -->
                   <li><a class="dropdown-item" href="ListaClientes.php">Clientes</a></li>
                 <?php } ?>
                 <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>

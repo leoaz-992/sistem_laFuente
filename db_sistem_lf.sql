@@ -145,3 +145,4 @@ UPDATE `empleados` SET `password` = '$2y$10$EDObej4yHOmG4MdUGIV6vuq01rkTZG4x0W2s
 UPDATE `empleados` SET `password` = '$2y$10$rQ0Ad8SFlu2Ke04fB88nkeAGHPy61vGXb2HXgOdwIXJ8EZyBzfNvG' WHERE `empleados`.`id_usuario` = 2; 
 UPDATE `empleados` SET `password` = '$2y$10$JyP0LrxOW2UWRKS6PukvA.yeHpb4WyUKcxeIPckIGU2E/b1smvWXO' WHERE `empleados`.`id_usuario` = 3; 
 UPDATE `empleados` SET `password` = '$2y$10$GrN1XBh/H1//bA4KqqyPveS9xJg/e80fs7b5UPAVWhsZGcS.cSAR2' WHERE `empleados`.`id_usuario` = 4;
+UPDATE `empleados` SET `password` = '$2y$10$ufmGvf5oWGVvrfKH8qgs5u0LOd05PxBZsCqQhruSrxpjVJD8wSh3i' WHERE `empleados`.`id_usuario` = 5;
