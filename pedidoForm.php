@@ -108,7 +108,7 @@ $resultProductos = mysqli_query($connection, $sql);
                 echo '<div class="col-md-4">';
                 echo '<div class="form-group">';
                 echo '<label for="cantidad_' . $producto['id_productos'] . '">' . $producto["nombre_producto"] . '</label>';
-                echo '<input type="number" min="0" class="form-control" id="cantidad_' . $producto['id_productos'] . '" name="cantidad_' . $producto['id_productos'] . '" value="' . ($producto['id_productos'] == 7 ? 1 : 0) . '" required>';
+                echo '<input type="number" min="0" class="form-control" id="cantidad_' . $producto['id_productos'] . '" name="cantidad_' . $producto['id_productos'] . '" value="' . ($producto['id_productos'] == 1 ? 1 : 0) . '" required>';
                 echo '</div>';
                 echo '</div>';
             }
