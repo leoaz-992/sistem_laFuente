@@ -35,8 +35,8 @@ include "config/conn.php";
           
             // Botones en la última columna
             echo "<td>";
-            echo "<a href='agregoproducto.php?id=" . $row['id_metodo_pago'] . "' class='btn btn-warning btn-sm me-2'>Modificar</a>";
-            echo "<a href='modificar.php?id_delete=" . $row['id_metodo_pago'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
+            echo "<a href='formulariometodo_pago.php?id=" . $row['id_metodo_pago'] . "' class='btn btn-warning btn-sm me-2'>Modificar</a>";
+            echo "<a href='config/guardarMetodo.php?id_delete=" . $row['id_metodo_pago'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
         }
 
         echo "</tbody>";

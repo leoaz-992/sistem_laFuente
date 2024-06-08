@@ -24,32 +24,29 @@ if (isset($_GET['msj'])) {
 <?php
 }
 ?>
-    <h1 class="text-center ">Modificar Barrio</h1>
+    <h1 class="text-center ">Modificar metodo de pago</h1>
     <div class="row justify-content-center">
         <div class="col-8">
-            <form action="metodopago.php" method="post">
-                <input type="hidden" name="id" value="<?=$id?>">
-                <div class="mb-8">
-                    <label for="barrio-name" class="form-label">Nombre del Barrio:</label>
-                    <input type="text" class="form-control" id="barrio-name" name="barrio_name" value="<?=$barrio['nombre_barrio']?>" required>
-                 </div>
-            
-                <div class="mb-8">
-                    <label for="barrio-zona" class="form-label">Zona del Barrio:</label>
-                    <input type="number" class="form-control" id="barrio_zona" name="barrio_zona" value="<?=$barrio['zona']?>" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Modificar Barrio</button>
-            </form>
+        <form action="config/guardarMetodo.php" method="post">
+        <input type="hidden" name="id_metodo_pago" value="<?php echo $id; ?>">
+        <div class="mb-8">
+            <label for="tipo_pago" class="form-label">Nombre del tipo de pago:</label>
+            <input type="text" class="form-control" id="tipo_pago" name="tipo_pago" value=<?php echo $metodo_pago['tipo_pago']; ?> required>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary my-2">guardar tipo de pago</button>
+    </form>  
         </div>
     </div>
 <?php } else { ?>
     <h1 class="text-center ">Añadir metodo de pago</h1>
     <div class="row justify-content-center">
         <div class="col-8">
-    <form action="config/guardarBarrio.php" method="post">
+    <form action="config/guardarMetodo.php" method="post">
         <div class="mb-8">
-            <label for="id_metodo_pago" class="form-label">Nombre del tipo de pago:</label>
-            <input type="text" class="form-control" id="id_metodo_pago" name="id_metodo_pago" required>
+            <label for="tipo_pago" class="form-label">Nombre del tipo de pago:</label>
+            <input type="text" class="form-control" id="tipo_pago" name="tipo_pago" required>
         </div>
 
         
