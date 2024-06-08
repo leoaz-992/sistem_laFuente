@@ -10,7 +10,7 @@ function buscarCliente($conn, $correo, $telefono)
 
     $stmt = mysqli_prepare($conn, $sql);
 
-    mysqli_stmt_bind_param($stmt, "ss", $correo, $telefono);
+    mysqli_stmt_bind_param($stmt, "ss", $telefono, $correo);
 
     mysqli_stmt_execute($stmt);
 
