@@ -60,7 +60,6 @@ $(document).ready(function () {
 
       data: $(this).serialize() + "&calle=" + calle + "&numero=" + numero,
       success: function (response) {
-        console.log(response);
         if (response === "success") {
           //redirigir y crear datos de sesion
           $("#mensaje")
@@ -72,6 +71,9 @@ $(document).ready(function () {
           $("#nombre").val("");
           $("#apellido").val("");
           $("#telefono").val("");
+          $("#telefono").removeClass("is-valid");
+          $("#correo").val("");
+          $("#correo").removeClass("is-valid");
           $("#direccion").val("");
           $("#nombre_barrio").val("");
           $("#productoslist").val("");
