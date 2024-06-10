@@ -1,6 +1,22 @@
 <?php
 require_once "conn.php";
 require_once "redireccion.php";
+
+if(isset($_GET['id_delete'])){
+    $id= $_GET['id_delete'];
+   $sql= "DELETE FROM metodos_pago WHERE `metodos_pago`.`id_metodo_pago` = $id";
+   $respond=mysqli_query($connection,$sql);
+   if($respond){
+    header("location:../metodopago.php.");
+    return;
+   }
+else
+header("location:../formulariometodo_pago.php&msj= ocurrio un error al borrr el metodo de pago.");
+}
+
+
+
+
 if(isset($_POST['id_metodo_pago'])){
 
     $id_metodo_pago = $_POST['id_metodo_pago'];
@@ -13,7 +29,17 @@ $tipopago= $_POST["tipo_pago"];
 
         header("location:../formulariometodo_pago.php&msj=El campo no puede estar vacio.");
     }
-   $sql="UPDATE `metodos_pago` SET `tipo_pago` = '$tipopago' WHERE `metodos_pago`.`id_metodo_pago` = $id_metodo_pago;"; 
+   $sql="UPDATE `metodos_pago` SET `tipo_pago` = '$tipopago' WHERE `metodos_pago`.`id_metodo_pago` = $id_metodo_pago;";
+   
+   $respond= mysqli_query($connection,$sql);
+   if ($respond){
+    header("location:../metodopago.php");
+    return;
+   }
+   else{
+    header("location:../formulariometodo_pago.php&msj=No se guardo el metodo de pago intentolo nuevamnete.");
+    return;
+   }
 }
 // Recibe los datos del formulario
 $tipo_pago= $_POST["tipo_pago"];
