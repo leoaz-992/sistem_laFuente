@@ -3,7 +3,7 @@ include_once("includes/header.php");
 require_once("config/conn.php");
 require_once("config/redireccion.php");
 
-if (!isset($_SESSION['id_rol'])) {
+if (!isset($_SESSION['rol'])) {
   redirigirA('index');
 }
 
@@ -17,7 +17,7 @@ $apellido = $partes[1];
 <h2> Hola <?= $nombre ?></h2>
 <div class="row justify-content-between">
   <!-- lista de opciones -->
-  <?php if ($_SESSION['id_rol'] == '1') { ?>
+  <?php if ($_SESSION['rol'] == "ADMIN") { ?>
     <div class="col-3 pt-2">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item m-0">

@@ -2,7 +2,7 @@
 include_once("includes/header.php");
 require_once("config/conn.php");
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
-if (!isset($_SESSION['id_rol']) && $_SESSION['id_rol'] != 1) {
+if (!isset($_SESSION['rol']) && $_SESSION['rol'] != "ADMIN") {
   redirigirA('index.php');
 }
 

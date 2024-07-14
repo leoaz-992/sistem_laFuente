@@ -29,8 +29,8 @@
       <ul>
         <li><a class="link-footer" href="index.php" target="_blank" rel="noopener noreferrer">Inicio</a></li>
         <?php
-        if (isset($_SESSION['id_rol'])) {
-          if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
+        if (isset($_SESSION['rol'])) {
+          if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "RECEPCION") { ?>
             <li><a class="link-footer" href="pedidoForm.php" target="_blank" rel="noopener noreferrer">Hace tu Pedido</a></li>
         <?php }
         } ?>
