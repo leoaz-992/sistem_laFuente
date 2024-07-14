@@ -16,14 +16,7 @@ if (isset($_FILES["imagen_producto"])) {
 
     // Mueve el archivo al destino deseado
     if (move_uploaded_file($archivoTemp, $carpetaDestino . $nombreArchivo)) {
-        echo "Imagen subida exitosamente.<br>";
-    } else {
-        echo "Error al subir la imagen.";
-    }
-} else {
-    echo "No se ha seleccionado ningún archivo.";
-}
-$sql = "INSERT INTO `productos` (`nombre_producto`, `precio_producto`, `stock_poducto`, `descripcion_producto`, `imagen_producto`) VALUES ('$nombre_producto', '$precio_producto', '$stock_poducto', '$descripcion_producto', '$nombreArchivo');";
+        $sql = "INSERT INTO `productos` (`nombre_producto`, `precio_producto`, `stock_poducto`, `descripcion_producto`, `imagen_producto`) VALUES ('$nombre_producto', '$precio_producto', '$stock_poducto', '$descripcion_producto', '$nombreArchivo');";
 
 // Completa el código para ejecutar la inserción
 // Debes enlazar los parámetros y ejecutar la consulta
@@ -32,7 +25,6 @@ $result = mysqli_query($connection, $sql);
 if ($result) {
     // Verifica si la inserción fue exitosa
     if (mysqli_affected_rows($connection) > 0) { // Corregir a mysqli_affected_rows
-        echo "producto agregado satisfactoriamente";
         redirigirA("verproductos");
     } else {
         echo "Error en el registro. Por favor, intenta de nuevo.";
@@ -40,6 +32,13 @@ if ($result) {
 } else {
     echo "Error en la preparación de la consulta SQL: " . mysqli_error($connection); // Agregar mensaje de error específico
 }
+    } else {
+        echo "Error al subir la imagen.";
+    }
+} else {
+    echo "No se ha seleccionado ningún archivo.";
+}
+
 
 // Cierra la conexión a la base de datos
 mysqli_close($connection);
