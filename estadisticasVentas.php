@@ -2,16 +2,16 @@
 include_once("includes/header.php");
 require_once "config/conn.php";
 
-if (!isset($_SESSION['id_rol'])) {
+if (!isset($_SESSION['rol'])) {
   redirigirA('index');
 }
 
-$nombre_usuario = $_SESSION['nombre_usuario'];
+#$nombre_usuario = $_SESSION['nombre_usuario'];
 ?>
 <h2> Hola <?= $_SESSION["nombreCompleto"] ?></h2>
 <!-- //? menu lateral -->
 <div class="row">
-  <!-- // todo: donde se muestra la info -->
+  <!-- // todo: gráfico donde se muestra la info -->
   <div class="col-12 ps-3 pt-3 border border-bottom-0">
     <div id="estadisticas">
       <h3 class="text-center">estadisticas de ventas</h3>
@@ -68,7 +68,7 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
             </table>
           </div>
           <div id="garficoBidonesVendidosPorMes">
-            <table class="charts-css column show-labels datasets-spacing-2 show-10-secondary-axes">
+            <table class="charts-css bar show-labels datasets-spacing-2 show-primary-axis show-data-axes">
               <caption>grafico por meses</caption>
               <thead>
                 <tr>
@@ -79,51 +79,51 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
               <tbody>
                 <tr>
                   <th scope="row fs-6">Ene</th>
-                  <td style="--size: 0.2;">20</td>
+                  <td id="data_enero" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Feb</th>
-                  <td style="--size: 0.4;">40</td>
+                  <td id="data_febrero" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Mar</th>
-                  <td style="--size: 0.6;">60</td>
+                  <td id="data_marzo" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Abr</th>
-                  <td style="--size: 0.8;">80</td>
+                  <td id="data_abril" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">May</th>
-                  <td style="--size: 1;">100</td>
+                  <td id="data_mayo" style="--size: 0;"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Jun</th>
-                  <td style="--size: 0.5;">50</td>
+                  <td id="data_junio" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Jul</th>
-                  <td style="--size: 0.3;">30</td>
+                  <td id="data_julio" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Ago</th>
-                  <td style="--size: 0.2;">20</td>
+                  <td id="data_agosto" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Sept</th>
-                  <td style="--size: 0.5;">50</td>
+                  <td id="data_septiembre" style="--size: 0"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">oct</th>
-                  <td style="--size: 0.75;">75</td>
+                  <td id="data_octubre" style="--size: 0;"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">Nov</th>
-                  <td style="--size: 0.45;">45</td>
+                  <td id="data_noviembre" style="--size: 0;"></td>
                 </tr>
                 <tr>
                   <th scope="row fs-6">dic</th>
-                  <td style="--size: 0.6;">60</td>
+                  <td id="data_diciembre" style="--size: 0"></td>
                 </tr>
               </tbody>
             </table>
@@ -177,84 +177,92 @@ $nombre_usuario = $_SESSION['nombre_usuario'];
     </div>
   </div>
 </div>
+<script src="js/estadisticasMensual.js"></script>
+<script src="js/estadisticasSemana.js"></script>
 <script>
   //divs grafico estadisticos
   let div1 = document.getElementById("garficoBidonesVendidosPorSemana");
   let div2 = document.getElementById("garficoBidonesVendidosPorMes");
   let div3 = document.getElementById("garficoBidonesVendidosPorAnio");
+  let inputFecha = document.getElementById("fecha_semana");
 
   /* div1.style.display = 'none'; */
   div2.style.display = "none";
   div3.style.display = "none";
 
-  let boton1 = document.getElementById("semana");
-  let boton2 = document.getElementById("mes");
-  let boton3 = document.getElementById("anio");
+  let btnSemana = document.getElementById("semana");
+  let btnMes = document.getElementById("mes");
+  let btnAnio = document.getElementById("anio");
 
   // Luego, agrega un evento 'click' a cada botón
-  boton1.addEventListener("click", function() {
-    // Verifica si boton1 tiene la clase .bg-secondary y, si es así, quítala
-    if (boton1.classList.contains("bg-secondary")) {
-      boton1.classList.remove("bg-secondary");
+  btnSemana.addEventListener("click", function() {
+    // Verifica si btnSemana tiene la clase .bg-secondary y, si es así, quítala
+    if (btnSemana.classList.contains("bg-secondary")) {
+      btnSemana.classList.remove("bg-secondary");
     }
-    boton1.classList.add("bg-primary"); // Agrega la clase .bg-primary a boton1
-    if (boton2.classList.contains("bg-primary")) {
-      boton2.classList.remove("bg-primary");
+    btnSemana.classList.add("bg-primary"); // Agrega la clase .bg-primary a btnSemana
+    if (btnMes.classList.contains("bg-primary")) {
+      btnMes.classList.remove("bg-primary");
     }
-    boton2.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton2
-    if (boton3.classList.contains("bg-primary")) {
-      boton3.classList.remove("bg-primary");
+    btnMes.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnMes
+    if (btnAnio.classList.contains("bg-primary")) {
+      btnAnio.classList.remove("bg-primary");
     }
-    boton3.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton3
+    btnAnio.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnAnio
 
     // Oculta div2 y div3
     div1.style.display = "block";
+    inputFecha.style.display = "block";
 
     div2.style.display = "none";
     div3.style.display = "none";
   });
 
-  boton2.addEventListener("click", function() {
-    // Verifica si boton2 tiene la clase .bg-secondary y, si es así, quítala
-    if (boton2.classList.contains("bg-secondary")) {
-      boton2.classList.remove("bg-secondary");
+  btnMes.addEventListener("click", function() {
+    // Verifica si btnMes tiene la clase .bg-secondary y, si es así, quítala
+    if (btnMes.classList.contains("bg-secondary")) {
+      btnMes.classList.remove("bg-secondary");
     }
-    boton2.classList.add("bg-primary"); // Agrega la clase .bg-primary a boton2
-    if (boton1.classList.contains("bg-primary")) {
-      boton1.classList.remove("bg-primary");
+    btnMes.classList.add("bg-primary"); // Agrega la clase .bg-primary a btnMes
+    if (btnSemana.classList.contains("bg-primary")) {
+      btnSemana.classList.remove("bg-primary");
     }
-    boton1.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton1
-    if (boton3.classList.contains("bg-primary")) {
-      boton3.classList.remove("bg-primary");
+    btnSemana.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnSemana
+    if (btnAnio.classList.contains("bg-primary")) {
+      btnAnio.classList.remove("bg-primary");
     }
-    boton3.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton3
+    btnAnio.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnAnio
 
     div1.style.display = "none"; // Oculta div1
+    inputFecha.style.display = "none";
     div2.style.display = "block"; // Muestra div2
     div3.style.display = "none"; // Oculta div3
+
+    let fechaSeleccionada = new Date();
+    getDataMeses(fechaSeleccionada);
   });
 
-  boton3.addEventListener("click", function() {
-    // Verifica si boton3 tiene la clase .bg-secondary y, si es así, quítala
-    if (boton3.classList.contains("bg-secondary")) {
-      boton3.classList.remove("bg-secondary");
+  btnAnio.addEventListener("click", function() {
+    // Verifica si btnAnio tiene la clase .bg-secondary y, si es así, quítala
+    if (btnAnio.classList.contains("bg-secondary")) {
+      btnAnio.classList.remove("bg-secondary");
     }
-    boton3.classList.add("bg-primary"); // Agrega la clase .bg-primary a boton3
-    if (boton2.classList.contains("bg-primary")) {
-      boton2.classList.remove("bg-primary");
+    btnAnio.classList.add("bg-primary"); // Agrega la clase .bg-primary a btnAnio
+    if (btnMes.classList.contains("bg-primary")) {
+      btnMes.classList.remove("bg-primary");
     }
-    boton2.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton2
-    if (boton1.classList.contains("bg-primary")) {
-      boton1.classList.remove("bg-primary");
+    btnMes.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnMes
+    if (btnSemana.classList.contains("bg-primary")) {
+      btnSemana.classList.remove("bg-primary");
     }
-    boton1.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a boton1
+    btnSemana.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnSemana
 
     div1.style.display = "none"; // Oculta div1
+    inputFecha.style.display = "none";
     div2.style.display = "none"; // Oculta div2
     div3.style.display = "block"; // Muestra div3
   });
 </script>
-<script src="js/estadisticasSemana.js"></script>
 <?php
 include("includes/footer.php");
 ?>
