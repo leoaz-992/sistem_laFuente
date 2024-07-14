@@ -32,3 +32,26 @@ SELECT
 FROM `pedidos`
 WHERE `fecha_entrega` BETWEEN '2024-05-23' AND '2024-05-29'
 GROUP BY `dia_semana`;
+
+
+--trae el total de pedidos por mes
+SELECT
+    CASE
+        WHEN MONTH(fecha_entrega) = 1 THEN 'Enero'
+        WHEN MONTH(fecha_entrega) = 2 THEN 'Febrero'
+        WHEN MONTH(fecha_entrega) = 3 THEN 'Marzo'
+        WHEN MONTH(fecha_entrega) = 4 THEN 'Abril'
+        WHEN MONTH(fecha_entrega) = 5 THEN 'Mayo'
+        WHEN MONTH(fecha_entrega) = 6 THEN 'Junio'
+        WHEN MONTH(fecha_entrega) = 7 THEN 'Julio'
+        WHEN MONTH(fecha_entrega) = 8 THEN 'Agosto'
+        WHEN MONTH(fecha_entrega) = 9 THEN 'Septiembre'
+        WHEN MONTH(fecha_entrega) = 10 THEN 'Octubre'
+        WHEN MONTH(fecha_entrega) = 11 THEN 'Noviembre'
+        WHEN MONTH(fecha_entrega) = 12 THEN 'Diciembre'
+    END AS Meses,
+    COUNT(*) AS CantidadPedidos
+FROM pedidos
+WHERE fecha_entrega BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY MONTH(fecha_entrega)
+ORDER BY Meses;
