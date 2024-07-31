@@ -4,7 +4,7 @@ require_once("config/conn.php");
 require_once("config/redireccion.php");
 
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
-if (!isset($_SESSION['id_rol']) && ($_SESSION['id_rol'] != 1 || $_SESSION['id_rol'] != 3)) {
+if (!isset($_SESSION['rol']) && ($_SESSION['rol'] != "ADMIN" || $_SESSION['rol'] != "RECEPCION")) {
     redirigirA('index');
 }
 

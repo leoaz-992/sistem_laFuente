@@ -7,18 +7,37 @@ if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {
   $email = $_POST['email'];
   $contrasena = $_POST['contrasena'];
 
-  $sql = "SELECT nombre, apellido,password, correo, nombre_usuario, id_rol FROM `empleados` WHERE `correo` = '$email' OR `nombre_usuario` = '$email'";
-  $result = mysqli_query($connection, $sql);
-  $user = mysqli_fetch_array($result);
-  if (mysqli_num_rows($result) == 1  && password_verify($contrasena, $user['password'])) {
-    $_SESSION['nombre_usuario'] = $user['nombre_usuario'];
-    $_SESSION['nombreCompleto'] = $user['nombre'] . " " . $user['apellido'];
-    $_SESSION['id_rol'] = $user['id_rol'];
-    $_SESSION['correo'] = $user['correo'];
-    obtenerConsultasSinLeer();
-    echo "success";
+  $sql = "SELECT
+    nombre,
+    apellido,
+    password,
+    correo,
+    nombre_usuario,
+    r.nombre_rol as rol
+FROM
+    empleados e
+INNER JOIN roles_empleados r ON r.id_rol= e.id_rol
+WHERE
+    correo = ? OR nombre_usuario = ?;";
+  $stmt = $connection->prepare($sql);
+  $stmt->bind_param("ss", $email, $email);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows == 1) {
+    $user = $result->fetch_assoc();
+    if (password_verify($contrasena, $user['password'])) {
+      $_SESSION['nombre_usuario'] = $user['nombre_usuario'];
+      $_SESSION['nombreCompleto'] = $user['nombre'] . " " . $user['apellido'];
+      $_SESSION['rol'] = $user['rol'];
+      $_SESSION['correo'] = $user['correo'];
+      obtenerConsultasSinLeer();
+      echo "success";
+    } else {
+      echo "Inicio de sesión fallido. Verifica tus credenciales.";
+    }
   } else {
-    echo "Inicio de sesión fallido. Verifica tus credenciales.";
+    echo "Usuario no encontrado.";
   }
 }
 mysqli_close($connection);

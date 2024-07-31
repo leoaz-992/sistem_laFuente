@@ -35,7 +35,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link" href="verproductos.php">Productos</a>
             </li>
-            <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
+            <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "RECEPCION") { ?>
               <li class="nav-item">
                 <a class="nav-link" href="pedidoForm.php">hace tu pedido</a>
               </li>
@@ -45,32 +45,32 @@
                 Para Empleados
               </a>
               <ul class="dropdown-menu">
-                <?php if ($_SESSION['id_rol'] == 1) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN") { ?>
                   <li><a class="dropdown-item" href="registrarEmpleado.php">Añadir Empleado</a></li>
                   <li><a class="dropdown-item" href="estadisticasVentas.php">Estadisticas</a></li>
                   <li><a class="dropdown-item" href="informesClientes.php">Informes</a></li>
                   <li><a class="dropdown-item" href="metodopago.php">Metodos de pago</a></li>
                 <?php } ?>
-                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "ENCARGADO") { ?>
                   <!-- lista todos los productos -->
                   <li><a class="dropdown-item" href="listaProductos.php">Productos</a></li>
                 <?php } ?>
-                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "ENCARGADO") { ?>
                   <!-- lista todos los barrios -->
                   <li><a class="dropdown-item" href="ListadoBarrios.php">Barrios</a></li>
                 <?php } ?>
-                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 4) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "ENCARGADO") { ?>
                   <!-- lista todos los Clientes -->
                   <li><a class="dropdown-item" href="ListaClientes.php">Clientes</a></li>
                 <?php } ?>
-                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "RECEPCION") { ?>
                   <!-- lista todos los mensajes de contacto -->
                   <li><a class="dropdown-item" href="contactos.php">Consultas<span class=" ms-4 badge bg-primary rounded-pill"><?= $_SESSION['consultasSinLeer'] ? "sin leer: " . $_SESSION['consultasSinLeer'] : "" ?></span></a></li>
                   <!-- lista todos los pedidos -->
                   <li><a class="dropdown-item" href="listapedidos.php">Pedidos Recibidos</a></li>
                 <?php } ?>
                 <!-- lista todos los pedidos q estan en distribucion -->
-                <?php if ($_SESSION['id_rol'] == 1 || $_SESSION['id_rol'] == 3 || $_SESSION['id_rol'] == 2) { ?>
+                <?php if ($_SESSION['rol'] == "ADMIN" || $_SESSION['rol'] == "RECEPCION" || $_SESSION['rol'] == "REPARTIDOR") { ?>
                   <li><a class="dropdown-item" href="distribucion.php">Pedidos en Distribucion</a></li>
                 <?php } ?>
                 <li><a class="dropdown-item" href="miperfil.php">Cambiar contraseña</a></li>

@@ -3,7 +3,7 @@ require_once "config/conn.php";
 require_once("config/consultas.php");
 require_once('config/redireccion.php');
 /* si no esta logeado o no tiene un rol admin o recepcion te envia al index */
-if (!isset($_SESSION['id_rol']) || ($_SESSION['id_rol'] != 1 && $_SESSION['id_rol'] != 3)) {
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != "ADMIN" && $_SESSION['rol'] != "RECEPCION")) {
   redirigirA('index');
 }
 /* si recibe por get un id cambia el estado de mensaje con ese id */
