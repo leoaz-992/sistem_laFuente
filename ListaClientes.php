@@ -1,6 +1,14 @@
 <?php
 include("includes/header.php");
 include "config/conn.php";
+if(isset($_GET['id_delete'])){
+    $id_delete=$_GET['id_delete'];
+    $sql= "UPDATE `clientes` SET `visible` = '0' WHERE `clientes`.`id_cliente` = $id_delete;";
+    $result=mysqli_query($connection,$sql);
+    if($result){        
+        header("Location: ListaClientes.php");
+    }
+}
 ?>
 
 <div class="container mt-4">
@@ -8,7 +16,7 @@ include "config/conn.php";
 
     <?php
     // Obtener la lista de Clientes
-    $sql = "SELECT * FROM clientes ORDER BY nombre ASC, apellido ASC";
+    $sql = "SELECT * FROM `clientes` WHERE visible= 1 ORDER BY nombre ASC, apellido ASC;";
     $result = mysqli_query($connection, $sql);
 
     if ($result) {
@@ -34,7 +42,7 @@ include "config/conn.php";
 
             // Botones en la última columna
             echo "<td>";
-            echo "<a href='modificarcliente.php?id_delete=" . $row['id_cliente'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
+            echo "<a href='listaClientes.php?id_delete=" . $row['id_cliente'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
         }
 
         echo "</tbody>";
