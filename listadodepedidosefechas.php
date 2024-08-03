@@ -6,10 +6,19 @@
     <title>Listado de Pedidos Entregados</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Listado de Pedidos Entregados</h1>
         <form id="filtroFechas" class="row g-3 mb-4" method="GET" action="listado_pedidos.php">
+
+        <select>
+            <option value="">pepe</option>
+            <option value="">jose</option>
+            <option value="">leo</option>
+            <option value="">cesar</option>
+        </select>
+        
             <div class="col-md-5">
                 <label for="fechaInicio" class="form-label">Fecha Inicio</label>
                 <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>

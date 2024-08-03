@@ -28,7 +28,7 @@ include "config/conn.php";
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             echo "<td>" . $row['nombre'] . "</td>";
-            echo "<td>$" . $row['apellido'] . "</td>";
+            echo "<td>$" .$row['apellido'] . "</td>";
             echo "<td>" . $row['telefono'] . "</td>";
             echo "<td>" . $row['correo'] . "</td>";
 
