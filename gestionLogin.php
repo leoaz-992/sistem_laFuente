@@ -8,6 +8,7 @@ if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {
   $contrasena = $_POST['contrasena'];
 
   $sql = "SELECT
+  e.id_usuario as id,
     nombre,
     apellido,
     password,
@@ -31,6 +32,7 @@ WHERE
       $_SESSION['nombreCompleto'] = $user['nombre'] . " " . $user['apellido'];
       $_SESSION['rol'] = $user['rol'];
       $_SESSION['correo'] = $user['correo'];
+      $_SESSION["idEmpleado"]= $user["id"];
       obtenerConsultasSinLeer();
       echo "success";
     } else {

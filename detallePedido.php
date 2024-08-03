@@ -17,6 +17,40 @@ $result = mysqli_query($connection, $sql);
     }
 } ?>
 <a class="btn btn-warning" href="distribucion.php">volver a lista de distribucion</a>
+      <form class="" id="Formulariodetalledistribuidor">
+        <div class="mb-3 col-auto">
+          <label for="nameContacto" class="form-label lb-Footer text-primary">Observaciones al entregar el pedido</label>
+          <input type="text" class="form-control form-control-sm " id="observaciones" required />
+          </div>
+          <input type="hidden" name="idPedido" id="idPedido" value="<?php echo $_GET["id_pedido"]?>">
+          <input type="hidden" name="idEmpleado" id="idEmpleado" value="<?php echo $_SESSION["idEmpleado"]?>">
+        <button type="submit" class="btn btn-primary">Enviar comentario</button>
+      </form>
+      <div class="" id="mensajeObservacion"></div>
+
+      <script>
+        let formularioobservaciones= document.getElementById("Formulariodetalledistribuidor");
+        formularioobservaciones.addEventListener("submit",function(event){
+          event.preventDefault();
+          let campoobservaciones= document.getElementById("observaciones").value;
+          let idPedido= document.getElementById("idPedido").value;
+          let idEmpleado= document.getElementById("idEmpleado").value;
+          fetch('config/gestionObservaciones.php', {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({
+                   idEmpleado: idEmpleado,
+                   idPedido: idPedido,
+                   observaciones: campoobservaciones
+               }),
+           }).then(response=> response.json())
+           .then(data=>{
+            console.log(data);
+           })
+        })
+      </script>
 <?php
 include("includes/footer.php");
 
