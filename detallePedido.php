@@ -22,8 +22,8 @@ $result = mysqli_query($connection, $sql);
           <label for="nameContacto" class="form-label lb-Footer text-primary">Observaciones al entregar el pedido</label>
           <input type="text" class="form-control form-control-sm " id="observaciones" required />
           </div>
-          <input type="hidden" name="idPedido" id="idPedido" value="<?php echo $_GET["id_pedido"]?>">
-          <input type="hidden" name="idEmpleado" id="idEmpleado" value="<?php echo $_SESSION["idEmpleado"]?>">
+          <input type="hidden" name="idPedido" id="idPedido" value="<?php echo $_GET["id_pedido"];?>">
+          <input type="hidden" name="idEmpleado" id="idEmpleado" value="<?php echo $_SESSION["idEmpleado"];?>">
         <button type="submit" class="btn btn-primary">Enviar comentario</button>
       </form>
       <div class="" id="mensajeObservacion"></div>
