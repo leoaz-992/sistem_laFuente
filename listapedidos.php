@@ -16,18 +16,15 @@ if (isset($_GET['id_pedido'])) {
 /* quitar un pedido */
 if (isset($_GET['id_pedido_quitar'])) {
   $id_recibido = $_GET['id_pedido_quitar'];
-  $sqlDeleteDetalle = "DELETE FROM `detallespedidos` WHERE `pedido_id` = $id_recibido;";
-  $sqlDelete = "DELETE FROM `pedidos` WHERE `id_pedido` = $id_recibido;";
+  $sqlDeleteDetalle = "UPDATE pedidos SET visible = 0 WHERE `id_pedido` = $id_recibido;";
+  
   $resultDeleteDetalle = mysqli_query($connection, $sqlDeleteDetalle);
   if ($resultDeleteDetalle) {
-    $resultDelete = mysqli_query($connection, $sqlDelete);
-    if ($resultDelete) {
-      redirigirA("listapedidos");
-    }
+    redirigirA("listapedidos");
   }
 }
 
-$sql = "SELECT p.id_pedido AS idPedido, c.nombre AS Nombre_cliente, b.nombre_barrio AS barrio, b.zona AS distrito, m.tipo_pago AS metodo_de_pago, w.nombre_estado AS estado_de_pago, q.nombre_estado AS estado_pedido, p.fecha_entrega AS dia_entrega, p.fecha_pedido AS dia_pedido FROM pedidos p INNER JOIN clientes c ON p.cliente_id = c.id_cliente INNER JOIN direcciones d ON c.dirreccion_id = d.id_direccion INNER JOIN barrios b ON b.id_barrio = d.barrio_id INNER JOIN metodos_Pago m ON p.metPago_id = m.id_metodo_pago INNER JOIN pagos_stados w ON p.statusPago_id = w.id_estado inner join pedidos_estados q ON p.estado_pedido_id= q.id_estado WHERE p.estado_pedido_id!=3 ORDER BY  p.statusPago_id ASC";
+$sql = "SELECT p.id_pedido AS idPedido, c.nombre AS Nombre_cliente, b.nombre_barrio AS barrio, b.zona AS distrito, m.tipo_pago AS metodo_de_pago, w.nombre_estado AS estado_de_pago, q.nombre_estado AS estado_pedido, p.fecha_entrega AS dia_entrega, p.fecha_pedido AS dia_pedido FROM pedidos p INNER JOIN clientes c ON p.cliente_id = c.id_cliente INNER JOIN direcciones d ON c.dirreccion_id = d.id_direccion INNER JOIN barrios b ON b.id_barrio = d.barrio_id INNER JOIN metodos_Pago m ON p.metPago_id = m.id_metodo_pago INNER JOIN pagos_stados w ON p.statusPago_id = w.id_estado inner join pedidos_estados q ON p.estado_pedido_id= q.id_estado WHERE p.estado_pedido_id!=3 AND p.visible = 1 ORDER BY  p.statusPago_id ASC";
 
 $resultado = mysqli_query($connection, $sql);
 ?>
