@@ -16,7 +16,7 @@ function obtenerBidonesVendidos()
   $result = mysqli_query($connection, $sql);
   $data = array();
   while ($row = mysqli_fetch_array($result)) {
-    $data[$row['id']] = ['producto' => $row['producto'], 'cantidad_vendidas' => $row['cantidad_vendidas']];
+    $data[$row['producto']] = ['producto' => $row['producto'], 'cantidad_vendidas' => $row['cantidad_vendidas']];
   }
   return $data;
 }

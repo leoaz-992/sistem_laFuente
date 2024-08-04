@@ -153,11 +153,11 @@ if (!isset($_SESSION['rol'])) {
           ?>
           <div class="row text-white bg-info p-3 text-center">
             <h6>Dispenser Frio - Calor:</h6>
-            <p><?= $info[4]['cantidad_vendidas'] ?></p>
+            <p><?= $info['Dispenser Frio - Calor']['cantidad_vendidas'] ?></p>
           </div>
           <div class="row text-white bg-success p-3 my-2 text-center">
             <h6>Bidones entregados</h6>
-            <p><?= $info[1]['cantidad_vendidas'] ?></p>
+            <p><?= $info['Bidón 20lts']['cantidad_vendidas'] ?></p>
           </div>
         </div>
       </div>
