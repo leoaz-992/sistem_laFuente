@@ -8,11 +8,7 @@ if (!empty($_POST['email']) && !empty($_POST['contrasena'])) {
   $contrasena = $_POST['contrasena'];
 
   $sql = "SELECT
-<<<<<<< HEAD
     e.id_usuario as id,
-=======
-  e.id_usuario as id,
->>>>>>> eb53a5a0f6ea2bd90788852ca9200e548c78a1cd
     nombre,
     apellido,
     password,
