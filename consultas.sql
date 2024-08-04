@@ -61,3 +61,26 @@ UPDATE `detallespedidos` SET `visible` = '0' WHERE `detallespedidos`.`id_detalle
 
 
 SELECT YEAR(fecha_entrega) AS years, COUNT(id_pedido) AS cantidadPedidos FROM pedidos WHERE fecha_entrega IS NOT NULL GROUP BY YEAR(fecha_entrega) ORDER BY years ASC;
+GROUP BY MONTH(fecha_entrega)
+ORDER BY Meses;
+
+-- relaciona las tablas de cliente pedidos y detalle de pedidos
+SELECT 
+        clientes.id_cliente, 
+        clientes.nombre, 
+        clientes.apellido,
+        pedidos.id_pedido,
+        pedidos.fecha_pedido AS fecha_pedido,
+        detallespedidos.id_detalle_prod,
+        detallespedidos.producto_id,
+        detallespedidos.cantidad,
+        detallespedidos.precio,
+        (detallespedidos.cantidad * detallespedidos.precio) AS total
+    FROM 
+        clientes
+    INNER JOIN 
+        pedidos ON clientes.id_cliente = pedidos.cliente_id
+    INNER JOIN 
+        detallespedidos ON pedidos.id_pedido = detallespedidos.pedido_id
+    ORDER BY 
+        clientes.id_cliente, pedidos.id_pedido, detallespedidos.id_detalle_prod;
