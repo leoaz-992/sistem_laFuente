@@ -36,6 +36,7 @@ GROUP BY `dia_semana`;
 
 --trae el total de pedidos por mes
 SELECT
+    YEAR(fecha_entrega) AS Anio,
     CASE
         WHEN MONTH(fecha_entrega) = 1 THEN 'Enero'
         WHEN MONTH(fecha_entrega) = 2 THEN 'Febrero'
@@ -53,5 +54,10 @@ SELECT
     COUNT(*) AS CantidadPedidos
 FROM pedidos
 WHERE fecha_entrega BETWEEN '2024-01-01' AND '2024-12-31'
-GROUP BY MONTH(fecha_entrega)
-ORDER BY Meses;
+GROUP BY YEAR(fecha_entrega), MONTH(fecha_entrega)
+ORDER BY Anio, Meses;
+
+UPDATE `detallespedidos` SET `visible` = '0' WHERE `detallespedidos`.`id_detalle_prod` = 9
+
+
+SELECT YEAR(fecha_entrega) AS years, COUNT(id_pedido) AS cantidadPedidos FROM pedidos WHERE fecha_entrega IS NOT NULL GROUP BY YEAR(fecha_entrega) ORDER BY years ASC;
