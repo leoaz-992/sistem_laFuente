@@ -47,23 +47,11 @@ function graficoSemana(data) {
 
   let contador = 0;
 
+  clearSemanaDate();
   if (data.length == 0) {
-    // Reemplaza los valores
-    lunes.textContent = "";
-    martes.textContent = "";
-    miercoles.textContent = "";
-    jueves.textContent = "";
-    viernes.textContent = "";
-    sabado.textContent = "";
-
-    // cambiar el color y el valor del grafico
-    lunes.style.setProperty("--size", "0");
-    martes.style.setProperty("--size", "0");
-    miercoles.style.setProperty("--size", "0");
-    jueves.style.setProperty("--size", "0");
-    viernes.style.setProperty("--size", "0");
-    sabado.style.setProperty("--size", "0");
+    return;
   }
+
   for (let i = 0; i < data.length; i++) {
     const pedido = data[i];
     contador = contador + parseInt(pedido.cantidad_pedidos);
@@ -117,3 +105,28 @@ document.addEventListener("DOMContentLoaded", function () {
     getDatafecha(fechaSeleccionada);
   });
 });
+
+function clearSemanaDate() {
+  const lunes = document.getElementById("data_Lunes");
+  const martes = document.getElementById("data_Martes");
+  const miercoles = document.getElementById("data_Miércoles");
+  const jueves = document.getElementById("data_Jueves");
+  const viernes = document.getElementById("data_Viernes");
+  const sabado = document.getElementById("data_Sabado");
+
+  // Reemplaza los valores
+  lunes.textContent = "";
+  martes.textContent = "";
+  miercoles.textContent = "";
+  jueves.textContent = "";
+  viernes.textContent = "";
+  sabado.textContent = "";
+
+  // cambiar el color y el valor del grafico
+  lunes.style.setProperty("--size", "0");
+  martes.style.setProperty("--size", "0");
+  miercoles.style.setProperty("--size", "0");
+  jueves.style.setProperty("--size", "0");
+  viernes.style.setProperty("--size", "0");
+  sabado.style.setProperty("--size", "0");
+}

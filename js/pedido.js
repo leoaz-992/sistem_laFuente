@@ -63,7 +63,7 @@ $(document).ready(function () {
         if (response === "success") {
           //redirigir y crear datos de sesion
           $("#mensaje")
-            .html(`<div class="alert alert-dismissible alert-success">
+            .html(`<div class="position-absolute top-75 start-50 translate-middle alert alert-dismissible alert-success">
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           <strong>Pedido Realizado Correctamente!</strong>
         </div>`);
