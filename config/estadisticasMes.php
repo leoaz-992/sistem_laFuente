@@ -23,13 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         WHEN MONTH(fecha_entrega) = 11 THEN 'Noviembre'
         WHEN MONTH(fecha_entrega) = 12 THEN 'Diciembre'
     END AS Meses,
-    COUNT(*) AS cantidad_pedidos
-FROM pedidos
-WHERE fecha_entrega BETWEEN '$anio-01-01' AND '$anio-12-31'
-GROUP BY MONTH(fecha_entrega)
-ORDER BY Meses;";
+    COUNT(*) AS CantidadPedidos
+    FROM pedidos
+    WHERE fecha_entrega BETWEEN '$anio-01-01' AND '$anio-12-31'
+    GROUP BY MONTH(fecha_entrega)
+    ORDER BY Meses;";
 
   $response_consult = mysqli_query($connection, $sql);
+
+  $sqlYear = "SELECT YEAR(fecha_entrega) AS years, COUNT(id_pedido) AS cantidadPedidos FROM pedidos WHERE fecha_entrega IS NOT NULL GROUP BY YEAR(fecha_entrega) ORDER BY years ASC;";
+  $responseYear = mysqli_query($connection, $sqlYear);
 
 
   $data = array();
@@ -37,8 +40,15 @@ ORDER BY Meses;";
     $data[] = $fileData;
   }
 
+  $dataYear = array();
+  while ($fileDataYear =  mysqli_fetch_assoc($responseYear)) {
+    $dataYear[] = $fileDataYear;
+  }
+
   // Envía una respuesta al cliente
-  echo json_encode(array('status' => 'success', 'message' => 'Fechas recibidas correctamente', 'info' => $data));
+  echo json_encode(array(
+    'status' => 'success', 'message' => 'Fechas recibidas correctamente', 'info' => $data, 'infoYear' => $dataYear
+  ));
 } else {
   echo json_encode(array('status' => 'error', 'message' => 'Solicitud no válida'));
 }

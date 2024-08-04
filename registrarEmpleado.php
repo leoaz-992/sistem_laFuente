@@ -1,13 +1,12 @@
 <?php
 include_once("includes/header.php");
 require_once("config/conn.php");
+include_once("config/roles.php");
 /* esto verifica q solo los empleador con rol admin puedan añadir nuevos empleados. */
 if (!isset($_SESSION['rol']) && $_SESSION['rol'] != "ADMIN") {
   redirigirA('index.php');
 }
-
-$sql = "SELECT id_rol, nombre_rol FROM `roles_empleados`";
-$resultRoles = mysqli_query($connection, $sql);
+$rolesList = getRoles();
 ?>
 <div class="row justify-content-center p-5">
   <div class="col-md-6">
@@ -59,10 +58,13 @@ $resultRoles = mysqli_query($connection, $sql);
           <label for="rolUser" class="form-label mt-4">Rol</label>
           <select class="form-select" id="rolUser">
             <option value="null" selected disabled>Elegir Rol para el Empleado</option>
-            <?php while ($rol = mysqli_fetch_array($resultRoles)) {
+            <?php
+            foreach ($rolesList as $rol) {
               echo "<option value='" . $rol['id_rol'] . "'>" . $rol['nombre_rol'] . "</option>";
             }
-            mysqli_close($connection);
+            /* while ($rol = mysqli_fetch_array($resultRoles)) {
+              echo "<option value='" . $rol['id_rol'] . "'>" . $rol['nombre_rol'] . "</option>";
+            } */
             ?>
           </select>
         </div>

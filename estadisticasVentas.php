@@ -1,5 +1,6 @@
 <?php
 include_once("includes/header.php");
+include_once("config/consultas.php");
 require_once "config/conn.php";
 
 if (!isset($_SESSION['rol'])) {
@@ -27,6 +28,10 @@ if (!isset($_SESSION['rol'])) {
             <div class="col-4">
               <!-- input para buscar por fecha -->
               <input class="form-control form-control-sm border border-secondary" type="date" name="fecha_semana" id="fecha_semana">
+              <!-- input para seleccionar un año de la lista -->
+              <select title="Lista de años" class="form-select form-select-sm border border-secondary" id="yearSelect">
+                <option selected disabled>Selecciona un año:</option>
+              </select>
             </div>
           </div>
           <!-- gafico por semana -->
@@ -73,7 +78,7 @@ if (!isset($_SESSION['rol'])) {
               <thead>
                 <tr>
                   <th scope="col"> Meses </th>
-                  <th scope="col"> Progress </th>
+                  <th scope="col"> cantidad de ventas </th>
                 </tr>
               </thead>
               <tbody>
@@ -128,7 +133,7 @@ if (!isset($_SESSION['rol'])) {
               </tbody>
             </table>
           </div>
-          <div id="garficoBidonesVendidosPorAnio">
+          <div class="horizontal-scrollable" id="garficoBidonesVendidosPorAnio">
             <table class="charts-css column show-labels datasets-spacing-10 show-10-secondary-axes">
               <caption> grafico por año </caption>
               <thead>
@@ -137,40 +142,22 @@ if (!isset($_SESSION['rol'])) {
                   <th scope="col"> Progress </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row"> 2024 </th>
-                  <td style="--size: 0.2;">20</td>
-                </tr>
-                <tr>
-                  <th scope="row"> 2025 </th>
-                  <td style="--size: 0.4;">40</td>
-                </tr>
-                <tr>
-                  <th scope="row"> 2026 </th>
-                  <td style="--size: 0.6;">60</td>
-                </tr>
-                <tr>
-                  <th scope="row"> 2027 </th>
-                  <td style="--size: 0.8;">80</td>
-                </tr>
-                <tr>
-                  <th scope="row"> 2028 </th>
-                  <td style="--size: 1;">100</td>
-                </tr>
+              <tbody id="body_grafico_anio">
               </tbody>
             </table>
           </div>
         </div>
         <div class="col-2">
-          <div class="row text-white bg-info p-3 ">
-            Dispenser prendados
+          <?php
+          $info = obtenerBidonesVendidos();
+          ?>
+          <div class="row text-white bg-info p-3 text-center">
+            <h6>Dispenser Frio - Calor:</h6>
+            <p><?= $info[4]['cantidad_vendidas'] ?></p>
           </div>
-          <div class="row text-white bg-success p-3 my-2">
-            Bidones entregados
-          </div>
-          <div class="row text-white bg-dark p-3">
-            pedidos recibidos
+          <div class="row text-white bg-success p-3 my-2 text-center">
+            <h6>Bidones entregados</h6>
+            <p><?= $info[1]['cantidad_vendidas'] ?></p>
           </div>
         </div>
       </div>
@@ -185,10 +172,18 @@ if (!isset($_SESSION['rol'])) {
   let div2 = document.getElementById("garficoBidonesVendidosPorMes");
   let div3 = document.getElementById("garficoBidonesVendidosPorAnio");
   let inputFecha = document.getElementById("fecha_semana");
+  let selectYear = document.getElementById("yearSelect");
+
+
+  selectYear.addEventListener("change", function() {
+    let yearSelected = selectYear.value;
+    getDataMeses(yearSelected);
+  });
 
   /* div1.style.display = 'none'; */
   div2.style.display = "none";
   div3.style.display = "none";
+  selectYear.style.display = "none";
 
   let btnSemana = document.getElementById("semana");
   let btnMes = document.getElementById("mes");
@@ -211,6 +206,7 @@ if (!isset($_SESSION['rol'])) {
     btnAnio.classList.add("bg-secondary"); // Agrega la clase .bg-secondary a btnAnio
 
     // Oculta div2 y div3
+    selectYear.style.display = "none";
     div1.style.display = "block";
     inputFecha.style.display = "block";
 
@@ -236,14 +232,16 @@ if (!isset($_SESSION['rol'])) {
     div1.style.display = "none"; // Oculta div1
     inputFecha.style.display = "none";
     div2.style.display = "block"; // Muestra div2
+    selectYear.style.display = "block";
     div3.style.display = "none"; // Oculta div3
 
-    let fechaSeleccionada = new Date();
+    let fechaSeleccionada = new Date().getFullYear();
     getDataMeses(fechaSeleccionada);
   });
 
   btnAnio.addEventListener("click", function() {
     // Verifica si btnAnio tiene la clase .bg-secondary y, si es así, quítala
+    getDataMeses(new Date().getFullYear());
     if (btnAnio.classList.contains("bg-secondary")) {
       btnAnio.classList.remove("bg-secondary");
     }
@@ -259,6 +257,7 @@ if (!isset($_SESSION['rol'])) {
 
     div1.style.display = "none"; // Oculta div1
     inputFecha.style.display = "none";
+    selectYear.style.display = "none";
     div2.style.display = "none"; // Oculta div2
     div3.style.display = "block"; // Muestra div3
   });

@@ -59,10 +59,10 @@ function insertPedido($connection, $clienteId, $tipo_pago)
 
     $sql = "INSERT INTO `pedidos` (`id_pedido`, `fecha_pedido`, `fecha_entrega`,
     `estado_pedido_id`, `metPago_id`, `statusPago_id`,
-    `cliente_id`, `total`) 
+    `cliente_id`, `total`, `visible`) 
             VALUES (NULL, current_timestamp(), NULL,
                     '2', '$tipo_pago', '1', 
-                    '$clienteId', '0')";
+                    '$clienteId', '0', '1')";
 
     $resultPedido = mysqli_query($connection, $sql);
     if ($resultPedido === TRUE) {
@@ -88,7 +88,7 @@ function insertDetalle($connection, $pedidoId, $id_producto, $cantidad)
     }
 
     //insert el pedido en la base de datos
-    $sql = "INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subTotal`) VALUES (NULL, '$pedidoId', '$id_producto', '$cantidad', '$precio', ($precio*$cantidad))";
+    $sql = "INSERT INTO `detallespedidos` (`id_detalle_prod`, `pedido_id`, `producto_id`, `cantidad`, `precio`, `subTotal`, `visible`) VALUES (NULL, '$pedidoId', '$id_producto', '$cantidad', '$precio', ($precio*$cantidad), '1')";
 
     $resultDetalle = mysqli_query($connection, $sql);
 

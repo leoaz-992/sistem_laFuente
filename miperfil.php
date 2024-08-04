@@ -2,6 +2,7 @@
 include_once("includes/header.php");
 require_once("config/conn.php");
 require_once("config/redireccion.php");
+include_once("config/roles.php");
 
 if (!isset($_SESSION['rol'])) {
   redirigirA('index');
@@ -10,12 +11,32 @@ if (!isset($_SESSION['rol'])) {
 //$nombre_usuario = $_SESSION['nombre_usuario'];
 $nombreCompleto = $_SESSION["nombreCompleto"];
 $partes = explode(" ", $nombreCompleto);
-
+$msj = "";
 $nombre = $partes[0];
 $apellido = $partes[1];
+if (isset($_GET['msj'])) {
+  $msj = $_GET['msj'];
+}
 ?>
+<div id="msjNotify">
+  <?php
+  if ($msj == "Usuario eliminado") {
+    echo '<div class="position-absolute top-25 start-50 translate-middle alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong><i class="bi bi-trash text-success"></i>' . $msj . '</strong>
+    </div>';
+
+    echo '<script>
+    setTimeout(function () {
+      $("#msjNotify").html("");
+      }, 5000);
+      </script>';
+  }
+  ?>
+</div>
 <h2> Hola <?= $nombre ?></h2>
 <div class="row justify-content-between">
+
   <!-- lista de opciones -->
   <?php if ($_SESSION['rol'] == "ADMIN") { ?>
     <div class="col-3 pt-2">
@@ -71,33 +92,35 @@ $apellido = $partes[1];
     </div>
   </div>
   <div id="tablaEmpleado" class="col-lg-12 offset-lg-0 offset-sm-0 position-relative mt-3 d-none">
+    <h3 class="text-center">Lista de Empleados</h3>
     <table class="table table-info">
       <thead>
         <tr>
-          <th scope="col">nombre</th>
+          <th class="ps-2" scope="col">nombre</th>
           <th scope="col">apellido</th>
           <th scope="col">nombre de usuario</th>
           <th scope="col">correo</th>
           <th scope="col">Rol</th>
-          <th scope="col">actions</th>
+          <th class="text-center" scope="col">actions</th>
         </tr>
       </thead>
       <tbody>
         <?php
         //mostrar todos los empleados
-        $sql = "SELECT e.nombre as nombre, e.apellido as apellido, e.correo as correo, e.nombre_usuario as nombre_usuario, r.nombre_rol AS Rol FROM empleados e JOIN roles_empleados r ON e.id_rol = r.id_rol;";
+        $sql = "SELECT e.id_usuario as 'id', e.nombre as nombre, e.apellido as apellido, e.correo as correo, e.nombre_usuario as nombre_usuario, r.nombre_rol AS Rol FROM empleados e JOIN roles_empleados r ON e.id_rol = r.id_rol;";
 
         $query = mysqli_query($connection, $sql);
         while ($row = mysqli_fetch_assoc($query)) {
-          echo "<tr>";
-          echo "<td>" . $row['nombre'] . "</td>";
+          echo "<tr  idempleado='" . $row['id'] . "'>";
+          echo "<td class='ps-3'>" . $row['nombre'] . "</td>";
           echo "<td>" . $row['apellido'] . "</td>";
           echo "<td>" . $row['nombre_usuario'] . "</td>";
           echo "<td>" . $row['correo'] . "</td>";
           echo "<td>" . $row['Rol'] . "</td>";
-          echo "<td>";
-          echo "<button class='btn btn-info btn-sm m-2'>Editar</button>";
-          echo "<button class='btn btn-danger btn-sm'>Eliminar</button>";
+          echo "<td class='text-center'>";
+          /* echo "<a href='config/user.php?id_edit=" . $row['id'] . "' class='btn btn-info btn-sm m-2'>Editar</a>"; */
+          echo "<button type='button' class='btn btn-info btn-sm m-2 btnEditar' data-bs-toggle='modal' data-bs-target='#formEditar'>Editar</button>";
+          echo " <a href='config/user.php?id_delete=" . $row['id'] . "' class='btn btn-danger btn-sm'>Eliminar</button> ";
           echo "</td>";
           echo "</tr>";
         }
@@ -106,6 +129,55 @@ $apellido = $partes[1];
     </table>
   </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="formEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Datos</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEdit">
+          <div class="form-group">
+            <label class="form-label" for="nombreEdit">nombre</label>
+            <input class="form-control form-control-sm" type="text" name="nombreEdit" id="nombreEdit">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="apellidoEdit">apellido</label>
+            <input class="form-control form-control-sm" type="text" name="apellidoEdit" id="apellidoEdit">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="nombreUsuarioEdit">nombre de usuario</label>
+            <input class="form-control form-control-sm" type="text" name="nombreUsuarioEdit" id="nombreUsuarioEdit">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="emailEdit">email</label>
+            <input class="form-control form-control-sm" type="email" name="emailEdit" id="emailEdit">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="rolEdit">Rol</label>
+            <select class="form-select form-select-sm" name="rolEdit" id="rolEdit">
+              <option selected disabled value="">Seleccionar</option>
+              <?php
+              $roles = getRoles();
+              foreach ($roles as $rol) {
+                echo "<option value='" . $rol['id_rol'] . "'>" . $rol['nombre_rol'] . "</option>";
+              }
+              ?>
+            </select>
+          </div>
+          <input type="hidden" name="id_edit" id="id_edit">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnSubmitEdit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/user.js"></script>
 <script src="js/cambiarPass.js"></script>
 <?php
 include_once("includes/footer.php");

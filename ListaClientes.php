@@ -3,8 +3,8 @@ include("includes/header.php");
 include "config/conn.php";
 ?>
 
-<div class="container mt-4">
-<h2 class="text-center" style="text-decoration: underline;">Lista de Clientes</h2>
+<div class="container-md mt-4">
+    <h2 class="text-center text-decoration-underline">Lista de Clientes</h2>
 
     <?php
     // Obtener la lista de Clientes
@@ -33,8 +33,10 @@ include "config/conn.php";
             echo "<td>" . $row['correo'] . "</td>";
 
             // Botones en la última columna
-            echo "<td>";
-            echo "<a href='modificarcliente.php?id_delete=" . $row['id_cliente'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
+            echo "<td class='text-center'>";
+            echo "<a href='ListaClientes.php?id_delete=" . $row['id_cliente'] . "' class='btn btn-danger btn-sm'>Eliminar</a>";
+            echo "</td>";
+            echo "</tr>";
         }
 
         echo "</tbody>";
